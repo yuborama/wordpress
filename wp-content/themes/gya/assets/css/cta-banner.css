@@ -6,6 +6,7 @@
 }
 
 .cta-banner {
+  --cta-overlap: 180px;
   position: relative;
   min-height: 432px;
   display: grid;
@@ -17,7 +18,10 @@
 
 .cta-copy {
   position: relative;
+  z-index: 2;
   overflow: hidden;
+  width: calc(100% + var(--cta-overlap));
+  margin-right: calc(var(--cta-overlap) * -1);
   padding: 68px 48px;
   color: var(--white);
   background-color: #00020e;
@@ -25,6 +29,8 @@
   background-position: left bottom;
   background-repeat: no-repeat;
   isolation: isolate;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 58%, rgba(0, 0, 0, 0.78) 72%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 58%, rgba(0, 0, 0, 0.78) 72%, transparent 100%);
 }
 
 .cta-copy::before {
@@ -36,16 +42,16 @@
   background:
     linear-gradient(
       90deg,
-      rgb(0 2 14 / 0%) 0%,
-      rgb(0 2 14 / 38%) 45%,
-      rgba(0, 2, 14, 0.54) 75%,
+      rgba(0, 2, 14, 0.62) 0%,
+      rgba(0, 2, 14, 0.46) 45%,
+      rgba(0, 2, 14, 0.18) 75%,
       rgba(0, 2, 14, 0) 100%
     ),
     linear-gradient(
       180deg,
       rgba(0, 2, 14, 0.12) 0%,
-      rgba(0, 2, 14, 0.28) 45%,
-      rgba(0, 2, 14, 0.9) 100%
+      rgba(0, 2, 14, 0.2) 45%,
+      rgba(0, 2, 14, 0.58) 100%
     );
 }
 
@@ -79,6 +85,7 @@
 
 .cta-photo {
   position: relative;
+  z-index: 1;
   min-height: 432px;
   background-color: #dbe5eb;
   background-size: cover;
@@ -92,10 +99,10 @@
   pointer-events: none;
   background: linear-gradient(
     90deg,
-    #00020e 0%,
-    rgba(0, 2, 14, 0.78) 12%,
-    rgba(0, 2, 14, 0.34) 24%,
-    rgba(0, 2, 14, 0) 42%
+    rgba(0, 2, 14, 0.42) 0%,
+    rgba(0, 2, 14, 0.22) 18%,
+    rgba(0, 2, 14, 0.08) 34%,
+    rgba(0, 2, 14, 0) 58%
   );
 }
 
@@ -110,7 +117,11 @@
   }
 
   .cta-copy {
+    width: 100%;
+    margin-right: 0;
     padding: 46px 28px;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .cta-copy h2 {
