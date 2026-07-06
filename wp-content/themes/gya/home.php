@@ -14,7 +14,6 @@ get_header();
     <?php get_template_part('template-parts/solutions', null, array('data' => $data, 'page_id' => $page_id)); ?>
     <?php get_template_part('template-parts/services', null, array('data' => $data, 'page_id' => $page_id)); ?>
     <?php get_template_part('template-parts/insights', null, array('data' => $data, 'page_id' => $page_id)); ?>
-    <?php get_template_part('template-parts/blog-preview'); ?>
     <?php get_template_part('template-parts/cta-banner', null, array('page_id' => $page_id)); ?>
     <?php get_template_part('template-parts/team', null, array('data' => $data, 'page_id' => $page_id)); ?>
 </main>

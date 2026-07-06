@@ -134,12 +134,37 @@ function gya_register_team_member_cpt()
 }
 add_action('init', 'gya_register_team_member_cpt');
 
+function gya_register_insights_cpt() {
+    register_post_type('insights', array(
+        'labels' => array(
+            'name' => 'Insights',
+            'singular_name' => 'Insight',
+            'add_new' => 'Agregar Insight',
+            'add_new_item' => 'Agregar nuevo Insight',
+            'edit_item' => 'Editar Insight',
+            'new_item' => 'Nuevo Insight',
+            'view_item' => 'Ver Insight',
+            'search_items' => 'Buscar Insights',
+            'not_found' => 'No se encontraron Insights',
+            'not_found_in_trash' => 'No se encontraron Insights en la papelera',
+        ),
+        'public' => true,
+        'menu_icon' => 'dashicons-lightbulb',
+        'supports' => array('title', 'thumbnail'),
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'insights'),
+        'show_in_rest' => true,
+    ));
+}
+add_action('init', 'gya_register_insights_cpt');
+
 function gya_enqueue_assets()
 {
     $theme_version = wp_get_theme()->get('Version');
     $css_path = get_template_directory() . '/assets/css/main.css';
     $hero_css_path = get_template_directory() . '/assets/css/hero.css';
     $solutions_css_path = get_template_directory() . '/assets/css/solutions.css';
+    $insights_css_path = get_template_directory() . '/assets/css/insights.css';
     $services_css_path = get_template_directory() . '/assets/css/services.css';
     $team_css_path = get_template_directory() . '/assets/css/team.css';
     $js_path = get_template_directory() . '/assets/js/main.js';
@@ -163,6 +188,13 @@ function gya_enqueue_assets()
         get_template_directory_uri() . '/assets/css/solutions.css',
         array('gya-main-style'),
         file_exists($solutions_css_path) ? filemtime($solutions_css_path) : $theme_version
+    );
+
+    wp_enqueue_style(
+        'gya-insights-style',
+        get_template_directory_uri() . '/assets/css/insights.css',
+        array('gya-main-style'),
+        file_exists($insights_css_path) ? filemtime($insights_css_path) : $theme_version
     );
 
     wp_enqueue_style(

@@ -1,0 +1,133 @@
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(270px, 1fr));
+  gap: 26px;
+  align-items: stretch;
+}
+
+.insight-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--white);
+  text-align: left;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.insight-photo {
+  width: 100%;
+  height: 168px;
+  background-color: #dbe5eb;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.insight-copy {
+  min-height: 210px;
+  padding: 24px 18px 26px;
+  background: var(--white);
+}
+
+.tag {
+  display: block;
+  color: var(--orange);
+  font-weight: 800;
+  font-size: 10px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.insight-copy h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  color: #050b16;
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 800;
+  transition: color 180ms ease;
+}
+
+.insight-copy h3 span {
+  color: var(--orange);
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 400;
+  transition: transform 180ms ease;
+}
+
+.insight-copy p {
+  margin: 14px 0 0;
+  color: #394653;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 24px;
+}
+
+.author span {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: #dde5e9;
+  color: var(--orange);
+  font-weight: 800;
+  font-size: 11px;
+  transition: border-color 180ms ease;
+}
+
+.author img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateY(4px);
+}
+
+.author small {
+  color: #162232;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.insight-card:hover,
+.insight-card:focus-within {
+  border-color: var(--orange);
+  box-shadow: none;
+}
+
+.insight-card:hover .insight-copy h3,
+.insight-card:focus-within .insight-copy h3 {
+  color: var(--orange);
+}
+
+.insight-card:hover .insight-copy h3 span,
+.insight-card:focus-within .insight-copy h3 span {
+  transform: translateX(4px);
+}
+
+.insight-card:hover .author span,
+.insight-card:focus-within .author span {
+  border-color: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+}
