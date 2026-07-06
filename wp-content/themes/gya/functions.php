@@ -27,10 +27,43 @@ function gya_theme_setup() {
 }
 add_action('after_setup_theme', 'gya_theme_setup');
 
+function gya_register_categories_cpt() {
+  register_post_type('gya_category', [
+    'labels' => [
+      'name' => 'Categorías',
+      'singular_name' => 'Categoría',
+      'add_new_item' => 'Agregar nueva categoría',
+      'edit_item' => 'Editar categoría',
+    ],
+    'public' => true,
+    'menu_icon' => 'dashicons-category',
+    'supports' => ['title', 'thumbnail'],
+    'show_in_rest' => true,
+  ]);
+}
+add_action('init', 'gya_register_categories_cpt');
+
+function gya_register_subcategories_cpt() {
+  register_post_type('gya_subcategory', [
+    'labels' => [
+      'name' => 'Subcategorías',
+      'singular_name' => 'Subcategoría',
+      'add_new_item' => 'Agregar nueva subcategoría',
+      'edit_item' => 'Editar subcategoría',
+    ],
+    'public' => true,
+    'menu_icon' => 'dashicons-tag',
+    'supports' => ['title'],
+    'show_in_rest' => true,
+  ]);
+}
+add_action('init', 'gya_register_subcategories_cpt');
+
 function gya_enqueue_assets() {
     $theme_version = wp_get_theme()->get('Version');
     $css_path = get_template_directory() . '/assets/css/main.css';
     $hero_css_path = get_template_directory() . '/assets/css/hero.css';
+    $solutions_css_path = get_template_directory() . '/assets/css/solutions.css';
     $js_path = get_template_directory() . '/assets/js/main.js';
 
     wp_enqueue_style(
@@ -47,6 +80,13 @@ function gya_enqueue_assets() {
         file_exists($hero_css_path) ? filemtime($hero_css_path) : $theme_version
     );
 
+    wp_enqueue_style(
+        'gya-solutions-style',
+        get_template_directory_uri() . '/assets/css/solutions.css',
+        array('gya-main-style'),
+        file_exists($solutions_css_path) ? filemtime($solutions_css_path) : $theme_version
+    );
+
     wp_enqueue_script(
         'gya-main-script',
         get_template_directory_uri() . '/assets/js/main.js',
@@ -56,6 +96,7 @@ function gya_enqueue_assets() {
     );
 }
 add_action('wp_enqueue_scripts', 'gya_enqueue_assets');
+
 
 function gya_primary_menu_fallback() {
     echo '<ul class="menu">';

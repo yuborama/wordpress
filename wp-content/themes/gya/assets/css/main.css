@@ -201,39 +201,6 @@ body.admin-bar .site-header {
   color: var(--white);
 }
 
-.solutions-page {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-}
-
-.solution-card {
-  min-height: 182px;
-  padding: 24px;
-  border: 1.5px solid var(--line);
-  border-radius: 6px;
-  background: var(--white);
-}
-
-.solution-card h3 {
-  margin: 0;
-  color: #111925;
-  font-size: 14px;
-}
-
-.solution-card h3 span {
-  color: var(--orange);
-  margin-left: 5px;
-  font-size: 20px;
-}
-
-.solution-card p {
-  margin: 12px 0 0;
-  color: #4b5864;
-  font-size: 12px;
-  line-height: 1.36;
-}
-
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -517,7 +484,6 @@ body.admin-bar .site-header {
     display: none;
   }
 
-  .solutions-page,
   .services-grid,
   .insights-grid,
   .blog-grid,

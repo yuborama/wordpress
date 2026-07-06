@@ -22,6 +22,23 @@ function gya_get_field_value($field_name, $default = '', $post_id = null) {
 }
 
 /**
+ * Get a post-specific ACF field with raw post meta fallback.
+ */
+function gya_get_post_field_value($field_name, $post_id, $default = '') {
+    if (function_exists('get_field')) {
+        $value = get_field($field_name, $post_id);
+    } else {
+        $value = get_post_meta($post_id, $field_name, true);
+    }
+
+    if ($value === null || $value === false || $value === '') {
+        return $default;
+    }
+
+    return $value;
+}
+
+/**
  * Build a fixed-length list from ACF fields with per-item defaults.
  */
 function gya_get_fixed_items_from_acf($defaults, $prefix, $keys, $count, $post_id = null) {

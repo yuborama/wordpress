@@ -11,35 +11,6 @@ function gya_asset_uri($path) {
 function gya_get_landing_data() {
     return array(
         'nav_items' => array('Soluciones', 'Insights', 'Cómo ayudamos', 'Nosotros'),
-        'hero_slides' => array(
-            array(
-                'eyebrow' => 'CONTACTO',
-                'title' => 'Claridad estratégica',
-                'strong' => 'para empresas en crecimiento.',
-                'body' => 'Ayudamos a empresas a resolver retos fiscales, legales y financieros mediante soluciones claras, ágiles y personalizadas.',
-                'cta' => 'Diagnóstico estratégico',
-                'href' => '#contacto',
-                'image' => gya_asset_uri('assets/images/office.jpg'),
-            ),
-            array(
-                'eyebrow' => 'INSIGHTS',
-                'title' => 'Información que genera',
-                'strong' => 'mejores decisiones.',
-                'body' => 'Accede a infografías, cursos y contenido especializado elaborado por nuestros expertos para mantenerte actualizado en temas fiscales, legales y financieros.',
-                'cta' => 'Explorar insights',
-                'href' => '#insights',
-                'image' => gya_asset_uri('assets/images/office2.jpg'),
-            ),
-            array(
-                'eyebrow' => 'NOSOTROS',
-                'title' => 'Visibilidad y control',
-                'strong' => 'de tus procesos.',
-                'body' => 'Conoce cómo damos seguimiento a proyectos, requerimientos y tareas mediante herramientas de control que mejoran la comunicación y la ejecución.',
-                'cta' => 'Conocer nuestra metodología',
-                'href' => '#nosotros',
-                'image' => gya_asset_uri('assets/images/office3.png'),
-            ),
-        ),
         'stats' => array(
             array('value' => '+ 15', 'label' => 'años de experiencia'),
             array('value' => '+140', 'label' => 'soluciones especializadas'),

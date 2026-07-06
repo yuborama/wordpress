@@ -26,20 +26,6 @@ function gya_register_hero_slide_post_type() {
 }
 add_action('init', 'gya_register_hero_slide_post_type');
 
-function gya_get_post_field_value($field_name, $post_id, $default = '') {
-    if (function_exists('get_field')) {
-        $value = get_field($field_name, $post_id);
-    } else {
-        $value = get_post_meta($post_id, $field_name, true);
-    }
-
-    if ($value === null || $value === false || $value === '') {
-        return $default;
-    }
-
-    return $value;
-}
-
 function gya_get_hero_slides_from_posts() {
     $query = new WP_Query(
         array(
