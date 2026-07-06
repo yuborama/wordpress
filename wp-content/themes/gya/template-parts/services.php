@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object_id();
 $services_heading = gya_get_field_value('gya_services_heading', 'Soluciones a los retos que realmente impactan tu negocio.', $page_id);
 $upload_dir = wp_upload_dir();
-$services_bg = trailingslashit($upload_dir['baseurl']) . '2026/06/hero-image-scaled.jpg';
+$services_bg = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
 
 $services_query = new WP_Query(
     array(
