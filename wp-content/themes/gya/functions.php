@@ -59,11 +59,49 @@ function gya_register_subcategories_cpt() {
 }
 add_action('init', 'gya_register_subcategories_cpt');
 
+function gya_register_como_ayudamos_cpt() {
+    $labels = array(
+        'name'               => 'Cómo ayudamos',
+        'singular_name'      => 'Item Cómo ayudamos',
+        'menu_name'          => 'Cómo ayudamos',
+        'name_admin_bar'     => 'Item Cómo ayudamos',
+        'add_new'            => 'Agregar nuevo',
+        'add_new_item'       => 'Agregar nuevo item',
+        'new_item'           => 'Nuevo item',
+        'edit_item'          => 'Editar item',
+        'view_item'          => 'Ver item',
+        'all_items'          => 'Todos los items',
+        'search_items'       => 'Buscar items',
+        'not_found'          => 'No se encontraron items',
+        'not_found_in_trash' => 'No hay items en la papelera',
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'menu_icon'          => 'dashicons-heart',
+        'query_var'          => true,
+        'rewrite'            => array('slug' => 'como-ayudamos'),
+        'capability_type'    => 'post',
+        'has_archive'        => false,
+        'hierarchical'       => false,
+        'menu_position'      => 22,
+        'supports'           => array('title'),
+        'show_in_rest'       => true,
+    );
+
+    register_post_type('como_ayudamos', $args);
+}
+add_action('init', 'gya_register_como_ayudamos_cpt');
+
 function gya_enqueue_assets() {
     $theme_version = wp_get_theme()->get('Version');
     $css_path = get_template_directory() . '/assets/css/main.css';
     $hero_css_path = get_template_directory() . '/assets/css/hero.css';
     $solutions_css_path = get_template_directory() . '/assets/css/solutions.css';
+    $services_css_path = get_template_directory() . '/assets/css/services.css';
     $js_path = get_template_directory() . '/assets/js/main.js';
 
     wp_enqueue_style(
@@ -85,6 +123,13 @@ function gya_enqueue_assets() {
         get_template_directory_uri() . '/assets/css/solutions.css',
         array('gya-main-style'),
         file_exists($solutions_css_path) ? filemtime($solutions_css_path) : $theme_version
+    );
+
+    wp_enqueue_style(
+        'gya-services-style',
+        get_template_directory_uri() . '/assets/css/services.css',
+        array('gya-main-style'),
+        file_exists($services_css_path) ? filemtime($services_css_path) : $theme_version
     );
 
     wp_enqueue_script(
