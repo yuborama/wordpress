@@ -9,7 +9,7 @@ $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object
 $slides = isset($data['hero_slides']) ? $data['hero_slides'] : array();
 $stats = isset($data['stats']) ? $data['stats'] : array();
 $upload_dir = wp_upload_dir();
-$network_image = trailingslashit($upload_dir['baseurl']) . '2026/06/hero-image-scaled.jpg';
+$network_image = trailingslashit($upload_dir['baseurl']) . '2026/07/hero-image-scaled.jpg';
 $post_slides = gya_get_hero_slides_from_posts();
 
 if (!empty($post_slides)) {
