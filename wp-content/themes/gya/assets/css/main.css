@@ -228,66 +228,6 @@ body.admin-bar .site-header {
   height: auto;
 }
 
-.cta-shell {
-  width: min(100%, var(--max));
-  margin: 0 auto;
-  padding-bottom: 76px;
-  background: var(--white);
-}
-
-.cta-banner {
-  min-height: 432px;
-  display: grid;
-  grid-template-columns: 52% 48%;
-  border-radius: 4px;
-  overflow: hidden;
-  background: #00020e;
-}
-
-.cta-copy {
-  padding: 68px 48px;
-  color: var(--white);
-  background-color: #07101f;
-  background-size: cover;
-  background-position: left bottom;
-  position: relative;
-}
-
-.cta-copy::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 2, 14, 0.6);
-}
-
-.cta-copy > * {
-  position: relative;
-  z-index: 1;
-}
-
-.cta-copy h2 {
-  margin: 0 0 22px;
-  font-size: 36px;
-  line-height: 1.08;
-}
-
-.cta-copy p {
-  margin: 0;
-  font-size: 22px;
-  line-height: 1.35;
-}
-
-.cta-copy .outline-link {
-  margin-top: 34px;
-}
-
-.cta-photo {
-  min-height: 432px;
-  background-color: #dbe5eb;
-  background-size: cover;
-  background-position: center;
-}
-
 .primary-button {
   margin: 44px auto 0;
   width: max-content;
@@ -385,15 +325,6 @@ body.admin-bar .site-header {
 
   .blog-grid {
     grid-template-columns: 1fr;
-  }
-
-  .cta-banner {
-    grid-template-columns: 1fr;
-  }
-
-  .cta-copy,
-  .cta-photo {
-    min-height: 280px;
   }
 
   .section {

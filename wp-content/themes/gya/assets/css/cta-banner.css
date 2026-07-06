@@ -1,0 +1,123 @@
+.cta-shell {
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  padding: 0 0 76px;
+  background: var(--white);
+}
+
+.cta-banner {
+  position: relative;
+  min-height: 432px;
+  display: grid;
+  grid-template-columns: 52% 48%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #00020e;
+}
+
+.cta-copy {
+  position: relative;
+  overflow: hidden;
+  padding: 68px 48px;
+  color: var(--white);
+  background-color: #00020e;
+  background-size: cover;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  isolation: isolate;
+}
+
+.cta-copy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(0 2 14 / 0%) 0%,
+      rgb(0 2 14 / 38%) 45%,
+      rgba(0, 2, 14, 0.54) 75%,
+      rgba(0, 2, 14, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 2, 14, 0.12) 0%,
+      rgba(0, 2, 14, 0.28) 45%,
+      rgba(0, 2, 14, 0.9) 100%
+    );
+}
+
+.cta-copy h2 {
+  position: relative;
+  z-index: 1;
+  max-width: 455px;
+  margin: 0 0 28px;
+  color: var(--white);
+  font-size: 36px;
+  line-height: 1.08;
+  font-weight: 800;
+}
+
+.cta-copy p {
+  position: relative;
+  z-index: 1;
+  max-width: 470px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+.cta-copy .outline-link {
+  position: relative;
+  z-index: 2;
+  margin-top: 34px;
+}
+
+.cta-photo {
+  position: relative;
+  min-height: 432px;
+  background-color: #dbe5eb;
+  background-size: cover;
+  background-position: center;
+}
+
+.cta-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #00020e 0%,
+    rgba(0, 2, 14, 0.78) 12%,
+    rgba(0, 2, 14, 0.34) 24%,
+    rgba(0, 2, 14, 0) 42%
+  );
+}
+
+@media (max-width: 900px) {
+  .cta-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-copy,
+  .cta-photo {
+    min-height: 280px;
+  }
+
+  .cta-copy {
+    padding: 46px 28px;
+  }
+
+  .cta-copy h2 {
+    font-size: 30px;
+  }
+
+  .cta-copy p {
+    font-size: 18px;
+  }
+}

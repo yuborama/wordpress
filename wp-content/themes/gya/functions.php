@@ -165,6 +165,7 @@ function gya_enqueue_assets()
     $hero_css_path = get_template_directory() . '/assets/css/hero.css';
     $solutions_css_path = get_template_directory() . '/assets/css/solutions.css';
     $insights_css_path = get_template_directory() . '/assets/css/insights.css';
+    $cta_css_path = get_template_directory() . '/assets/css/cta-banner.css';
     $services_css_path = get_template_directory() . '/assets/css/services.css';
     $team_css_path = get_template_directory() . '/assets/css/team.css';
     $js_path = get_template_directory() . '/assets/js/main.js';
@@ -195,6 +196,13 @@ function gya_enqueue_assets()
         get_template_directory_uri() . '/assets/css/insights.css',
         array('gya-main-style'),
         file_exists($insights_css_path) ? filemtime($insights_css_path) : $theme_version
+    );
+
+    wp_enqueue_style(
+        'gya-cta-banner-style',
+        get_template_directory_uri() . '/assets/css/cta-banner.css',
+        array('gya-main-style'),
+        file_exists($cta_css_path) ? filemtime($cta_css_path) : $theme_version
     );
 
     wp_enqueue_style(

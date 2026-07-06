@@ -10,8 +10,10 @@ $cta_title = gya_get_field_value('gya_cta_title', 'Más que servicios, construim
 $cta_body = gya_get_field_value('gya_cta_body', 'G&A es una firma boutique que acompaña a empresas con claridad, experiencia y atención personalizada.', $page_id);
 $cta_link_text = gya_get_field_value('gya_cta_link_text', 'Hablemos de tu empresa', $page_id);
 $cta_link_url = gya_get_field_value('gya_cta_link_url', '#contacto', $page_id);
-$cta_image = gya_get_field_value('gya_cta_image', gya_asset_uri('assets/images/insightsCardTeam.jpg'), $page_id);
-$banner_bg = gya_asset_uri('assets/images/insightsBanner.jpg');
+$upload_dir = wp_upload_dir();
+$banner_bg = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
+$cta_image = trailingslashit($upload_dir['baseurl']) . '2026/07/insightsCardTeam.jpg';
+
 ?>
 <section class="cta-shell" id="nosotros">
     <div class="shell">
