@@ -313,31 +313,6 @@ body.admin-bar .site-header {
   background-position: center;
 }
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-}
-
-.team-card {
-  min-height: 130px;
-  padding: 24px;
-  border: 1px solid var(--orange);
-  border-radius: 7px;
-}
-
-.team-card h3 {
-  margin: 0;
-  color: #060b13;
-  font-size: 14px;
-}
-
-.team-card p {
-  margin: 9px 0 0;
-  color: #596775;
-  font-size: 12px;
-}
-
 .primary-button {
   margin: 44px auto 0;
   width: max-content;
@@ -434,8 +409,7 @@ body.admin-bar .site-header {
   }
 
   .insights-grid,
-  .blog-grid,
-  .team-grid {
+  .blog-grid {
     grid-template-columns: 1fr;
   }
 
