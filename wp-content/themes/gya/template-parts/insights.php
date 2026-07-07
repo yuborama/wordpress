@@ -94,6 +94,6 @@ wp_reset_postdata();
                 </a>
             <?php endforeach; ?>
         </div>
-        <a class="primary-button" href="#insights">Explorar insights</a>
+        <a class="primary-button insights-cta" href="#insights">Explorar insights</a>
     </div>
 </section>
