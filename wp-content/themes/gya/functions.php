@@ -168,7 +168,10 @@ function gya_enqueue_assets()
     $cta_css_path = get_template_directory() . '/assets/css/cta-banner.css';
     $services_css_path = get_template_directory() . '/assets/css/services.css';
     $team_css_path = get_template_directory() . '/assets/css/team.css';
+    $intro_loader_css_path = get_template_directory() . '/assets/css/intro-loader.css';
     $js_path = get_template_directory() . '/assets/js/main.js';
+    $intro_loader_js_path = get_template_directory() . '/assets/js/intro-loader.js';
+    $intro_lottie_path = get_template_directory() . '/assets/lottie/intro.json';
 
     wp_enqueue_style(
         'gya-main-style',
@@ -219,6 +222,40 @@ function gya_enqueue_assets()
         file_exists($team_css_path) ? filemtime($team_css_path) : $theme_version
     );
 
+    if ((is_front_page() || is_home()) && file_exists($intro_lottie_path)) {
+        wp_enqueue_style(
+            'gya-intro-loader-style',
+            get_template_directory_uri() . '/assets/css/intro-loader.css',
+            array('gya-main-style'),
+            file_exists($intro_loader_css_path) ? filemtime($intro_loader_css_path) : $theme_version
+        );
+
+        wp_enqueue_script(
+            'lottie-web',
+            'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js',
+            array(),
+            '5.12.2',
+            true
+        );
+
+        wp_enqueue_script(
+            'gya-intro-loader',
+            get_template_directory_uri() . '/assets/js/intro-loader.js',
+            array('lottie-web'),
+            file_exists($intro_loader_js_path) ? filemtime($intro_loader_js_path) : $theme_version,
+            true
+        );
+
+        wp_localize_script(
+            'gya-intro-loader',
+            'gyaIntroLoader',
+            array(
+                'animationPath' => get_template_directory_uri() . '/assets/lottie/intro.json',
+                'storageKey' => 'gyaIntroLoaderPlayed',
+            )
+        );
+    }
+
     wp_enqueue_script(
         'gya-main-script',
         get_template_directory_uri() . '/assets/js/main.js',
@@ -228,6 +265,48 @@ function gya_enqueue_assets()
     );
 }
 add_action('wp_enqueue_scripts', 'gya_enqueue_assets');
+
+function gya_intro_loader_head_state()
+{
+    if (!(is_front_page() || is_home())) {
+        return;
+    }
+
+    if (!file_exists(get_template_directory() . '/assets/lottie/intro.json')) {
+        return;
+    }
+
+    ?>
+    <script>
+    (function () {
+      try {
+        if (window.sessionStorage && window.sessionStorage.getItem('gyaIntroLoaderPlayed') === 'true') {
+          document.documentElement.classList.add('gya-intro-loader-played');
+        }
+      } catch (error) {}
+    })();
+    </script>
+    <?php
+}
+add_action('wp_head', 'gya_intro_loader_head_state', 1);
+
+function gya_intro_loader_markup()
+{
+    if (!(is_front_page() || is_home())) {
+        return;
+    }
+
+    if (!file_exists(get_template_directory() . '/assets/lottie/intro.json')) {
+        return;
+    }
+
+    ?>
+    <div class="page-loader" id="page-loader" aria-hidden="true">
+        <div class="page-loader__animation" id="page-loader-lottie"></div>
+    </div>
+    <?php
+}
+add_action('wp_body_open', 'gya_intro_loader_markup');
 
 
 function gya_primary_menu_fallback()
