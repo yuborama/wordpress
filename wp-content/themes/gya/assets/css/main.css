@@ -60,35 +60,13 @@ body.admin-bar .site-header {
 .logo-mark {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 700;
+  width: 119px;
 }
 
-.logo-mark__diamond {
-  width: 30px;
-  height: 30px;
-  transform: rotate(45deg);
-  border: 4px solid var(--white);
-  border-radius: 3px;
-  position: relative;
-}
-
-.logo-mark__diamond::after {
-  content: '';
-  width: 10px;
-  height: 10px;
-  background: var(--orange);
-  position: absolute;
-  top: 6px;
-  left: 6px;
-}
-
-.logo-mark__text {
-  font-size: 18px;
-}
-
-.logo-mark__text span {
-  color: var(--orange);
+.logo-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .desktop-nav {
@@ -168,7 +146,7 @@ body.admin-bar .site-header {
 .section {
   width: min(100%, var(--max));
   margin: 0 auto;
-  padding: 77px 0 90px;
+  padding: 77px 48px 90px;
 }
 
 .light-section {

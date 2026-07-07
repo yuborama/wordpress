@@ -15,8 +15,7 @@ $header_cta_url = gya_get_field_value('gya_header_cta_url', '#contacto', $front_
 <header class="site-header" id="top">
     <div class="shell header-inner">
         <a class="logo-mark" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Inicio GYA">
-            <span class="logo-mark__diamond" aria-hidden="true"></span>
-            <span class="logo-mark__text">G<span>&amp;</span>A</span>
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
         </a>
 
         <nav class="desktop-nav" aria-label="Principal">
