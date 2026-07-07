@@ -28,6 +28,7 @@ while ($solutions_query->have_posts()) {
     $short_description = gya_get_post_field_value('short_description', $solution_id);
     $long_description = gya_get_post_field_value('long_description', $solution_id);
     $icon = sanitize_file_name((string) gya_get_post_field_value('icon', $solution_id));
+    $icon = preg_replace('/\.svg$/i', '', $icon);
     $description = $short_description;
 
     if (empty($description) && !empty($long_description)) {
@@ -35,6 +36,7 @@ while ($solutions_query->have_posts()) {
     }
 
     $solutions[] = array(
+        'url' => get_permalink($solution_id),
         'title' => get_the_title(),
         'description' => $description,
         'icon' => $icon,
@@ -64,7 +66,7 @@ $solution_pages = array_chunk($solutions, 4);
                         <?php foreach ($solution_pages as $page_index => $solution_page) : ?>
                             <div class="solutions-page" data-solutions-page="<?php echo esc_attr((string) $page_index); ?>">
                                 <?php foreach ($solution_page as $solution) : ?>
-                                    <article class="solution-card">
+                                    <a class="solution-card" href="<?php echo esc_url($solution['url']); ?>">
                                         <?php if (!empty($solution['icon'])) : ?>
                                             <span class="solution-icon" aria-hidden="true">
                                                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/solutions/' . $solution['icon'] . '.svg'); ?>" alt="">
@@ -74,7 +76,7 @@ $solution_pages = array_chunk($solutions, 4);
                                         <?php if (!empty($solution['description'])) : ?>
                                             <p><?php echo esc_html($solution['description']); ?></p>
                                         <?php endif; ?>
-                                    </article>
+                                    </a>
                                 <?php endforeach; ?>
                             </div>
                         <?php endforeach; ?>

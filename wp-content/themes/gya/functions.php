@@ -179,6 +179,7 @@ function gya_enqueue_assets()
     $solutions_css_path = get_template_directory() . '/assets/css/solutions.css';
     $insights_css_path = get_template_directory() . '/assets/css/insights.css';
     $insight_detail_css_path = get_template_directory() . '/assets/css/insight-detail.css';
+    $category_detail_css_path = get_template_directory() . '/assets/css/category-detail.css';
     $cta_css_path = get_template_directory() . '/assets/css/cta-banner.css';
     $services_css_path = get_template_directory() . '/assets/css/services.css';
     $team_css_path = get_template_directory() . '/assets/css/team.css';
@@ -221,6 +222,15 @@ function gya_enqueue_assets()
             get_template_directory_uri() . '/assets/css/insight-detail.css',
             array('gya-main-style'),
             file_exists($insight_detail_css_path) ? filemtime($insight_detail_css_path) : $theme_version
+        );
+    }
+
+    if (is_singular('gya_category')) {
+        wp_enqueue_style(
+            'gya-category-detail-style',
+            get_template_directory_uri() . '/assets/css/category-detail.css',
+            array('gya-main-style', 'gya-insights-style', 'gya-cta-banner-style'),
+            file_exists($category_detail_css_path) ? filemtime($category_detail_css_path) : $theme_version
         );
     }
 
