@@ -158,6 +158,19 @@ function gya_register_insights_cpt() {
 }
 add_action('init', 'gya_register_insights_cpt');
 
+function gya_flush_rewrite_rules_once()
+{
+    $rewrite_version = '20260706_insights_detail';
+
+    if (get_option('gya_rewrite_rules_version') === $rewrite_version) {
+        return;
+    }
+
+    flush_rewrite_rules(false);
+    update_option('gya_rewrite_rules_version', $rewrite_version);
+}
+add_action('init', 'gya_flush_rewrite_rules_once', 30);
+
 function gya_enqueue_assets()
 {
     $theme_version = wp_get_theme()->get('Version');
@@ -165,6 +178,7 @@ function gya_enqueue_assets()
     $hero_css_path = get_template_directory() . '/assets/css/hero.css';
     $solutions_css_path = get_template_directory() . '/assets/css/solutions.css';
     $insights_css_path = get_template_directory() . '/assets/css/insights.css';
+    $insight_detail_css_path = get_template_directory() . '/assets/css/insight-detail.css';
     $cta_css_path = get_template_directory() . '/assets/css/cta-banner.css';
     $services_css_path = get_template_directory() . '/assets/css/services.css';
     $team_css_path = get_template_directory() . '/assets/css/team.css';
@@ -200,6 +214,15 @@ function gya_enqueue_assets()
         array('gya-main-style'),
         file_exists($insights_css_path) ? filemtime($insights_css_path) : $theme_version
     );
+
+    if (is_singular('insights')) {
+        wp_enqueue_style(
+            'gya-insight-detail-style',
+            get_template_directory_uri() . '/assets/css/insight-detail.css',
+            array('gya-main-style'),
+            file_exists($insight_detail_css_path) ? filemtime($insight_detail_css_path) : $theme_version
+        );
+    }
 
     wp_enqueue_style(
         'gya-cta-banner-style',

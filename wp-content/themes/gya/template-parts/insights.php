@@ -47,6 +47,7 @@ while ($insights_query->have_posts()) {
     }
 
     $insights[] = array(
+        'url' => get_permalink($insight_id),
         'tag' => $tag_id ? get_the_title($tag_id) : '',
         'title' => $title,
         'body' => $body,
@@ -67,7 +68,7 @@ wp_reset_postdata();
         </header>
         <div class="insights-grid">
             <?php foreach ($insights as $insight) : ?>
-                <article class="insight-card">
+                <a class="insight-card" href="<?php echo esc_url($insight['url']); ?>">
                     <div class="insight-photo" style="background-image:url('<?php echo esc_url($insight['image']); ?>');"></div>
                     <div class="insight-copy">
                         <?php if (!empty($insight['tag'])) : ?>
@@ -90,7 +91,7 @@ wp_reset_postdata();
                             </div>
                         <?php endif; ?>
                     </div>
-                </article>
+                </a>
             <?php endforeach; ?>
         </div>
         <a class="primary-button" href="#insights">Explorar insights</a>
