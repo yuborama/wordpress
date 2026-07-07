@@ -38,9 +38,15 @@
   color: var(--orange);
 }
 
-.solution-icon svg {
+.solution-icon svg,
+.solution-icon img {
   width: 100%;
   height: 100%;
+}
+
+.solution-icon img {
+  display: block;
+  object-fit: contain;
 }
 
 .solution-card h3 {

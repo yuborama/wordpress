@@ -27,6 +27,7 @@ while ($solutions_query->have_posts()) {
     $solution_id = get_the_ID();
     $short_description = gya_get_post_field_value('short_description', $solution_id);
     $long_description = gya_get_post_field_value('long_description', $solution_id);
+    $icon = sanitize_file_name((string) gya_get_post_field_value('icon', $solution_id));
     $description = $short_description;
 
     if (empty($description) && !empty($long_description)) {
@@ -36,6 +37,7 @@ while ($solutions_query->have_posts()) {
     $solutions[] = array(
         'title' => get_the_title(),
         'description' => $description,
+        'icon' => $icon,
     );
 }
 
@@ -63,13 +65,11 @@ $solution_pages = array_chunk($solutions, 4);
                             <div class="solutions-page" data-solutions-page="<?php echo esc_attr((string) $page_index); ?>">
                                 <?php foreach ($solution_page as $solution) : ?>
                                     <article class="solution-card">
-                                        <span class="solution-icon" aria-hidden="true">
-                                            <svg viewBox="0 0 32 32" focusable="false">
-                                                <path d="M7 25V11h5v14M14 25V7h5v18M21 25V15h5v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                                                <path d="M5 25h23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                                <circle cx="24" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="2" />
-                                            </svg>
-                                        </span>
+                                        <?php if (!empty($solution['icon'])) : ?>
+                                            <span class="solution-icon" aria-hidden="true">
+                                                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/solutions/' . $solution['icon'] . '.svg'); ?>" alt="">
+                                            </span>
+                                        <?php endif; ?>
                                         <h3><?php echo esc_html($solution['title']); ?> <span>&rsaquo;</span></h3>
                                         <?php if (!empty($solution['description'])) : ?>
                                             <p><?php echo esc_html($solution['description']); ?></p>
