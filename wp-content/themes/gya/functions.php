@@ -178,6 +178,7 @@ function gya_enqueue_assets()
     $hero_css_path = get_template_directory() . '/assets/css/hero.css';
     $solutions_css_path = get_template_directory() . '/assets/css/solutions.css';
     $insights_css_path = get_template_directory() . '/assets/css/insights.css';
+    $insights_archive_css_path = get_template_directory() . '/assets/css/insights-archive.css';
     $insight_detail_css_path = get_template_directory() . '/assets/css/insight-detail.css';
     $category_detail_css_path = get_template_directory() . '/assets/css/category-detail.css';
     $cta_css_path = get_template_directory() . '/assets/css/cta-banner.css';
@@ -215,6 +216,15 @@ function gya_enqueue_assets()
         array('gya-main-style'),
         file_exists($insights_css_path) ? filemtime($insights_css_path) : $theme_version
     );
+
+    if (is_post_type_archive('insights')) {
+        wp_enqueue_style(
+            'gya-insights-archive-style',
+            get_template_directory_uri() . '/assets/css/insights-archive.css',
+            array('gya-main-style', 'gya-insights-style', 'gya-cta-banner-style'),
+            file_exists($insights_archive_css_path) ? filemtime($insights_archive_css_path) : $theme_version
+        );
+    }
 
     if (is_singular('insights')) {
         wp_enqueue_style(
