@@ -57,7 +57,7 @@ function gya_get_hero_slides_from_posts() {
 
         $slides[] = array(
             'eyebrow' => gya_get_post_field_value('hero_tag', $post_id),
-            'title' => gya_get_post_field_value('hero_title', $post_id, get_the_title($post_id)),
+            'title' => gya_get_post_field_value('hero_tittle', $post_id, gya_get_post_field_value('hero_title', $post_id, get_the_title($post_id))),
             'strong' => '',
             'body' => gya_get_post_field_value('hero_description', $post_id),
             'cta' => gya_get_post_field_value('hero_button_text', $post_id),
@@ -137,7 +137,6 @@ function gya_register_hero_slide_acf_fields() {
         )
     );
 }
-add_action('acf/init', 'gya_register_hero_slide_acf_fields');
 
 function gya_home_hero_shortcode() {
     ob_start();
