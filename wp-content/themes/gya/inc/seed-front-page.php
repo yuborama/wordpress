@@ -53,8 +53,9 @@ function gya_seed_front_page_fields() {
 
     foreach ($data['stats'] as $index => $stat) {
         $n = $index + 1;
-        $seed_values['gya_stat_' . $n . '_value'] = $stat['value'];
-        $seed_values['gya_stat_' . $n . '_label'] = $stat['label'];
+        $seed_values['gya_stat_' . $n . '_value'] = isset($stat['value']) ? $stat['value'] : '';
+        $seed_values['gya_stat_' . $n . '_label'] = isset($stat['label']) ? $stat['label'] : '';
+        $seed_values['gya_stat_' . $n . '_icon'] = isset($stat['icon']) ? $stat['icon'] : '';
     }
 
     foreach ($data['solutions'] as $index => $solution) {

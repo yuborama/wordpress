@@ -25,7 +25,7 @@ if (empty($post_slides) && !empty($slides[0])) {
     $slides[0]['image'] = gya_get_field_value('gya_hero_image', $slides[0]['image'], $page_id);
 }
 
-$stats = gya_get_fixed_items_from_acf($stats, 'gya_stat', array('value', 'label'), 4, $page_id);
+$stats = gya_get_fixed_items_from_acf($stats, 'gya_stat', array('value', 'label', 'icon'), 4, $page_id);
 ?>
 <section class="hero-section js-hero" aria-labelledby="hero-title">
     <div class="hero-media" aria-hidden="true">
@@ -77,6 +77,13 @@ $stats = gya_get_fixed_items_from_acf($stats, 'gya_stat', array('value', 'label'
     <div class="shell stats-grid">
         <?php foreach ($stats as $stat): ?>
             <article>
+                <?php if (!empty($stat['icon'])): ?>
+                    <img
+                        class="stat-icon"
+                        src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/hero/' . $stat['icon'] . '.svg'); ?>"
+                        alt=""
+                        aria-hidden="true">
+                <?php endif; ?>
                 <div>
                     <strong><?php echo esc_html($stat['value']); ?></strong>
                     <span><?php echo esc_html($stat['label']); ?></span>

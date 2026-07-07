@@ -12,10 +12,10 @@ function gya_get_landing_data() {
     return array(
         'nav_items' => array('Soluciones', 'Insights', 'Cómo ayudamos', 'Nosotros'),
         'stats' => array(
-            array('value' => '+ 15', 'label' => 'años de experiencia'),
-            array('value' => '+140', 'label' => 'soluciones especializadas'),
-            array('value' => '+7', 'label' => 'áreas de especialización'),
-            array('value' => '+40', 'label' => 'especialistas y consultores'),
+            array('value' => '+ 15', 'label' => 'años de experiencia', 'icon' => 'years'),
+            array('value' => '+140', 'label' => 'soluciones especializadas', 'icon' => 'solutions'),
+            array('value' => '+7', 'label' => 'áreas de especialización', 'icon' => 'areas'),
+            array('value' => '+40', 'label' => 'especialistas y consultores', 'icon' => 'person'),
         ),
         'solutions' => array(
             array('title' => 'Fiscal y Financiero', 'body' => 'Estrategias fiscales, cumplimiento y optimización financiera para operar con mayor claridad y seguridad.'),

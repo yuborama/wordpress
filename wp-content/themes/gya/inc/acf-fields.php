@@ -83,6 +83,19 @@ function gya_register_acf_landing_fields() {
             'name' => 'gya_stat_' . $i . '_label',
             'type' => 'text',
         );
+        $fields[] = array(
+            'key' => 'field_gya_stat_' . $i . '_icon',
+            'label' => 'Metrica ' . $i . ' icono',
+            'name' => 'gya_stat_' . $i . '_icon',
+            'type' => 'select',
+            'choices' => array(
+                'years' => 'years',
+                'solutions' => 'solutions',
+                'areas' => 'areas',
+                'person' => 'person',
+            ),
+            'ui' => 1,
+        );
     }
 
     $fields[] = array(

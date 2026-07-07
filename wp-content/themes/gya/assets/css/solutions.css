@@ -4,10 +4,12 @@
 
 .solutions-viewport {
   overflow: hidden;
+  padding: 12px 0;
 }
 
 .solutions-track {
   display: flex;
+  padding: 4px 0;
   transition: transform 520ms ease;
   will-change: transform;
 }
