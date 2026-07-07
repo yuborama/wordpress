@@ -39,8 +39,12 @@ $stats = gya_get_fixed_items_from_acf($stats, 'gya_stat', array('value', 'label'
         <div class="hero-network-image" style="background-image:url('<?php echo esc_url($network_image); ?>');"></div>
     </div>
 
-    <button class="circle-arrow hero-prev" type="button" aria-label="Anterior">&lsaquo;</button>
-    <button class="circle-arrow hero-next" type="button" aria-label="Siguiente">&rsaquo;</button>
+    <button class="circle-arrow hero-prev" type="button" aria-label="Anterior">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/arrow.svg'); ?>" alt="">
+    </button>
+    <button class="circle-arrow hero-next" type="button" aria-label="Siguiente">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/arrow.svg'); ?>" alt="">
+    </button>
 
     <div class="shell hero-content" aria-live="polite">
         <?php foreach ($slides as $index => $slide): ?>

@@ -91,7 +91,7 @@
   z-index: 4;
   width: 34px;
   height: 34px;
-  border: 1px solid #6f7c86;
+  border: 1.5px solid #7F8B93;
   border-radius: 50%;
   background: var(--white);
   color: #162232;
@@ -115,12 +115,30 @@
   outline: none;
 }
 
+.team-rail:hover .rail-arrow-icon,
+.team-rail:focus-visible .rail-arrow-icon {
+  background-color: var(--orange);
+}
+
+.team-rail .rail-arrow-icon {
+  display: block;
+  width: 20px;
+  height: 14px;
+  background-color: #7F8B93;
+  -webkit-mask: url("../images/icons/arrow.svg") center / contain no-repeat;
+  mask: url("../images/icons/arrow.svg") center / contain no-repeat;
+}
+
 .team-rail-left {
   left: -48px;
 }
 
 .team-rail-right {
   right: -48px;
+}
+
+.team-rail-right .rail-arrow-icon {
+  transform: rotate(180deg);
 }
 
 .team-dots {

@@ -85,7 +85,7 @@
   z-index: 4;
   width: 34px;
   height: 34px;
-  border: 1px solid #6f7c86;
+  border: 1.5px solid #7F8B93;
   border-radius: 50%;
   background: var(--white);
   color: #162232;
@@ -106,12 +106,30 @@
   outline: none;
 }
 
+.solutions-rail:hover .rail-arrow-icon,
+.solutions-rail:focus-visible .rail-arrow-icon {
+  background-color: var(--orange);
+}
+
+.solutions-rail .rail-arrow-icon {
+  display: block;
+  width: 20px;
+  height: 14px;
+  background-color: #7F8B93;
+  -webkit-mask: url("../images/icons/arrow.svg") center / contain no-repeat;
+  mask: url("../images/icons/arrow.svg") center / contain no-repeat;
+}
+
 .solutions-rail-left {
   left: -48px;
 }
 
 .solutions-rail-right {
   right: -48px;
+}
+
+.solutions-rail-right .rail-arrow-icon {
+  transform: rotate(180deg);
 }
 
 .solutions-dots {

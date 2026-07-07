@@ -158,6 +158,13 @@ body.admin-bar .site-header {
   cursor: pointer;
 }
 
+.circle-arrow img {
+  display: block;
+  width: 20px;
+  height: 14px;
+  object-fit: contain;
+}
+
 .section {
   width: min(100%, var(--max));
   margin: 0 auto;

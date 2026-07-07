@@ -52,7 +52,9 @@ $solution_pages = array_chunk($solutions, 4);
         <?php if (!empty($solution_pages)) : ?>
             <div class="solutions-slider js-solutions-slider" data-solutions-index="0">
                 <?php if (count($solution_pages) > 1) : ?>
-                    <button class="solutions-rail solutions-rail-left" type="button" aria-label="Anterior" data-solutions-prev>&lsaquo;</button>
+                    <button class="solutions-rail solutions-rail-left" type="button" aria-label="Anterior" data-solutions-prev>
+                        <span class="rail-arrow-icon" aria-hidden="true"></span>
+                    </button>
                 <?php endif; ?>
 
                 <div class="solutions-viewport">
@@ -80,7 +82,9 @@ $solution_pages = array_chunk($solutions, 4);
                 </div>
 
                 <?php if (count($solution_pages) > 1) : ?>
-                    <button class="solutions-rail solutions-rail-right" type="button" aria-label="Siguiente" data-solutions-next>&rsaquo;</button>
+                    <button class="solutions-rail solutions-rail-right" type="button" aria-label="Siguiente" data-solutions-next>
+                        <span class="rail-arrow-icon" aria-hidden="true"></span>
+                    </button>
                 <?php endif; ?>
             </div>
 

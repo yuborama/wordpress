@@ -89,7 +89,9 @@ $team_pages = array_chunk($team, 4);
         <?php if (!empty($team_pages)) : ?>
             <div class="team-slider js-team-slider" data-team-index="0">
                 <?php if (count($team_pages) > 1) : ?>
-                    <button class="team-rail team-rail-left" type="button" aria-label="Anterior" data-team-prev>&lsaquo;</button>
+                    <button class="team-rail team-rail-left" type="button" aria-label="Anterior" data-team-prev>
+                        <span class="rail-arrow-icon" aria-hidden="true"></span>
+                    </button>
                 <?php endif; ?>
 
                 <div class="team-viewport">
@@ -130,7 +132,9 @@ $team_pages = array_chunk($team, 4);
                 </div>
 
                 <?php if (count($team_pages) > 1) : ?>
-                    <button class="team-rail team-rail-right" type="button" aria-label="Siguiente" data-team-next>&rsaquo;</button>
+                    <button class="team-rail team-rail-right" type="button" aria-label="Siguiente" data-team-next>
+                        <span class="rail-arrow-icon" aria-hidden="true"></span>
+                    </button>
                 <?php endif; ?>
             </div>
 

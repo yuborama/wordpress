@@ -131,6 +131,10 @@
   right: 64px;
 }
 
+.hero-next img {
+  transform: rotate(180deg);
+}
+
 .stats-band {
   width: min(100%, var(--max));
   height: 145px;
