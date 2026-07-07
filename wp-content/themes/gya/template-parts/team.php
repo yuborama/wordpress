@@ -151,7 +151,7 @@ $team_pages = array_chunk($team, 4);
                 </div>
             <?php endif; ?>
         <?php endif; ?>
-        <a class="primary-button" href="#equipo">Explora nuestro equipo y experiencia</a>
+        <a class="primary-button team-cta" href="#equipo">Explora nuestro equipo y experiencia</a>
     </div>
 </section>
 

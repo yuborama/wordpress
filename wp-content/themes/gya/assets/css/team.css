@@ -162,6 +162,13 @@
   background: var(--orange);
 }
 
+.team-cta {
+  display: flex;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (max-width: 1180px) {
   .team-rail-left {
     left: -18px;
