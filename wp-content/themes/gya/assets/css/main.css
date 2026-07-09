@@ -172,6 +172,10 @@ body.admin-bar .site-header {
   transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
 }
 
+.header-dropdown--compact {
+  min-width: 205px;
+}
+
 .header-menu-item:hover > .header-dropdown,
 .header-menu-item:focus-within > .header-dropdown {
   opacity: 1;

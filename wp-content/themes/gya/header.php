@@ -55,8 +55,22 @@ $header_is_insights_active = is_post_type_archive('insights') || is_singular('in
                 <li class="header-menu-item">
                     <a class="header-menu-link" href="<?php echo esc_url(home_url('/#servicios')); ?>">Cómo ayudamos</a>
                 </li>
-                <li class="header-menu-item">
-                    <a class="header-menu-link" href="<?php echo esc_url(home_url('/#nosotros')); ?>">Nosotros</a>
+                <li class="header-menu-item header-menu-item--dropdown">
+                    <a class="header-menu-link" href="<?php echo esc_url(home_url('/#nosotros')); ?>" aria-haspopup="true">
+                        Nosotros
+                        <span class="header-menu-chevron" aria-hidden="true"></span>
+                    </a>
+
+                    <div class="header-dropdown header-dropdown--compact">
+                        <a href="<?php echo esc_url(home_url('/weare/')); ?>">
+                            Quiénes somos
+                            <span aria-hidden="true">›</span>
+                        </a>
+                        <a href="<?php echo esc_url(home_url('/team/')); ?>">
+                            Nuestro equipo
+                            <span aria-hidden="true">›</span>
+                        </a>
+                    </div>
                 </li>
             </ul>
         </nav>

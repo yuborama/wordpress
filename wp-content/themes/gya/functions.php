@@ -171,6 +171,24 @@ function gya_flush_rewrite_rules_once()
 }
 add_action('init', 'gya_flush_rewrite_rules_once', 30);
 
+function gya_is_team_page_request()
+{
+    global $wp;
+
+    $request = isset($wp->request) ? trim((string) $wp->request, '/') : '';
+
+    return is_page('team') || $request === 'team';
+}
+
+function gya_is_weare_page_request()
+{
+    global $wp;
+
+    $request = isset($wp->request) ? trim((string) $wp->request, '/') : '';
+
+    return is_page('weare') || $request === 'weare';
+}
+
 function gya_enqueue_assets()
 {
     $theme_version = wp_get_theme()->get('Version');
@@ -184,6 +202,8 @@ function gya_enqueue_assets()
     $cta_css_path = get_template_directory() . '/assets/css/cta-banner.css';
     $services_css_path = get_template_directory() . '/assets/css/services.css';
     $team_css_path = get_template_directory() . '/assets/css/team.css';
+    $team_page_css_path = get_template_directory() . '/assets/css/team-page.css';
+    $weare_page_css_path = get_template_directory() . '/assets/css/weare-page.css';
     $intro_loader_css_path = get_template_directory() . '/assets/css/intro-loader.css';
     $js_path = get_template_directory() . '/assets/js/main.js';
     $intro_loader_js_path = get_template_directory() . '/assets/js/intro-loader.js';
@@ -265,6 +285,24 @@ function gya_enqueue_assets()
         file_exists($team_css_path) ? filemtime($team_css_path) : $theme_version
     );
 
+    if (gya_is_team_page_request()) {
+        wp_enqueue_style(
+            'gya-team-page-style',
+            get_template_directory_uri() . '/assets/css/team-page.css',
+            array('gya-main-style', 'gya-team-style'),
+            file_exists($team_page_css_path) ? filemtime($team_page_css_path) : $theme_version
+        );
+    }
+
+    if (gya_is_weare_page_request()) {
+        wp_enqueue_style(
+            'gya-weare-page-style',
+            get_template_directory_uri() . '/assets/css/weare-page.css',
+            array('gya-main-style', 'gya-team-style'),
+            file_exists($weare_page_css_path) ? filemtime($weare_page_css_path) : $theme_version
+        );
+    }
+
     if ((is_front_page() || is_home()) && file_exists($intro_lottie_path)) {
         wp_enqueue_style(
             'gya-intro-loader-style',
@@ -308,6 +346,50 @@ function gya_enqueue_assets()
     );
 }
 add_action('wp_enqueue_scripts', 'gya_enqueue_assets');
+
+function gya_team_page_template($template)
+{
+    if (!gya_is_team_page_request()) {
+        return $template;
+    }
+
+    $team_template = get_template_directory() . '/page-team.php';
+
+    if (file_exists($team_template)) {
+        global $wp_query;
+
+        if ($wp_query) {
+            $wp_query->is_404 = false;
+        }
+
+        status_header(200);
+    }
+
+    return file_exists($team_template) ? $team_template : $template;
+}
+add_filter('template_include', 'gya_team_page_template');
+
+function gya_weare_page_template($template)
+{
+    if (!gya_is_weare_page_request()) {
+        return $template;
+    }
+
+    $weare_template = get_template_directory() . '/page-weare.php';
+
+    if (file_exists($weare_template)) {
+        global $wp_query;
+
+        if ($wp_query) {
+            $wp_query->is_404 = false;
+        }
+
+        status_header(200);
+    }
+
+    return file_exists($weare_template) ? $weare_template : $template;
+}
+add_filter('template_include', 'gya_weare_page_template');
 
 function gya_intro_loader_head_state()
 {
