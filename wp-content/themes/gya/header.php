@@ -11,6 +11,9 @@
 $front_page_id = (int) get_option('page_on_front');
 $header_cta_text = gya_get_field_value('gya_header_cta_text', 'Diagnóstico estratégico', $front_page_id);
 $header_cta_url = gya_get_field_value('gya_header_cta_url', '#contacto', $front_page_id);
+if ($header_cta_url === '#contacto') {
+    $header_cta_url = home_url('/contact/');
+}
 $header_solution_items = get_posts(
     array(
         'post_type' => 'gya_category',

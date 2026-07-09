@@ -9,6 +9,9 @@ require_once get_template_directory() . '/inc/theme-helpers.php';
 require_once get_template_directory() . '/inc/hero-slides.php';
 require_once get_template_directory() . '/inc/acf-fields.php';
 require_once get_template_directory() . '/inc/seed-front-page.php';
+require_once get_template_directory() . '/inc/gya-email-settings.php';
+require_once get_template_directory() . '/inc/gya-email-resend.php';
+require_once get_template_directory() . '/inc/gya-contact-form.php';
 
 function gya_theme_setup()
 {
@@ -189,6 +192,15 @@ function gya_is_weare_page_request()
     return is_page('weare') || $request === 'weare';
 }
 
+function gya_is_contact_page_request()
+{
+    global $wp;
+
+    $request = isset($wp->request) ? trim((string) $wp->request, '/') : '';
+
+    return is_page('contact') || $request === 'contact';
+}
+
 function gya_enqueue_assets()
 {
     $theme_version = wp_get_theme()->get('Version');
@@ -204,8 +216,10 @@ function gya_enqueue_assets()
     $team_css_path = get_template_directory() . '/assets/css/team.css';
     $team_page_css_path = get_template_directory() . '/assets/css/team-page.css';
     $weare_page_css_path = get_template_directory() . '/assets/css/weare-page.css';
+    $contact_page_css_path = get_template_directory() . '/assets/css/contact-page.css';
     $intro_loader_css_path = get_template_directory() . '/assets/css/intro-loader.css';
     $js_path = get_template_directory() . '/assets/js/main.js';
+    $contact_form_js_path = get_template_directory() . '/assets/js/contact-form.js';
     $intro_loader_js_path = get_template_directory() . '/assets/js/intro-loader.js';
     $intro_lottie_path = get_template_directory() . '/assets/lottie/intro.json';
 
@@ -303,6 +317,15 @@ function gya_enqueue_assets()
         );
     }
 
+    if (gya_is_contact_page_request()) {
+        wp_enqueue_style(
+            'gya-contact-page-style',
+            get_template_directory_uri() . '/assets/css/contact-page.css',
+            array('gya-main-style'),
+            file_exists($contact_page_css_path) ? filemtime($contact_page_css_path) : $theme_version
+        );
+    }
+
     if ((is_front_page() || is_home()) && file_exists($intro_lottie_path)) {
         wp_enqueue_style(
             'gya-intro-loader-style',
@@ -344,6 +367,24 @@ function gya_enqueue_assets()
         file_exists($js_path) ? filemtime($js_path) : $theme_version,
         true
     );
+
+    if (gya_is_contact_page_request()) {
+        wp_enqueue_script(
+            'gya-contact-form',
+            get_template_directory_uri() . '/assets/js/contact-form.js',
+            array(),
+            file_exists($contact_form_js_path) ? filemtime($contact_form_js_path) : $theme_version,
+            true
+        );
+
+        wp_localize_script(
+            'gya-contact-form',
+            'gyaContactForm',
+            array(
+                'ajaxUrl' => admin_url('admin-ajax.php'),
+            )
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'gya_enqueue_assets');
 
@@ -390,6 +431,28 @@ function gya_weare_page_template($template)
     return file_exists($weare_template) ? $weare_template : $template;
 }
 add_filter('template_include', 'gya_weare_page_template');
+
+function gya_contact_page_template($template)
+{
+    if (!gya_is_contact_page_request()) {
+        return $template;
+    }
+
+    $contact_template = get_template_directory() . '/page-contact.php';
+
+    if (file_exists($contact_template)) {
+        global $wp_query;
+
+        if ($wp_query) {
+            $wp_query->is_404 = false;
+        }
+
+        status_header(200);
+    }
+
+    return file_exists($contact_template) ? $contact_template : $template;
+}
+add_filter('template_include', 'gya_contact_page_template');
 
 function gya_intro_loader_head_state()
 {
