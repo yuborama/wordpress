@@ -65,6 +65,137 @@ function gya_register_subcategories_cpt()
 }
 add_action('init', 'gya_register_subcategories_cpt');
 
+function gya_relationship_meta_query($field_name, $post_id)
+{
+    return array(
+        'relation' => 'OR',
+        array(
+            'key' => $field_name,
+            'value' => (string) $post_id,
+            'compare' => '=',
+        ),
+        array(
+            'key' => $field_name,
+            'value' => '"' . (int) $post_id . '"',
+            'compare' => 'LIKE',
+        ),
+        array(
+            'key' => $field_name,
+            'value' => 'i:' . (int) $post_id . ';',
+            'compare' => 'LIKE',
+        ),
+    );
+}
+
+function gya_subcategory_admin_parent_filter($post_type)
+{
+    if ($post_type !== 'gya_subcategory') {
+        return;
+    }
+
+    $selected_category = isset($_GET['gya_parent_category']) ? absint($_GET['gya_parent_category']) : 0;
+    $categories = get_posts(
+        array(
+            'post_type' => 'gya_category',
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'no_found_rows' => true,
+        )
+    );
+
+    if (empty($categories)) {
+        return;
+    }
+    ?>
+    <select name="gya_parent_category" id="gya-parent-category-filter">
+        <option value=""><?php echo esc_html__('Todas las categorías', 'gya'); ?></option>
+        <?php foreach ($categories as $category) : ?>
+            <option value="<?php echo esc_attr((string) $category->ID); ?>" <?php selected($selected_category, $category->ID); ?>>
+                <?php echo esc_html(get_the_title($category)); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <?php
+}
+add_action('restrict_manage_posts', 'gya_subcategory_admin_parent_filter');
+
+function gya_filter_subcategories_by_parent_category($query)
+{
+    if (!is_admin() || !$query->is_main_query()) {
+        return;
+    }
+
+    $post_type = $query->get('post_type');
+
+    if ($post_type !== 'gya_subcategory') {
+        return;
+    }
+
+    $selected_category = isset($_GET['gya_parent_category']) ? absint($_GET['gya_parent_category']) : 0;
+
+    if (!$selected_category) {
+        return;
+    }
+
+    $existing_meta_query = $query->get('meta_query');
+    $parent_meta_query = gya_relationship_meta_query('parent_category', $selected_category);
+
+    if (!empty($existing_meta_query)) {
+        $query->set(
+            'meta_query',
+            array(
+                'relation' => 'AND',
+                $existing_meta_query,
+                $parent_meta_query,
+            )
+        );
+        return;
+    }
+
+    $query->set('meta_query', $parent_meta_query);
+}
+add_action('pre_get_posts', 'gya_filter_subcategories_by_parent_category');
+
+function gya_subcategory_admin_columns($columns)
+{
+    $updated_columns = array();
+
+    foreach ($columns as $key => $label) {
+        $updated_columns[$key] = $label;
+
+        if ($key === 'title') {
+            $updated_columns['gya_parent_category'] = __('Categoría padre', 'gya');
+        }
+    }
+
+    return $updated_columns;
+}
+add_filter('manage_gya_subcategory_posts_columns', 'gya_subcategory_admin_columns');
+
+function gya_subcategory_admin_column_content($column, $post_id)
+{
+    if ($column !== 'gya_parent_category') {
+        return;
+    }
+
+    $parent_categories = gya_get_post_field_value('parent_category', $post_id, array());
+    $parent_categories = is_array($parent_categories) ? $parent_categories : array($parent_categories);
+    $parent_names = array();
+
+    foreach ($parent_categories as $parent_category) {
+        $parent_id = $parent_category instanceof WP_Post ? $parent_category->ID : absint($parent_category);
+
+        if ($parent_id) {
+            $parent_names[] = get_the_title($parent_id);
+        }
+    }
+
+    echo !empty($parent_names) ? esc_html(implode(', ', $parent_names)) : '&mdash;';
+}
+add_action('manage_gya_subcategory_posts_custom_column', 'gya_subcategory_admin_column_content', 10, 2);
+
 function gya_register_como_ayudamos_cpt()
 {
     $labels = array(
