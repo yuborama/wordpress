@@ -14,6 +14,8 @@ $header_cta_url = gya_get_field_value('gya_header_cta_url', '#contacto', $front_
 if ($header_cta_url === '#contacto') {
     $header_cta_url = home_url('/contact/');
 }
+$header_iso_badge_path = get_template_directory() . '/assets/images/icons/iso9001.svg';
+$header_iso_badge_url = get_template_directory_uri() . '/assets/images/icons/iso9001.svg';
 $header_solution_items = get_posts(
     array(
         'post_type' => 'gya_category',
@@ -82,4 +84,9 @@ $header_is_insights_active = is_post_type_archive('insights') || is_singular('in
             <a class="primary-link" href="<?php echo esc_url($header_cta_url); ?>"><?php echo esc_html($header_cta_text); ?></a>
         </div>
     </div>
+    <?php if (file_exists($header_iso_badge_path)) : ?>
+        <div class="header-iso-ribbon" aria-label="Certificación ISO 9001">
+            <img src="<?php echo esc_url($header_iso_badge_url); ?>" alt="ISO 9001">
+        </div>
+    <?php endif; ?>
 </header>
