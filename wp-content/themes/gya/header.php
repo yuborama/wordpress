@@ -83,10 +83,54 @@ $header_is_insights_active = is_post_type_archive('insights') || is_singular('in
         <div class="header-tools">
             <a class="primary-link" href="<?php echo esc_url($header_cta_url); ?>"><?php echo esc_html($header_cta_text); ?></a>
         </div>
+
+        <button class="mobile-menu-toggle" type="button" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
     <?php if (file_exists($header_iso_badge_path)) : ?>
         <div class="header-iso-ribbon" aria-label="Certificación ISO 9001">
             <img src="<?php echo esc_url($header_iso_badge_url); ?>" alt="ISO 9001">
         </div>
     <?php endif; ?>
+
+    <div class="mobile-menu-panel" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-head">
+            <a class="mobile-menu-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Inicio GYA">
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
+            </a>
+            <button class="mobile-menu-close" type="button" aria-label="Cerrar menú">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="mobile-menu-nav" aria-label="Menú móvil">
+            <details class="mobile-menu-group">
+                <summary>Soluciones</summary>
+                <?php if (!empty($header_solution_items)) : ?>
+                    <div class="mobile-submenu">
+                        <?php foreach ($header_solution_items as $solution_item) : ?>
+                            <a href="<?php echo esc_url(get_permalink($solution_item->ID)); ?>"><?php echo esc_html(get_the_title($solution_item)); ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </details>
+
+            <a href="<?php echo esc_url(get_post_type_archive_link('insights') ?: home_url('/insights/')); ?>">Insights</a>
+            <a href="<?php echo esc_url(home_url('/#servicios')); ?>">Cómo ayudamos</a>
+
+            <details class="mobile-menu-group">
+                <summary>Nosotros</summary>
+                <div class="mobile-submenu">
+                    <a href="<?php echo esc_url(home_url('/weare/')); ?>">Quiénes somos</a>
+                    <a href="<?php echo esc_url(home_url('/team/')); ?>">Nuestro equipo</a>
+                </div>
+            </details>
+
+            <a class="mobile-menu-cta" href="<?php echo esc_url($header_cta_url); ?>"><?php echo esc_html($header_cta_text); ?></a>
+        </nav>
+    </div>
 </header>
