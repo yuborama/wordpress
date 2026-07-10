@@ -175,7 +175,8 @@
 @media (max-width: 900px) {
   .solutions-page {
     min-width: 100%;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 
   .solutions-rail {
@@ -184,6 +185,10 @@
 }
 
 @media (max-width: 560px) {
+  .solutions-page {
+    grid-template-columns: 1fr;
+  }
+
   .solution-card {
     padding: 22px 18px;
   }

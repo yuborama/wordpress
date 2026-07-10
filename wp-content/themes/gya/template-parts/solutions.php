@@ -55,7 +55,7 @@ $solution_pages = array_chunk($solutions, 4);
         </header>
         <?php if (!empty($solution_pages)) : ?>
             <div class="solutions-slider js-solutions-slider" data-solutions-index="0">
-                <?php if (count($solution_pages) > 1) : ?>
+                <?php if (count($solutions) > 1) : ?>
                     <button class="solutions-rail solutions-rail-left" type="button" aria-label="Anterior" data-solutions-prev>
                         <span class="rail-arrow-icon" aria-hidden="true"></span>
                     </button>
@@ -66,7 +66,7 @@ $solution_pages = array_chunk($solutions, 4);
                         <?php foreach ($solution_pages as $page_index => $solution_page) : ?>
                             <div class="solutions-page" data-solutions-page="<?php echo esc_attr((string) $page_index); ?>">
                                 <?php foreach ($solution_page as $solution) : ?>
-                                    <a class="solution-card" href="<?php echo esc_url($solution['url']); ?>">
+                                    <a class="solution-card" href="<?php echo esc_url($solution['url']); ?>" data-solutions-card>
                                         <?php if (!empty($solution['icon'])) : ?>
                                             <span class="solution-icon" aria-hidden="true">
                                                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/solutions/' . $solution['icon'] . '.svg'); ?>" alt="">
@@ -83,14 +83,14 @@ $solution_pages = array_chunk($solutions, 4);
                     </div>
                 </div>
 
-                <?php if (count($solution_pages) > 1) : ?>
+                <?php if (count($solutions) > 1) : ?>
                     <button class="solutions-rail solutions-rail-right" type="button" aria-label="Siguiente" data-solutions-next>
                         <span class="rail-arrow-icon" aria-hidden="true"></span>
                     </button>
                 <?php endif; ?>
             </div>
 
-            <?php if (count($solution_pages) > 1) : ?>
+            <?php if (count($solutions) > 1) : ?>
                 <div class="solutions-dots" aria-label="Páginas de soluciones">
                     <?php foreach ($solution_pages as $page_index => $_solution_page) : ?>
                         <button
@@ -113,18 +113,99 @@ $solution_pages = array_chunk($solutions, 4);
 
   sliders.forEach(function (slider) {
     var track = slider.querySelector('.solutions-track');
-    var pages = slider.querySelectorAll('[data-solutions-page]');
+    var cards = track ? Array.prototype.slice.call(track.querySelectorAll('[data-solutions-card]')) : [];
+    var pages = [];
     var prevButton = slider.querySelector('[data-solutions-prev]');
     var nextButton = slider.querySelector('[data-solutions-next]');
     var dotsContainer = slider.parentNode ? slider.parentNode.querySelector('.solutions-dots') : null;
-    var dots = dotsContainer ? dotsContainer.querySelectorAll('[data-solutions-dot]') : [];
+    var dots = [];
     var activeIndex = 0;
+    var cardsPerPage = 4;
     var autoplayMs = Number(slider.dataset.solutionsAutoplay || 6000);
     var autoplayId = null;
+    var resizeId = null;
 
-    if (!track || pages.length <= 1) return;
+    if (!track || !cards.length) return;
+
+    function getCardsPerPage() {
+      if (window.matchMedia && window.matchMedia('(max-width: 560px)').matches) {
+        return 1;
+      }
+
+      if (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) {
+        return 2;
+      }
+
+      return 4;
+    }
+
+    function updateControls() {
+      var hasMultiplePages = pages.length > 1;
+
+      if (prevButton) {
+        prevButton.hidden = !hasMultiplePages;
+      }
+
+      if (nextButton) {
+        nextButton.hidden = !hasMultiplePages;
+      }
+
+      if (dotsContainer) {
+        dotsContainer.hidden = !hasMultiplePages;
+      }
+    }
+
+    function bindDots() {
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          setActivePage(Number(dot.dataset.solutionsDot || 0));
+          restartAutoplay();
+        });
+      });
+    }
+
+    function buildDots() {
+      if (!dotsContainer) return;
+
+      dotsContainer.innerHTML = '';
+
+      pages.forEach(function (_page, pageIndex) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.dataset.solutionsDot = String(pageIndex);
+        dot.setAttribute('aria-label', 'Ir a pagina ' + (pageIndex + 1));
+        dotsContainer.appendChild(dot);
+      });
+
+      dots = Array.prototype.slice.call(dotsContainer.querySelectorAll('[data-solutions-dot]'));
+      bindDots();
+    }
+
+    function buildPages(nextActiveIndex) {
+      var previousFirstCardIndex = activeIndex * cardsPerPage;
+      cardsPerPage = getCardsPerPage();
+      track.innerHTML = '';
+
+      cards.forEach(function (card, cardIndex) {
+        if (cardIndex % cardsPerPage === 0) {
+          var page = document.createElement('div');
+          page.className = 'solutions-page';
+          page.dataset.solutionsPage = String(Math.floor(cardIndex / cardsPerPage));
+          track.appendChild(page);
+        }
+
+        track.lastElementChild.appendChild(card);
+      });
+
+      pages = Array.prototype.slice.call(slider.querySelectorAll('[data-solutions-page]'));
+      buildDots();
+      updateControls();
+      setActivePage(typeof nextActiveIndex === 'number' ? nextActiveIndex : Math.floor(previousFirstCardIndex / cardsPerPage));
+    }
 
     function setActivePage(index) {
+      if (!pages.length) return;
+
       activeIndex = (index + pages.length) % pages.length;
       slider.dataset.solutionsIndex = String(activeIndex);
       track.style.transform = 'translateX(-' + activeIndex * 100 + '%)';
@@ -150,6 +231,10 @@ $solution_pages = array_chunk($solutions, 4);
 
     function startAutoplay() {
       stopAutoplay();
+
+      if (pages.length <= 1) {
+        return;
+      }
 
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return;
@@ -178,19 +263,23 @@ $solution_pages = array_chunk($solutions, 4);
       });
     }
 
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () {
-        setActivePage(Number(dot.dataset.solutionsDot || 0));
-        restartAutoplay();
-      });
-    });
-
     slider.addEventListener('mouseenter', stopAutoplay);
     slider.addEventListener('mouseleave', startAutoplay);
     slider.addEventListener('focusin', stopAutoplay);
     slider.addEventListener('focusout', startAutoplay);
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeId);
+      resizeId = setTimeout(function () {
+        var nextCardsPerPage = getCardsPerPage();
 
-    setActivePage(0);
+        if (nextCardsPerPage !== cardsPerPage) {
+          buildPages();
+          restartAutoplay();
+        }
+      }, 150);
+    });
+
+    buildPages(0);
     startAutoplay();
   });
 })();
