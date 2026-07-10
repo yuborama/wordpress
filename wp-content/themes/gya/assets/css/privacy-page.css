@@ -1,0 +1,154 @@
+.privacy-page {
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  background: var(--white);
+  color: #435365;
+}
+
+.privacy-hero {
+  background: #00020e;
+  color: var(--white);
+}
+
+.privacy-hero__inner {
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.privacy-hero span,
+.privacy-meta span {
+  display: block;
+  color: var(--orange);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.privacy-hero h1 {
+  margin: 20px 0 0;
+  color: var(--white);
+  font-size: 54px;
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.privacy-hero p {
+  max-width: 620px;
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 18px;
+  line-height: 1.38;
+}
+
+.privacy-content {
+  padding: 72px 0 96px;
+}
+
+.privacy-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+}
+
+.privacy-meta {
+  position: sticky;
+  top: 116px;
+  display: grid;
+  gap: 22px;
+  padding-top: 5px;
+}
+
+.privacy-meta strong {
+  display: block;
+  margin-top: 10px;
+  color: #07101f;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.privacy-meta a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 38px;
+  padding: 0 18px;
+  border: 1px solid var(--orange);
+  border-radius: 4px;
+  color: var(--orange);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.privacy-article {
+  max-width: 880px;
+}
+
+.privacy-block {
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(127, 139, 147, 0.28);
+}
+
+.privacy-block + .privacy-block {
+  padding-top: 36px;
+}
+
+.privacy-block h2 {
+  margin: 0 0 18px;
+  color: #08283d;
+  font-size: 26px;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+.privacy-block p {
+  margin: 0;
+  color: #435365;
+  font-size: 16px;
+  line-height: 1.64;
+}
+
+.privacy-block p + p,
+.privacy-block ul + p {
+  margin-top: 16px;
+}
+
+.privacy-block ul {
+  display: grid;
+  gap: 11px;
+  margin: 18px 0 0;
+  padding-left: 22px;
+}
+
+.privacy-block li {
+  color: #435365;
+  font-size: 16px;
+  line-height: 1.48;
+}
+
+.privacy-block li::marker {
+  color: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .privacy-hero__inner {
+    min-height: 260px;
+  }
+
+  .privacy-hero h1 {
+    font-size: 40px;
+  }
+
+  .privacy-layout {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .privacy-meta {
+    position: static;
+  }
+}

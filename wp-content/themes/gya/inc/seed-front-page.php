@@ -43,7 +43,7 @@ function gya_seed_front_page_fields() {
         'gya_footer_legal_1_text' => 'Términos de uso',
         'gya_footer_legal_1_url' => '#terminos',
         'gya_footer_legal_2_text' => 'Aviso de privacidad',
-        'gya_footer_legal_2_url' => '#privacidad',
+        'gya_footer_legal_2_url' => home_url('/aviso-de-privacidad/'),
         'gya_footer_legal_3_text' => 'Aviso de manejo de cookies',
         'gya_footer_legal_3_url' => '#cookies',
         'gya_footer_text_1' => 'G&A Gómez y Asociados (G&A) es una firma especializada en servicios fiscales, legales, financieros y de consultoría empresarial. La prestación de servicios se realiza conforme a la naturaleza y alcance de cada proyecto, bajo criterios de independencia profesional y cumplimiento normativo.',

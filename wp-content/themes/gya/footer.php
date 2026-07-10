@@ -18,6 +18,13 @@ $footer_text_1 = gya_get_field_value('gya_footer_text_1', 'G&A Gómez y Asociado
 $footer_text_2 = gya_get_field_value('gya_footer_text_2', 'La información publicada en este sitio tiene carácter informativo y no representa una opinión profesional definitiva ni sustituye asesoría especializada para casos concretos.', $front_page_id);
 $footer_copyright = gya_get_field_value('gya_footer_copyright', 'G&A Gómez y Asociados, S.C.', $front_page_id);
 
+foreach ($footer_legal_links as &$legal_link) {
+    if (!empty($legal_link['url']) && $legal_link['url'] === '#privacidad') {
+        $legal_link['url'] = home_url('/aviso-de-privacidad/');
+    }
+}
+unset($legal_link);
+
 $has_legal_links = false;
 foreach ($footer_legal_links as $legal_link) {
     if (!empty($legal_link['text']) && !empty($legal_link['url'])) {

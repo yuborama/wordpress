@@ -201,6 +201,15 @@ function gya_is_contact_page_request()
     return is_page('contact') || $request === 'contact';
 }
 
+function gya_is_privacy_page_request()
+{
+    global $wp;
+
+    $request = isset($wp->request) ? trim((string) $wp->request, '/') : '';
+
+    return is_page('privacy') || is_page('aviso-de-privacidad') || in_array($request, array('privacy', 'aviso-de-privacidad'), true);
+}
+
 function gya_enqueue_assets()
 {
     $theme_version = wp_get_theme()->get('Version');
@@ -217,6 +226,7 @@ function gya_enqueue_assets()
     $team_page_css_path = get_template_directory() . '/assets/css/team-page.css';
     $weare_page_css_path = get_template_directory() . '/assets/css/weare-page.css';
     $contact_page_css_path = get_template_directory() . '/assets/css/contact-page.css';
+    $privacy_page_css_path = get_template_directory() . '/assets/css/privacy-page.css';
     $intro_loader_css_path = get_template_directory() . '/assets/css/intro-loader.css';
     $js_path = get_template_directory() . '/assets/js/main.js';
     $contact_form_js_path = get_template_directory() . '/assets/js/contact-form.js';
@@ -323,6 +333,15 @@ function gya_enqueue_assets()
             get_template_directory_uri() . '/assets/css/contact-page.css',
             array('gya-main-style'),
             file_exists($contact_page_css_path) ? filemtime($contact_page_css_path) : $theme_version
+        );
+    }
+
+    if (gya_is_privacy_page_request()) {
+        wp_enqueue_style(
+            'gya-privacy-page-style',
+            get_template_directory_uri() . '/assets/css/privacy-page.css',
+            array('gya-main-style'),
+            file_exists($privacy_page_css_path) ? filemtime($privacy_page_css_path) : $theme_version
         );
     }
 
@@ -453,6 +472,28 @@ function gya_contact_page_template($template)
     return file_exists($contact_template) ? $contact_template : $template;
 }
 add_filter('template_include', 'gya_contact_page_template');
+
+function gya_privacy_page_template($template)
+{
+    if (!gya_is_privacy_page_request()) {
+        return $template;
+    }
+
+    $privacy_template = get_template_directory() . '/page-privacy.php';
+
+    if (file_exists($privacy_template)) {
+        global $wp_query;
+
+        if ($wp_query) {
+            $wp_query->is_404 = false;
+        }
+
+        status_header(200);
+    }
+
+    return file_exists($privacy_template) ? $privacy_template : $template;
+}
+add_filter('template_include', 'gya_privacy_page_template');
 
 function gya_intro_loader_head_state()
 {
