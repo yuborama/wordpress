@@ -88,7 +88,7 @@ $team_pages = array_chunk($team, 4);
         </header>
         <?php if (!empty($team_pages)) : ?>
             <div class="team-slider js-team-slider" data-team-index="0">
-                <?php if (count($team_pages) > 1) : ?>
+                <?php if (count($team) > 1) : ?>
                     <button class="team-rail team-rail-left" type="button" aria-label="Anterior" data-team-prev>
                         <span class="rail-arrow-icon" aria-hidden="true"></span>
                     </button>
@@ -99,7 +99,7 @@ $team_pages = array_chunk($team, 4);
                         <?php foreach ($team_pages as $page_index => $team_page) : ?>
                             <div class="team-page" data-team-page="<?php echo esc_attr((string) $page_index); ?>">
                                 <?php foreach ($team_page as $member) : ?>
-                                    <article class="team-card">
+                                    <article class="team-card" data-team-card>
                                         <div class="avatar">
                                             <?php if (!empty($member['image'])) : ?>
                                                 <img src="<?php echo esc_url($member['image']); ?>" alt="<?php echo esc_attr($member['name']); ?>">
@@ -131,14 +131,14 @@ $team_pages = array_chunk($team, 4);
                     </div>
                 </div>
 
-                <?php if (count($team_pages) > 1) : ?>
+                <?php if (count($team) > 1) : ?>
                     <button class="team-rail team-rail-right" type="button" aria-label="Siguiente" data-team-next>
                         <span class="rail-arrow-icon" aria-hidden="true"></span>
                     </button>
                 <?php endif; ?>
             </div>
 
-            <?php if (count($team_pages) > 1) : ?>
+            <?php if (count($team) > 1) : ?>
                 <div class="team-dots" aria-label="P&aacute;ginas de equipo">
                     <?php foreach ($team_pages as $page_index => $_team_page) : ?>
                         <button
@@ -162,16 +162,95 @@ $team_pages = array_chunk($team, 4);
 
   sliders.forEach(function (slider) {
     var track = slider.querySelector('.team-track');
-    var pages = slider.querySelectorAll('[data-team-page]');
+    var cards = track ? Array.prototype.slice.call(track.querySelectorAll('[data-team-card]')) : [];
+    var pages = [];
     var prevButton = slider.querySelector('[data-team-prev]');
     var nextButton = slider.querySelector('[data-team-next]');
     var dotsContainer = slider.parentNode ? slider.parentNode.querySelector('.team-dots') : null;
-    var dots = dotsContainer ? dotsContainer.querySelectorAll('[data-team-dot]') : [];
+    var dots = [];
     var activeIndex = 0;
+    var cardsPerPage = 4;
 
-    if (!track || pages.length <= 1) return;
+    if (!track || !cards.length) return;
+
+    function getCardsPerPage() {
+      if (window.matchMedia && window.matchMedia('(max-width: 560px)').matches) {
+        return 1;
+      }
+
+      if (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) {
+        return 2;
+      }
+
+      return 4;
+    }
+
+    function updateControls() {
+      var hasMultiplePages = pages.length > 1;
+
+      if (prevButton) {
+        prevButton.hidden = !hasMultiplePages;
+      }
+
+      if (nextButton) {
+        nextButton.hidden = !hasMultiplePages;
+      }
+
+      if (dotsContainer) {
+        dotsContainer.hidden = !hasMultiplePages;
+      }
+    }
+
+    function bindDots() {
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          setActivePage(Number(dot.dataset.teamDot || 0));
+        });
+      });
+    }
+
+    function buildDots() {
+      if (!dotsContainer) return;
+
+      dotsContainer.innerHTML = '';
+
+      pages.forEach(function (_page, pageIndex) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.dataset.teamDot = String(pageIndex);
+        dot.setAttribute('aria-label', 'Ir a pagina ' + (pageIndex + 1));
+        dotsContainer.appendChild(dot);
+      });
+
+      dots = Array.prototype.slice.call(dotsContainer.querySelectorAll('[data-team-dot]'));
+      bindDots();
+    }
+
+    function buildPages(nextActiveIndex) {
+      var previousFirstCardIndex = activeIndex * cardsPerPage;
+      cardsPerPage = getCardsPerPage();
+      track.innerHTML = '';
+
+      cards.forEach(function (card, cardIndex) {
+        if (cardIndex % cardsPerPage === 0) {
+          var page = document.createElement('div');
+          page.className = 'team-page';
+          page.dataset.teamPage = String(Math.floor(cardIndex / cardsPerPage));
+          track.appendChild(page);
+        }
+
+        track.lastElementChild.appendChild(card);
+      });
+
+      pages = Array.prototype.slice.call(slider.querySelectorAll('[data-team-page]'));
+      buildDots();
+      updateControls();
+      setActivePage(typeof nextActiveIndex === 'number' ? nextActiveIndex : Math.floor(previousFirstCardIndex / cardsPerPage));
+    }
 
     function setActivePage(index) {
+      if (!pages.length) return;
+
       activeIndex = (index + pages.length) % pages.length;
       slider.dataset.teamIndex = String(activeIndex);
       track.style.transform = 'translateX(-' + activeIndex * 100 + '%)';
@@ -200,13 +279,15 @@ $team_pages = array_chunk($team, 4);
       });
     }
 
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () {
-        setActivePage(Number(dot.dataset.teamDot || 0));
-      });
+    window.addEventListener('resize', function () {
+      var nextCardsPerPage = getCardsPerPage();
+
+      if (nextCardsPerPage !== cardsPerPage) {
+        buildPages();
+      }
     });
 
-    setActivePage(0);
+    buildPages(0);
   });
 })();
 </script>
