@@ -119,6 +119,8 @@ $solution_pages = array_chunk($solutions, 4);
     var dotsContainer = slider.parentNode ? slider.parentNode.querySelector('.solutions-dots') : null;
     var dots = dotsContainer ? dotsContainer.querySelectorAll('[data-solutions-dot]') : [];
     var activeIndex = 0;
+    var autoplayMs = Number(slider.dataset.solutionsAutoplay || 6000);
+    var autoplayId = null;
 
     if (!track || pages.length <= 1) return;
 
@@ -139,25 +141,57 @@ $solution_pages = array_chunk($solutions, 4);
       });
     }
 
+    function stopAutoplay() {
+      if (autoplayId) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+
+      autoplayId = setInterval(function () {
+        setActivePage(activeIndex + 1);
+      }, autoplayMs);
+    }
+
+    function restartAutoplay() {
+      startAutoplay();
+    }
+
     if (prevButton) {
       prevButton.addEventListener('click', function () {
         setActivePage(activeIndex - 1);
+        restartAutoplay();
       });
     }
 
     if (nextButton) {
       nextButton.addEventListener('click', function () {
         setActivePage(activeIndex + 1);
+        restartAutoplay();
       });
     }
 
     dots.forEach(function (dot) {
       dot.addEventListener('click', function () {
         setActivePage(Number(dot.dataset.solutionsDot || 0));
+        restartAutoplay();
       });
     });
 
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+    slider.addEventListener('focusin', stopAutoplay);
+    slider.addEventListener('focusout', startAutoplay);
+
     setActivePage(0);
+    startAutoplay();
   });
 })();
 </script>
