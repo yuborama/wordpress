@@ -66,34 +66,127 @@ wp_reset_postdata();
             <span>INSIGHTS</span>
             <h2><?php echo esc_html($insights_heading); ?></h2>
         </header>
-        <div class="insights-grid">
-            <?php foreach ($insights as $insight) : ?>
-                <a class="insight-card" href="<?php echo esc_url($insight['url']); ?>">
-                    <div class="insight-photo" style="background-image:url('<?php echo esc_url($insight['image']); ?>');"></div>
-                    <div class="insight-copy">
-                        <?php if (!empty($insight['tag'])) : ?>
-                            <span class="tag"><?php echo esc_html($insight['tag']); ?></span>
-                        <?php endif; ?>
-                        <h3><?php echo esc_html($insight['title']); ?> <span>&rsaquo;</span></h3>
-                        <?php if (!empty($insight['body'])) : ?>
-                            <p><?php echo esc_html($insight['body']); ?></p>
-                        <?php endif; ?>
-                        <?php if (!empty($insight['author'])) : ?>
-                            <div class="author">
-                                <span>
-                                    <?php if (!empty($insight['author_image'])) : ?>
-                                        <img src="<?php echo esc_url($insight['author_image']); ?>" alt="<?php echo esc_attr($insight['author']); ?>">
-                                    <?php else : ?>
-                                        <?php echo esc_html($insight['author_initial']); ?>
-                                    <?php endif; ?>
-                                </span>
-                                <small><?php echo esc_html($insight['author']); ?></small>
+        <div class="insights-slider js-insights-slider" data-insights-index="0">
+            <div class="insights-grid">
+                <?php foreach ($insights as $insight) : ?>
+                    <div class="insights-slide">
+                        <a class="insight-card" href="<?php echo esc_url($insight['url']); ?>">
+                            <div class="insight-photo" style="background-image:url('<?php echo esc_url($insight['image']); ?>');"></div>
+                            <div class="insight-copy">
+                                <?php if (!empty($insight['tag'])) : ?>
+                                    <span class="tag"><?php echo esc_html($insight['tag']); ?></span>
+                                <?php endif; ?>
+                                <h3><?php echo esc_html($insight['title']); ?> <span>&rsaquo;</span></h3>
+                                <?php if (!empty($insight['body'])) : ?>
+                                    <p><?php echo esc_html($insight['body']); ?></p>
+                                <?php endif; ?>
+                                <?php if (!empty($insight['author'])) : ?>
+                                    <div class="author">
+                                        <span>
+                                            <?php if (!empty($insight['author_image'])) : ?>
+                                                <img src="<?php echo esc_url($insight['author_image']); ?>" alt="<?php echo esc_attr($insight['author']); ?>">
+                                            <?php else : ?>
+                                                <?php echo esc_html($insight['author_initial']); ?>
+                                            <?php endif; ?>
+                                        </span>
+                                        <small><?php echo esc_html($insight['author']); ?></small>
+                                    </div>
+                                <?php endif; ?>
                             </div>
-                        <?php endif; ?>
+                        </a>
                     </div>
-                </a>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
+            <?php if (count($insights) > 1) : ?>
+                <div class="insights-dots" aria-label="Páginas de insights">
+                    <?php foreach ($insights as $insight_index => $_insight) : ?>
+                        <button
+                            class="<?php echo $insight_index === 0 ? 'is-active' : ''; ?>"
+                            type="button"
+                            aria-label="<?php echo esc_attr(sprintf('Ir a insight %d', $insight_index + 1)); ?>"
+                            <?php echo $insight_index === 0 ? 'aria-current="true"' : ''; ?>
+                            data-insights-dot="<?php echo esc_attr((string) $insight_index); ?>"></button>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
         <a class="primary-button insights-cta" href="<?php echo esc_url(get_post_type_archive_link('insights')); ?>">Explorar insights</a>
     </div>
 </section>
+
+<script>
+(function () {
+  var sliders = document.querySelectorAll('.js-insights-slider');
+  if (!sliders.length) return;
+
+  sliders.forEach(function (slider) {
+    var track = slider.querySelector('.insights-grid');
+    var slides = slider.querySelectorAll('.insights-slide');
+    var dots = slider.querySelectorAll('[data-insights-dot]');
+    var activeIndex = 0;
+    var autoplayId = null;
+    var autoplayMs = Number(slider.dataset.insightsAutoplay || 6000);
+
+    if (!track || slides.length <= 1) return;
+
+    function isCarouselMode() {
+      return window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
+    }
+
+    function setActiveSlide(index) {
+      activeIndex = (index + slides.length) % slides.length;
+      slider.dataset.insightsIndex = String(activeIndex);
+      track.style.transform = isCarouselMode() ? 'translateX(-' + activeIndex * 100 + '%)' : '';
+
+      dots.forEach(function (dot, dotIndex) {
+        var isActive = dotIndex === activeIndex;
+        dot.classList.toggle('is-active', isActive);
+
+        if (isActive) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    function stopAutoplay() {
+      if (autoplayId) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+
+      if (!isCarouselMode() || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        return;
+      }
+
+      autoplayId = setInterval(function () {
+        setActiveSlide(activeIndex + 1);
+      }, autoplayMs);
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        setActiveSlide(Number(dot.dataset.insightsDot || 0));
+        startAutoplay();
+      });
+    });
+
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+    slider.addEventListener('focusin', stopAutoplay);
+    slider.addEventListener('focusout', startAutoplay);
+    window.addEventListener('resize', function () {
+      setActiveSlide(isCarouselMode() ? activeIndex : 0);
+      startAutoplay();
+    });
+
+    setActiveSlide(0);
+    startAutoplay();
+  });
+})();
+</script>
