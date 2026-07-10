@@ -25,6 +25,26 @@ foreach ($footer_legal_links as &$legal_link) {
 }
 unset($legal_link);
 
+$footer_social_links = array();
+if (function_exists('gya_social_networks')) {
+    foreach (gya_social_networks() as $network_key => $network) {
+        if ($network_key === 'whatsapp') {
+            continue;
+        }
+
+        $url = get_option($network['option'], '');
+
+        if (!empty($url)) {
+            $footer_social_links[] = array(
+                'label' => $network['label'],
+                'url' => $url,
+                'icon' => get_template_directory_uri() . '/assets/images/icons/social/' . $network['icon'],
+            );
+        }
+    }
+}
+$whatsapp_url = get_option('gya_social_whatsapp', '');
+
 $has_legal_links = false;
 foreach ($footer_legal_links as $legal_link) {
     if (!empty($legal_link['text']) && !empty($legal_link['url'])) {
@@ -35,6 +55,9 @@ foreach ($footer_legal_links as $legal_link) {
 ?>
 <footer class="site-footer" id="contacto">
     <div class="shell">
+        <a class="footer-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Inicio GYA">
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
+        </a>
         <div class="footer-line"></div>
         <nav class="footer-nav" aria-label="Footer">
             <?php if ($has_legal_links) : ?>
@@ -57,6 +80,15 @@ foreach ($footer_legal_links as $legal_link) {
                 );
                 ?>
             <?php endif; ?>
+            <?php if (!empty($footer_social_links)) : ?>
+                <div class="footer-social" aria-label="Redes sociales">
+                    <?php foreach ($footer_social_links as $social_link) : ?>
+                        <a href="<?php echo esc_url($social_link['url']); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($social_link['label']); ?>">
+                            <img src="<?php echo esc_url($social_link['icon']); ?>" alt="">
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </nav>
         <div class="footer-line"></div>
         <p><?php echo esc_html($footer_text_1); ?></p>
@@ -64,6 +96,11 @@ foreach ($footer_legal_links as $legal_link) {
         <small>&copy; <?php echo esc_html(date_i18n('Y')); ?> <?php echo esc_html($footer_copyright); ?></small>
     </div>
 </footer>
+<?php if (!empty($whatsapp_url)) : ?>
+    <a class="floating-whatsapp" href="<?php echo esc_url($whatsapp_url); ?>" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/social/whatsapp.svg'); ?>" alt="">
+    </a>
+<?php endif; ?>
 <?php wp_footer(); ?>
 </body>
 </html>

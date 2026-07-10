@@ -7,16 +7,52 @@ if (!defined('ABSPATH')) {
 function gya_register_email_settings_page()
 {
     add_menu_page(
-        'Configuración de Emails',
-        'Emails GYA',
+        'Configuración GYA',
+        'GYA Config',
         'manage_options',
         'gya-email-settings',
         'gya_render_email_settings_page',
-        'dashicons-email-alt',
+        'dashicons-admin-generic',
         60
     );
 }
 add_action('admin_menu', 'gya_register_email_settings_page');
+
+function gya_social_networks()
+{
+    return array(
+        'facebook' => array(
+            'label' => 'Facebook',
+            'option' => 'gya_social_facebook',
+            'icon' => 'facebook.svg',
+            'placeholder' => 'https://facebook.com/gya',
+        ),
+        'linkedin' => array(
+            'label' => 'LinkedIn',
+            'option' => 'gya_social_linkedin',
+            'icon' => 'linkedin.svg',
+            'placeholder' => 'https://linkedin.com/company/gya',
+        ),
+        'youtube' => array(
+            'label' => 'YouTube',
+            'option' => 'gya_social_youtube',
+            'icon' => 'youtube.svg',
+            'placeholder' => 'https://youtube.com/@gya',
+        ),
+        'whatsapp' => array(
+            'label' => 'WhatsApp',
+            'option' => 'gya_social_whatsapp',
+            'icon' => 'whatsapp.svg',
+            'placeholder' => 'https://wa.me/5210000000000',
+        ),
+        'tiktok' => array(
+            'label' => 'TikTok',
+            'option' => 'gya_social_tiktok',
+            'icon' => 'tiktok.svg',
+            'placeholder' => 'https://tiktok.com/@gya',
+        ),
+    );
+}
 
 function gya_register_email_settings()
 {
@@ -24,6 +60,16 @@ function gya_register_email_settings()
     register_setting('gya_email_settings_group', 'gya_email_from');
     register_setting('gya_email_settings_group', 'gya_email_to');
     register_setting('gya_email_settings_group', 'gya_email_subject');
+
+    foreach (gya_social_networks() as $network) {
+        register_setting(
+            'gya_email_settings_group',
+            $network['option'],
+            array(
+                'sanitize_callback' => 'esc_url_raw',
+            )
+        );
+    }
 }
 add_action('admin_init', 'gya_register_email_settings');
 
@@ -39,11 +85,12 @@ function gya_render_email_settings_page()
     $subject = get_option('gya_email_subject', 'Nueva solicitud de diagnóstico');
     ?>
     <div class="wrap">
-        <h1>Configuración de Emails GYA</h1>
+        <h1>Configuración GYA</h1>
 
         <form method="post" action="options.php">
             <?php settings_fields('gya_email_settings_group'); ?>
 
+            <h2>Emails</h2>
             <table class="form-table" role="presentation">
                 <tr>
                     <th scope="row"><label for="gya_resend_api_key">API Key de Resend</label></th>
@@ -71,6 +118,21 @@ function gya_render_email_settings_page()
                         <input type="text" name="gya_email_subject" id="gya_email_subject" value="<?php echo esc_attr($subject); ?>" class="regular-text">
                     </td>
                 </tr>
+            </table>
+
+            <h2>Redes sociales</h2>
+            <p class="description">Estas URLs se muestran en el footer cuando están configuradas.</p>
+
+            <table class="form-table" role="presentation">
+                <?php foreach (gya_social_networks() as $network) : ?>
+                    <?php $value = get_option($network['option'], ''); ?>
+                    <tr>
+                        <th scope="row"><label for="<?php echo esc_attr($network['option']); ?>"><?php echo esc_html($network['label']); ?></label></th>
+                        <td>
+                            <input type="url" name="<?php echo esc_attr($network['option']); ?>" id="<?php echo esc_attr($network['option']); ?>" value="<?php echo esc_attr($value); ?>" class="regular-text" placeholder="<?php echo esc_attr($network['placeholder']); ?>">
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </table>
 
             <?php submit_button('Guardar configuración'); ?>

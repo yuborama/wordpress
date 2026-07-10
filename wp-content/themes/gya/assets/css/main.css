@@ -342,10 +342,10 @@ body.admin-bar .site-header {
 }
 
 .site-footer {
-  padding: 37px 0 42px;
+  padding: 40px 0 48px;
   background: #030713;
   color: rgba(255, 255, 255, 0.78);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .site-footer .shell {
@@ -354,20 +354,119 @@ body.admin-bar .site-header {
   align-items: center;
 }
 
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  width: 125px;
+  margin-bottom: 24px;
+}
+
+.footer-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .footer-line {
   width: 100%;
   height: 1px;
-  margin: 22px 0;
+  margin: 0;
   background: rgba(255, 255, 255, 0.22);
+}
+
+.footer-nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 78px;
+  min-height: 70px;
 }
 
 .footer-nav ul {
   justify-content: center;
+  gap: 92px;
+}
+
+.footer-nav a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  opacity: 0.9;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.footer-social img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.floating-whatsapp {
+  position: fixed;
+  right: 34px;
+  bottom: 34px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 10px 24px rgba(2, 6, 18, 0.24);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.floating-whatsapp:hover,
+.floating-whatsapp:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(2, 6, 18, 0.3);
+}
+
+.floating-whatsapp img {
+  display: block;
+  width: 30px;
+  height: 30px;
 }
 
 .site-footer p,
 .site-footer small {
   width: 100%;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.38;
+}
+
+.site-footer p {
+  margin-top: 30px;
+}
+
+.site-footer p + p {
+  margin-top: 18px;
+}
+
+.site-footer small {
+  margin-top: 22px;
+  font-size: 12px;
 }
 
 .blog-post h1,
@@ -441,5 +540,22 @@ body.admin-bar .site-header {
 
   .section {
     padding: 62px 0 70px;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-nav ul {
+    flex-wrap: wrap;
+    gap: 18px 26px;
+  }
+
+  .floating-whatsapp {
+    right: 18px;
+    bottom: 18px;
+    width: 50px;
+    height: 50px;
   }
 }
