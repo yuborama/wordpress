@@ -238,12 +238,25 @@
   }
 
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
   }
 
   .stats-band {
     height: auto;
-    padding: 32px 0;
+    padding: 0;
+  }
+
+  .stats-grid article {
+    justify-content: center;
+    text-align: center;
+    min-height: 86px;
+    padding: 0 24px;
+  }
+
+  .stats-grid article:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
   }
 }
 
@@ -259,6 +272,25 @@
 
   .hero-copy h1 {
     font-size: 34px;
+  }
+
+  .stats-grid article {
+    gap: 10px;
+    min-height: 78px;
+    padding: 0 16px;
+  }
+
+  .stat-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .stats-grid article strong {
+    font-size: 20px;
+  }
+
+  .stats-grid article span {
+    font-size: 9px;
   }
 }
 
