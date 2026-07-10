@@ -169,7 +169,7 @@ get_header();
                     <label>
                         <span>Área</span>
                         <select name="area" onchange="this.form.category.value=''; this.form.submit()">
-                            <option value="">Área</option>
+                            <option value="">Todas</option>
                             <?php foreach ($areas as $area) : ?>
                                 <option value="<?php echo esc_attr((string) $area->ID); ?>" <?php selected($selected_area, $area->ID); ?>>
                                     <?php echo esc_html(get_the_title($area)); ?>
@@ -181,7 +181,7 @@ get_header();
                     <label>
                         <span>Categoría</span>
                         <select name="category" onchange="this.form.submit()">
-                            <option value="">Categoría</option>
+                            <option value="">Todas</option>
                             <?php foreach ($category_options as $category_option) : ?>
                                 <?php $category_value = implode(',', array_unique($category_option['ids'])); ?>
                                 <option value="<?php echo esc_attr($category_value); ?>" <?php selected($selected_category_value, $category_value); ?>>
