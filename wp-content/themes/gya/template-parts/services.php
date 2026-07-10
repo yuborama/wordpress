@@ -65,17 +65,110 @@ if ($services_query->have_posts()) {
             <span>CÓMO AYUDAMOS</span>
             <h2><?php echo esc_html($services_heading); ?></h2>
         </header>
-        <div class="services-grid">
-            <?php foreach ($services as $service) : ?>
-                <article class="service-card">
-                    <div class="card-photo" style="background-image:url('<?php echo esc_url($service['image']); ?>');"></div>
-                    <div class="service-copy">
-                        <h3><?php echo esc_html($service['title']); ?> <span>&rsaquo;</span></h3>
-                        <p><?php echo esc_html($service['body']); ?></p>
+        <div class="services-slider js-services-slider" data-services-index="0">
+            <div class="services-grid">
+                <?php foreach ($services as $service) : ?>
+                    <div class="services-slide">
+                        <article class="service-card">
+                            <div class="card-photo" style="background-image:url('<?php echo esc_url($service['image']); ?>');"></div>
+                            <div class="service-copy">
+                                <h3><?php echo esc_html($service['title']); ?> <span>&rsaquo;</span></h3>
+                                <p><?php echo esc_html($service['body']); ?></p>
+                            </div>
+                        </article>
                     </div>
-                </article>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
+            <?php if (count($services) > 1) : ?>
+                <div class="services-dots" aria-label="Páginas de servicios">
+                    <?php foreach ($services as $service_index => $_service) : ?>
+                        <button
+                            class="<?php echo $service_index === 0 ? 'is-active' : ''; ?>"
+                            type="button"
+                            aria-label="<?php echo esc_attr(sprintf('Ir a servicio %d', $service_index + 1)); ?>"
+                            <?php echo $service_index === 0 ? 'aria-current="true"' : ''; ?>
+                            data-services-dot="<?php echo esc_attr((string) $service_index); ?>"></button>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
         <a class="outline-link centered services-cta" href="#servicios">Ver servicios especializados</a>
     </div>
 </section>
+
+<script>
+(function () {
+  var sliders = document.querySelectorAll('.js-services-slider');
+  if (!sliders.length) return;
+
+  sliders.forEach(function (slider) {
+    var track = slider.querySelector('.services-grid');
+    var slides = slider.querySelectorAll('.services-slide');
+    var dots = slider.querySelectorAll('[data-services-dot]');
+    var activeIndex = 0;
+    var autoplayId = null;
+    var autoplayMs = Number(slider.dataset.servicesAutoplay || 6000);
+
+    if (!track || slides.length <= 1) return;
+
+    function isCarouselMode() {
+      return window.matchMedia && window.matchMedia('(max-width: 900px)').matches;
+    }
+
+    function setActiveSlide(index) {
+      activeIndex = (index + slides.length) % slides.length;
+      slider.dataset.servicesIndex = String(activeIndex);
+      track.style.transform = isCarouselMode() ? 'translateX(-' + activeIndex * 100 + '%)' : '';
+
+      dots.forEach(function (dot, dotIndex) {
+        var isActive = dotIndex === activeIndex;
+        dot.classList.toggle('is-active', isActive);
+
+        if (isActive) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    function stopAutoplay() {
+      if (autoplayId) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+
+      if (!isCarouselMode() || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        return;
+      }
+
+      autoplayId = setInterval(function () {
+        setActiveSlide(activeIndex + 1);
+      }, autoplayMs);
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        setActiveSlide(Number(dot.dataset.servicesDot || 0));
+        startAutoplay();
+      });
+    });
+
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+    slider.addEventListener('focusin', stopAutoplay);
+    slider.addEventListener('focusout', startAutoplay);
+    window.addEventListener('resize', function () {
+      setActiveSlide(isCarouselMode() ? activeIndex : 0);
+      startAutoplay();
+    });
+
+    setActiveSlide(0);
+    startAutoplay();
+  });
+})();
+</script>
