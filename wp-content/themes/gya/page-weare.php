@@ -60,22 +60,35 @@ if ($director_query->have_posts()) {
 $feature_cards = array(
     array(
         'type' => 'tracking',
+        'image' => 'seguimiento.svg',
         'title' => 'Tecnología y seguimiento',
         'body' => 'Integramos herramientas y metodologías de trabajo que nos permiten dar seguimiento a proyectos, centralizar información clave y mantener una comunicación más clara durante cada etapa del servicio.',
     ),
     array(
         'type' => 'iso',
+        'image' => 'iso.svg',
         'title' => 'Calidad certificada',
         'body' => 'Nuestra firma evalúa y fortalece continuamente sus procesos mediante un Sistema de Calidad ISO 9001:2015, con el objetivo de ofrecer un servicio más sólido, ordenado y confiable.',
     ),
     array(
         'type' => 'defensa',
+        'image' => 'defensa.svg',
         'title' => 'Reconocimiento',
         'body' => 'G&A fue reconocida por segundo año consecutivo por la revista Defensa Fiscal como una de las Grandes Firmas de Fiscalistas en México, reflejo de la experiencia y especialización de nuestro equipo.',
     ),
 );
 
-$clients = array('SiX', 'Pfizer', 'DSV', 'SENATOR INTERNATIONAL', 'MAERSK', 'ALT HOME DELIVERY', 'Fracht Group');
+$feature_image_base = get_template_directory_uri() . '/assets/images/nosotros/';
+$sponsor_base = get_template_directory_uri() . '/assets/images/sponsor/';
+$clients = array(
+    array('name' => 'Vix', 'logo' => 'vix_Logo.svg'),
+    array('name' => 'Pfizer', 'logo' => 'pfizer_Logo.svg'),
+    array('name' => 'DSV', 'logo' => 'dvs_Logo.svg'),
+    array('name' => 'Senator International', 'logo' => 'senator_Logo.svg'),
+    array('name' => 'Maersk', 'logo' => 'maersk_Logo.svg'),
+    array('name' => 'AIT Home Delivery', 'logo' => 'ait_Logo.svg'),
+    array('name' => 'Fracht Group', 'logo' => 'fracht_Logo.svg'),
+);
 
 get_header();
 ?>
@@ -101,15 +114,7 @@ get_header();
             <?php foreach ($feature_cards as $feature) : ?>
                 <article class="weare-feature-card">
                     <div class="weare-feature-mark weare-feature-mark--<?php echo esc_attr($feature['type']); ?>" aria-hidden="true">
-                        <?php if ($feature['type'] === 'iso') : ?>
-                            <strong>ISO</strong>
-                            <small>9001:2015</small>
-                        <?php elseif ($feature['type'] === 'defensa') : ?>
-                            <strong>DEFENSA<br>FISCAL</strong>
-                            <small>La revista mexicana de estrategias fiscales</small>
-                        <?php else : ?>
-                            <span></span><span></span><span></span>
-                        <?php endif; ?>
+                        <img src="<?php echo esc_url($feature_image_base . $feature['image']); ?>" alt="">
                     </div>
                     <h2><?php echo esc_html($feature['title']); ?></h2>
                     <p><?php echo esc_html($feature['body']); ?></p>
@@ -128,7 +133,9 @@ get_header();
             </header>
             <div class="weare-client-list">
                 <?php foreach ($clients as $client) : ?>
-                    <span><?php echo esc_html($client); ?></span>
+                    <span class="weare-client-logo">
+                        <img src="<?php echo esc_url($sponsor_base . $client['logo']); ?>" alt="<?php echo esc_attr($client['name']); ?>">
+                    </span>
                 <?php endforeach; ?>
             </div>
         </div>
