@@ -8,8 +8,6 @@ $data = isset($args['data']) ? $args['data'] : gya_get_landing_data();
 $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object_id();
 $slides = isset($data['hero_slides']) ? $data['hero_slides'] : array();
 $stats = isset($data['stats']) ? $data['stats'] : array();
-$upload_dir = wp_upload_dir();
-$network_image = trailingslashit($upload_dir['baseurl']) . '2026/07/hero-image-scaled.jpg';
 $post_slides = gya_get_hero_slides_from_posts();
 
 if (!empty($post_slides)) {
@@ -36,7 +34,6 @@ $stats = gya_get_fixed_items_from_acf($stats, 'gya_stat', array('value', 'label'
                     data-hero-slide="<?php echo esc_attr((string) $index); ?>"></div>
             <?php endif; ?>
         <?php endforeach; ?>
-        <div class="hero-network-image" style="background-image:url('<?php echo esc_url($network_image); ?>');"></div>
     </div>
 
     <button class="circle-arrow hero-prev" type="button" aria-label="Anterior">

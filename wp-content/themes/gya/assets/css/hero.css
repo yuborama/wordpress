@@ -14,43 +14,36 @@
   overflow: hidden;
 }
 
-.hero-office-image,
-.hero-network-image {
+.hero-office-image {
   position: absolute;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 2, 14, 0.96) 0%, rgba(0, 2, 14, 0.74) 34%, rgba(0, 2, 14, 0.28) 66%, rgba(0, 2, 14, 0.06) 100%),
+    linear-gradient(180deg, rgba(0, 2, 14, 0.08) 0%, rgba(0, 2, 14, 0.2) 100%);
+}
+
 .hero-office-image {
-  top: -0.5rem;
-  left: 26%;
-  right: 0;
-  width: auto;
-  height: 44.5625rem;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   background-color: #07101f;
   opacity: 0;
   transition: opacity 700ms ease;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0.65) 25%, #000 42%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.15) 10%, rgba(0, 0, 0, 0.65) 25%, #000 42%, #000 100%);
 }
 
 .hero-office-image.is-active {
   opacity: 1;
-}
-
-.hero-network-image {
-  inset: 0;
-  width: 100%;
-  height: 741px;
-  z-index: 2;
-  opacity: 0.47;
-  mix-blend-mode: normal;
-  background-position: left bottom;
-  transform: translateY(72px);
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 28%, rgba(0, 0, 0, 0.7) 42%, rgba(0, 0, 0, 0.25) 58%, transparent 78%);
-  mask-image: linear-gradient(90deg, #000 0%, #000 28%, rgba(0, 0, 0, 0.7) 42%, rgba(0, 0, 0, 0.25) 58%, transparent 78%);
 }
 
 .hero-content {
@@ -189,12 +182,6 @@
 }
 
 @media (max-width: 1200px) {
-  .hero-office-image {
-    left: 28%;
-    right: auto;
-    width: 950px;
-  }
-
   .hero-content {
     padding-left: 56px;
   }
@@ -209,21 +196,6 @@
     height: 560px;
     padding-left: 32px;
     padding-right: 32px;
-  }
-
-  .hero-office-image {
-    left: 15%;
-    right: auto;
-    width: 900px;
-    height: 620px;
-  }
-
-  .hero-office-image.is-active {
-    opacity: 0.8;
-  }
-
-  .hero-network-image {
-    opacity: 0.38;
   }
 
   .hero-copy h1 {
@@ -264,16 +236,6 @@
 }
 
 @media (max-width: 560px) {
-  .hero-office-image {
-    left: 0;
-    right: auto;
-    width: 100%;
-  }
-
-  .hero-office-image.is-active {
-    opacity: 0.5;
-  }
-
   .hero-copy h1 {
     font-size: 34px;
   }
