@@ -72,8 +72,8 @@ while (have_posts()) :
     }
 
     $upload_dir = wp_upload_dir();
-    $network_image = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
-    $hero_image = has_post_thumbnail($category_id) ? get_the_post_thumbnail_url($category_id, 'full') : $network_image;
+    $fallback_hero_image = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
+    $hero_image = has_post_thumbnail($category_id) ? get_the_post_thumbnail_url($category_id, 'full') : $fallback_hero_image;
 
     $subcategories_query = new WP_Query(
         array(
@@ -107,7 +107,6 @@ while (have_posts()) :
     <main class="category-detail">
         <section class="category-detail-hero">
             <div class="category-detail-hero__image" style="background-image:url('<?php echo esc_url($hero_image); ?>');"></div>
-            <div class="category-detail-hero__network" style="background-image:url('<?php echo esc_url($network_image); ?>');"></div>
             <div class="shell category-detail-hero__inner">
                 <h1><?php echo esc_html($category_title); ?></h1>
                 <?php if (!empty($category_description)) : ?>

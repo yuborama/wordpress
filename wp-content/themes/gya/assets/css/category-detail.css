@@ -12,8 +12,7 @@
   background: #00020e;
 }
 
-.category-detail-hero__image,
-.category-detail-hero__network {
+.category-detail-hero__image {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
@@ -21,15 +20,8 @@
 }
 
 .category-detail-hero__image {
-  left: 38%;
   background-position: center;
-  opacity: 0.72;
-}
-
-.category-detail-hero__network {
-  right: 42%;
-  background-position: left bottom;
-  opacity: 0.78;
+  opacity: 1;
 }
 
 .category-detail-hero::before {
@@ -157,11 +149,6 @@
   .category-detail-hero,
   .category-detail-hero__inner {
     min-height: 430px;
-  }
-
-  .category-detail-hero__image {
-    left: 0;
-    opacity: 0.42;
   }
 
   .category-detail-hero h1 {
