@@ -1,0 +1,132 @@
+.iso-banner-shell {
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  padding: 4.75rem 3rem;
+  background: var(--white);
+}
+
+.iso-banner-shell--revista {
+  padding-top: 4.875rem;
+  padding-bottom: 4.875rem;
+}
+
+.iso-banner {
+  display: grid;
+  grid-template-columns: minmax(18rem, 38%) minmax(0, 1fr);
+  min-height: 18.25rem;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  background: #f3f4f4;
+}
+
+.iso-banner__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 0 3rem 3rem;
+}
+
+.iso-banner__copy h2 {
+  max-width: 22rem;
+  margin: 0;
+  color: #17364e;
+  font-size: 2rem;
+  line-height: 1.08;
+  font-weight: 800;
+}
+
+.iso-banner__copy h2 span {
+  display: block;
+  color: var(--orange);
+}
+
+.iso-banner__copy p {
+  max-width: 26rem;
+  margin: 1.35rem 0 0;
+  color: #43515c;
+  font-size: 1.125rem;
+  line-height: 1.28;
+  font-weight: 500;
+}
+
+.iso-banner__button {
+  min-height: 2.375rem;
+  margin: 1.75rem 0 0;
+  padding: 0 1.125rem;
+  gap: 0.625rem;
+  font-size: 0.75rem;
+}
+
+.iso-banner__button span {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.iso-banner__media {
+  position: relative;
+  min-height: 18.25rem;
+}
+
+.iso-banner__media::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 1;
+  width: 32%;
+  pointer-events: none;
+  background: linear-gradient(90deg, #f3f4f4 0%, rgba(243, 244, 244, 0.9) 28%, rgba(243, 244, 244, 0) 100%);
+}
+
+.iso-banner__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 18.25rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.iso-banner-shell--revista .iso-banner__media img {
+  object-position: center right;
+}
+
+@media (max-width: 900px) {
+  .iso-banner-shell {
+    padding: 3.5rem 1.0625rem;
+  }
+
+  .iso-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .iso-banner__copy {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .iso-banner__copy h2 {
+    font-size: 1.7rem;
+  }
+
+  .iso-banner__copy p {
+    font-size: 1rem;
+  }
+
+  .iso-banner__media {
+    min-height: 13.5rem;
+    order: -1;
+  }
+
+  .iso-banner__media::before {
+    inset: auto 0 0;
+    width: auto;
+    height: 36%;
+    background: linear-gradient(0deg, #f3f4f4 0%, rgba(243, 244, 244, 0.82) 28%, rgba(243, 244, 244, 0) 100%);
+  }
+
+  .iso-banner__media img {
+    min-height: 13.5rem;
+  }
+}
