@@ -61,9 +61,9 @@
   max-width: 455px;
   margin: 0 0 28px;
   color: var(--white);
-  font-size: 36px;
-  line-height: 1.08;
-  font-weight: 800;
+  font-size: var(--font-h2);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
 }
 
 .cta-copy p {
@@ -72,9 +72,9 @@
   max-width: 470px;
   margin: 0;
   color: rgba(255, 255, 255, 0.88);
-  font-size: 24px;
-  line-height: 1.35;
-  font-weight: 400;
+  font-size: var(--font-title);
+  line-height: var(--leading-body);
+  font-weight: var(--font-regular);
 }
 
 .cta-copy .outline-link {
@@ -125,10 +125,10 @@
   }
 
   .cta-copy h2 {
-    font-size: 30px;
+    font-size: var(--font-h3);
   }
 
   .cta-copy p {
-    font-size: 18px;
+    font-size: var(--font-body);
   }
 }

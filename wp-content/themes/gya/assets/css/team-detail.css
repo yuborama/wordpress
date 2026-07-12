@@ -21,16 +21,16 @@
   max-width: 520px;
   margin: 0;
   color: #08283d;
-  font-size: 48px;
-  line-height: 1.1;
-  font-weight: 800;
+  font-size: var(--font-h1);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
 }
 
 .team-detail-position {
   margin: 22px 0 0;
   color: #243748;
-  font-size: 20px;
-  line-height: 1.25;
+  font-size: var(--font-title);
+  line-height: var(--leading-title);
 }
 
 .team-detail-actions {
@@ -58,8 +58,8 @@
   max-width: 570px;
   margin-top: 42px;
   color: #243748;
-  font-size: 21px;
-  line-height: 1.28;
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
 }
 
 .team-detail-description p {
@@ -130,23 +130,23 @@
   max-width: 465px;
   margin: 0;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 20px;
-  line-height: 1.22;
+  font-size: var(--font-title);
+  line-height: var(--leading-title);
 }
 
 .team-detail-quote h2 {
   margin: 28px 0 0;
   color: var(--white);
-  font-size: 18px;
+  font-size: var(--font-title);
   line-height: 1.15;
-  font-weight: 800;
+  font-weight: var(--font-bold);
 }
 
 .team-detail-quote span {
   display: block;
   margin-top: 8px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 16px;
+  font-size: var(--font-body);
 }
 
 @media (max-width: 1100px) {
@@ -166,16 +166,16 @@
   }
 
   .team-detail-copy h1 {
-    font-size: 38px;
+    font-size: var(--font-h2);
   }
 
   .team-detail-position {
-    font-size: 18px;
+    font-size: var(--font-title);
   }
 
   .team-detail-description {
     margin-top: 32px;
-    font-size: 17px;
+    font-size: var(--font-body);
   }
 
   .team-detail-card {
@@ -195,6 +195,6 @@
   }
 
   .team-detail-quote p {
-    font-size: 17px;
+    font-size: var(--font-body);
   }
 }

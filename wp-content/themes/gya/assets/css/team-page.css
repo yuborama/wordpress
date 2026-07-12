@@ -61,21 +61,21 @@
   display: block;
   margin-bottom: 24px;
   color: var(--orange);
-  font-size: 13px;
+  font-size: var(--font-caption);
   line-height: 1;
-  font-weight: 800;
+  font-weight: var(--font-bold);
 }
 
 .team-page-hero h1 {
   margin: 0;
   color: var(--white);
-  font-size: 44px;
-  line-height: 1.13;
-  font-weight: 400;
+  font-size: var(--font-h1);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-regular);
 }
 
 .team-page-hero h1 strong {
-  font-weight: 800;
+  font-weight: var(--font-bold);
 }
 
 .team-page-filters {
@@ -109,8 +109,8 @@
     linear-gradient(135deg, var(--orange) 50%, transparent 50%) right 15px center / 6px 6px no-repeat,
     #f0f0f4;
   color: #4b5864;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--font-ui);
+  font-weight: var(--font-bold);
   appearance: none;
   cursor: pointer;
 }
@@ -138,14 +138,14 @@
 }
 
 .team-page-grid .team-card h3 {
-  font-size: 18px;
-  line-height: 1.2;
+  font-size: var(--font-title);
+  line-height: var(--leading-title);
 }
 
 .team-page-grid .team-card p {
   margin-top: 13px;
-  font-size: 16px;
-  line-height: 1.25;
+  font-size: var(--font-body);
+  line-height: var(--leading-title);
 }
 
 .team-page-grid .contact-icons {
@@ -160,7 +160,7 @@
 .team-page-empty {
   margin: 0;
   color: #435365;
-  font-size: 16px;
+  font-size: var(--font-body);
 }
 
 @media (max-width: 1180px) {
@@ -181,7 +181,7 @@
   }
 
   .team-page-hero h1 {
-    font-size: 34px;
+    font-size: var(--font-h2);
   }
 
   .team-page-filters {

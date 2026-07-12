@@ -44,9 +44,9 @@
 
 .insight-detail-hero__tag {
   color: var(--orange);
-  font-size: 13px;
+  font-size: var(--font-caption);
   line-height: 1;
-  font-weight: 800;
+  font-weight: var(--font-bold);
   text-transform: uppercase;
 }
 
@@ -54,15 +54,15 @@
   max-width: 520px;
   margin: 24px 0 22px;
   color: var(--white);
-  font-size: 46px;
-  line-height: 1.08;
-  font-weight: 800;
+  font-size: var(--font-h1);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
 }
 
 .insight-detail-hero time {
   color: rgba(255, 255, 255, 0.74);
-  font-size: 15px;
-  font-weight: 700;
+  font-size: var(--font-ui);
+  font-weight: var(--font-bold);
 }
 
 .insight-detail-author {
@@ -82,8 +82,8 @@
   border-radius: 50%;
   background: #dde5e9;
   color: var(--orange);
-  font-size: 14px;
-  font-weight: 800;
+  font-size: var(--font-ui);
+  font-weight: var(--font-bold);
 }
 
 .insight-detail-author img {
@@ -95,8 +95,8 @@
 
 .insight-detail-author small {
   color: var(--white);
-  font-size: 12px;
-  font-weight: 800;
+  font-size: var(--font-caption);
+  font-weight: var(--font-bold);
 }
 
 .insight-detail-content {
@@ -110,15 +110,15 @@
 .insight-detail-lead {
   margin: 0 0 32px;
   color: #435365;
-  font-size: 26px;
+  font-size: var(--font-h3);
   line-height: 1.18;
-  font-weight: 400;
+  font-weight: var(--font-regular);
 }
 
 .insight-detail-body {
   color: #435365;
-  font-size: 18px;
-  line-height: 1.36;
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
 }
 
 .insight-detail-body p {
@@ -163,16 +163,16 @@
 .insight-video-card h2 {
   margin: 0 0 28px;
   color: var(--white);
-  font-size: 36px;
-  line-height: 1.08;
-  font-weight: 800;
+  font-size: var(--font-h2);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
 }
 
 .insight-video-card p {
   margin: 0;
   color: rgba(255, 255, 255, 0.86);
-  font-size: 16px;
-  line-height: 1.32;
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
 }
 
 .insight-video-card .outline-link {

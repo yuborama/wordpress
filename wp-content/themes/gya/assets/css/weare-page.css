@@ -71,30 +71,30 @@
   display: block;
   margin-bottom: 24px;
   color: var(--orange);
-  font-size: 12px;
+  font-size: var(--font-caption);
   line-height: 1;
-  font-weight: 800;
+  font-weight: var(--font-bold);
 }
 
 .weare-hero h1 {
   margin: 0;
   color: var(--white);
-  font-size: 52px;
-  line-height: 1.08;
-  font-weight: 400;
+  font-size: var(--font-h1);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-regular);
 }
 
 .weare-hero h1 strong {
-  font-weight: 800;
+  font-weight: var(--font-bold);
 }
 
 .weare-hero p {
   max-width: 520px;
   margin: 24px 0 0;
   color: rgba(255, 255, 255, 0.84);
-  font-size: 16px;
-  line-height: 1.35;
-  font-weight: 600;
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
+  font-weight: var(--font-bold);
 }
 
 .weare-hero p + p {
@@ -148,16 +148,16 @@
 .weare-feature-card h2 {
   margin: 0;
   color: #060b13;
-  font-size: 17px;
-  line-height: 1.2;
-  font-weight: 800;
+  font-size: var(--font-title);
+  line-height: var(--leading-title);
+  font-weight: var(--font-bold);
 }
 
 .weare-feature-card p {
   margin: 18px 0 0;
   color: #435365;
-  font-size: 14px;
-  line-height: 1.28;
+  font-size: var(--font-ui);
+  line-height: var(--leading-title);
 }
 
 .weare-page #equipo {
@@ -200,9 +200,9 @@
   max-width: 720px;
   margin: 0 auto;
   color: var(--white);
-  font-size: 38px;
-  line-height: 1.12;
-  font-weight: 400;
+  font-size: var(--font-h2);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-regular);
 }
 
 .weare-client-list {
@@ -270,9 +270,9 @@
   max-width: 390px;
   margin: 0;
   color: #0a2d44;
-  font-size: 40px;
-  line-height: 1.04;
-  font-weight: 800;
+  font-size: var(--font-h2);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
 }
 
 .weare-message-card h2 strong {
@@ -282,26 +282,26 @@
 .weare-message-card p {
   margin: 28px 0 0;
   color: #3f4b56;
-  font-size: 15px;
-  line-height: 1.34;
-  font-weight: 700;
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
+  font-weight: var(--font-bold);
 }
 
 .weare-message-card h3 {
   margin: 28px 0 0;
   color: #07101f;
-  font-size: 14px;
+  font-size: var(--font-ui);
   line-height: 1.1;
-  font-weight: 800;
+  font-weight: var(--font-bold);
 }
 
 .weare-message-card span {
   display: block;
   margin-top: 4px;
   color: var(--orange);
-  font-size: 14px;
+  font-size: var(--font-ui);
   line-height: 1;
-  font-weight: 800;
+  font-weight: var(--font-bold);
 }
 
 .weare-message-card__person {
@@ -354,7 +354,7 @@
   }
 
   .weare-hero h1 {
-    font-size: 38px;
+    font-size: var(--font-h2);
   }
 
   .weare-message-card__copy {

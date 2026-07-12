@@ -45,9 +45,9 @@
 
 .service-detail-hero__eyebrow {
   color: var(--orange);
-  font-size: 13px;
+  font-size: var(--font-caption);
   line-height: 1;
-  font-weight: 800;
+  font-weight: var(--font-bold);
   text-transform: uppercase;
 }
 
@@ -55,18 +55,18 @@
   max-width: 610px;
   margin: 24px 0 0;
   color: var(--white);
-  font-size: 46px;
-  line-height: 1.08;
-  font-weight: 800;
+  font-size: var(--font-h1);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-bold);
 }
 
 .service-detail-hero p {
   max-width: 620px;
   margin: 22px 0 0;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 18px;
-  line-height: 1.36;
-  font-weight: 500;
+  font-size: var(--font-title);
+  line-height: var(--leading-body);
+  font-weight: var(--font-regular);
 }
 
 .service-detail-content {
@@ -79,7 +79,7 @@
 
 .service-detail-body {
   color: #435365;
-  font-size: 18px;
+  font-size: var(--font-body);
   line-height: 1.46;
 }
 
@@ -111,7 +111,7 @@
   }
 
   .service-detail-hero h1 {
-    font-size: 38px;
+    font-size: var(--font-h2);
   }
 
   .service-detail-content {
@@ -119,7 +119,7 @@
   }
 
   .service-detail-body {
-    font-size: 16px;
+    font-size: var(--font-body);
   }
 }
 
@@ -134,10 +134,10 @@
   }
 
   .service-detail-hero h1 {
-    font-size: 32px;
+    font-size: 2rem;
   }
 
   .service-detail-hero p {
-    font-size: 16px;
+    font-size: var(--font-body);
   }
 }

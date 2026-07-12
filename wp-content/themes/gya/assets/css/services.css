@@ -143,9 +143,9 @@
 .service-copy h3 {
   margin: 0;
   color: var(--white);
-  font-size: 18px;
-  line-height: 1.2;
-  font-weight: 600;
+  font-size: var(--font-title);
+  line-height: var(--leading-title);
+  font-weight: var(--font-bold);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -155,18 +155,18 @@
 .service-copy h3 span {
   display: inline-block;
   color: var(--orange);
-  font-size: 32px;
+  font-size: var(--font-h3);
   line-height: 1;
-  font-weight: 400;
+  font-weight: var(--font-regular);
   transition: transform 180ms ease;
 }
 
 .service-copy p {
   margin: 25px 0 0;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 16px;
-  line-height: 1.28;
-  font-weight: 400;
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
+  font-weight: var(--font-regular);
 }
 
 .service-card:hover,
@@ -216,11 +216,11 @@
   }
 
   .service-copy h3 {
-    font-size: 16px;
+    font-size: var(--font-body);
   }
 
   .service-copy p {
-    font-size: 14px;
+    font-size: var(--font-ui);
   }
 }
 

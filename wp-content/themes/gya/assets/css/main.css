@@ -8,6 +8,20 @@
   --white: #ffffff;
   --surface: #f8fafb;
   --max: 90rem;
+  --font-family-base: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-regular: 400;
+  --font-bold: 600;
+  --font-h1: 3rem;
+  --font-h2: 2.375rem;
+  --font-h3: 1.75rem;
+  --font-title: 1.125rem;
+  --font-body: 1rem;
+  --font-ui: 0.875rem;
+  --font-caption: 0.75rem;
+  --font-micro: 0.6875rem;
+  --leading-tight: 1.1;
+  --leading-title: 1.25;
+  --leading-body: 1.35;
 }
 
 * {
@@ -23,7 +37,9 @@ body {
   min-width: 20rem;
   background-color: #020612;
   color: var(--ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+  font-family: var(--font-family-base);
+  font-size: var(--font-body);
+  font-weight: var(--font-regular);
 }
 
 body.mobile-menu-open {
@@ -186,7 +202,7 @@ body.admin-bar .site-header {
   align-items: center;
   min-height: 44px;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 16px;
+  font-size: var(--font-body);
   line-height: 1.2;
   list-style: none;
   cursor: pointer;
@@ -222,7 +238,7 @@ body.admin-bar .site-header {
 
 .mobile-submenu a {
   color: rgba(255, 255, 255, 0.82);
-  font-size: 15px;
+  font-size: var(--font-ui);
   line-height: 1.2;
 }
 
@@ -239,7 +255,7 @@ body.admin-bar .site-header {
   border-radius: 3px;
   background: var(--orange);
   color: var(--white);
-  font-weight: 800;
+  font-weight: var(--font-bold);
 }
 
 .desktop-nav {
@@ -259,7 +275,7 @@ body.admin-bar .site-header {
 
 .desktop-nav a {
   color: rgba(255, 255, 255, 0.78);
-  font-size: 12px;
+  font-size: var(--font-caption);
 }
 
 .desktop-nav .header-menu {
@@ -280,7 +296,7 @@ body.admin-bar .site-header {
   gap: 7px;
   height: 76px;
   color: rgba(255, 255, 255, 0.78);
-  font-weight: 700;
+  font-weight: var(--font-bold);
   transition: color 160ms ease;
 }
 
@@ -364,8 +380,8 @@ body.admin-bar .site-header {
   gap: 24px;
   padding: 9px 28px;
   color: #07101f;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--font-ui);
+  font-weight: var(--font-bold);
   line-height: 1.2;
   white-space: nowrap;
   transition: color 160ms ease, background-color 160ms ease;
@@ -379,9 +395,9 @@ body.admin-bar .site-header {
 
 .header-dropdown a span {
   color: var(--orange);
-  font-size: 24px;
+  font-size: var(--font-h3);
   line-height: 0.8;
-  font-weight: 400;
+  font-weight: var(--font-regular);
 }
 
 .primary-link,
@@ -394,8 +410,8 @@ body.admin-bar .site-header {
   border-radius: 3px;
   background: var(--orange);
   color: var(--white);
-  font-weight: 700;
-  font-size: 12px;
+  font-weight: var(--font-bold);
+  font-size: var(--font-ui);
 }
 
 .outline-link {
@@ -407,14 +423,14 @@ body.admin-bar .site-header {
   border: 1px solid rgba(255, 255, 255, 0.82);
   border-radius: 2px;
   color: var(--white);
-  font-size: 12px;
-  font-weight: 800;
+  font-size: var(--font-ui);
+  font-weight: var(--font-bold);
 }
 
 .outline-link span {
   margin-left: 10px;
   color: var(--orange);
-  font-size: 20px;
+  font-size: var(--font-title);
 }
 
 .circle-arrow {
@@ -426,8 +442,8 @@ body.admin-bar .site-header {
   border: 0;
   color: var(--ink);
   background: var(--orange);
-  font-size: 24px;
-  font-weight: 800;
+  font-size: var(--font-h3);
+  font-weight: var(--font-bold);
   line-height: 1;
   cursor: pointer;
 }
@@ -457,16 +473,16 @@ body.admin-bar .site-header {
 
 .section-header span {
   color: var(--orange);
-  font-weight: 800;
-  font-size: 11px;
+  font-weight: var(--font-bold);
+  font-size: var(--font-caption);
 }
 
 .section-header h2 {
   margin: 9px 0 0;
   color: var(--blue);
-  font-size: 34px;
-  line-height: 1.1;
-  font-weight: 500;
+  font-size: var(--font-h2);
+  line-height: var(--leading-tight);
+  font-weight: var(--font-regular);
 }
 
 .section-header-light h2 {
@@ -493,15 +509,16 @@ body.admin-bar .site-header {
 .blog-card h3 {
   margin: 12px 0 0;
   color: #050b16;
-  font-size: 14px;
-  line-height: 1.25;
+  font-size: var(--font-title);
+  line-height: var(--leading-title);
+  font-weight: var(--font-bold);
 }
 
 .blog-card p {
   margin: 14px 0 0;
   color: #394653;
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: var(--font-body);
+  line-height: var(--leading-body);
 }
 
 .blog-card img {
@@ -518,7 +535,7 @@ body.admin-bar .site-header {
   padding: 40px 0 48px;
   background: #030713;
   color: rgba(255, 255, 255, 0.78);
-  font-size: 12px;
+  font-size: var(--font-caption);
 }
 
 .site-footer .shell {
