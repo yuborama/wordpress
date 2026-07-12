@@ -156,7 +156,29 @@
   }
 
   .team-detail-card {
-    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-top: 32px;
+  }
+
+  .team-detail-card img {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    align-self: center;
+    width: min(72%, 360px);
+    max-height: 430px;
+    object-fit: contain;
+    object-position: bottom center;
+  }
+
+  .team-detail-quote {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    margin: -8px 24px 24px;
   }
 }
 
@@ -179,18 +201,17 @@
   }
 
   .team-detail-card {
-    min-height: 560px;
+    padding-top: 28px;
   }
 
   .team-detail-card img {
-    right: 0;
-    width: 86%;
+    width: min(86%, 320px);
+    max-height: 390px;
     opacity: 0.88;
   }
 
   .team-detail-quote {
-    right: 14px;
-    left: 14px;
+    margin: -6px 14px 18px;
     padding: 24px;
   }
 
