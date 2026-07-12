@@ -775,12 +775,23 @@ body.admin-bar .site-header {
 
   .footer-nav {
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
+    min-height: 0;
+    padding: 28px 0;
   }
 
   .footer-nav ul {
     flex-wrap: wrap;
-    gap: 18px 26px;
+    gap: 16px 32px;
+    line-height: 1.25;
+  }
+
+  .footer-social {
+    gap: 28px;
+  }
+
+  .site-footer p {
+    margin-top: 26px;
   }
 
   .floating-whatsapp {
@@ -792,6 +803,44 @@ body.admin-bar .site-header {
 }
 
 @media (max-width: 560px) {
+  .site-footer {
+    padding: 38px 0 44px;
+  }
+
+  .footer-logo {
+    width: 118px;
+    margin-bottom: 28px;
+  }
+
+  .footer-nav {
+    align-items: flex-start;
+    padding: 24px 0;
+    gap: 18px;
+  }
+
+  .footer-nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .footer-social {
+    gap: 24px;
+  }
+
+  .site-footer p,
+  .site-footer small {
+    line-height: 1.46;
+  }
+
+  .site-footer p {
+    margin-top: 24px;
+  }
+
+  .site-footer p + p {
+    margin-top: 16px;
+  }
+
   .header-iso-ribbon {
     display: none;
   }
