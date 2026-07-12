@@ -35,7 +35,7 @@ function gya_seed_front_page_fields() {
         'gya_cta_link_text' => 'Hablemos de tu empresa',
         'gya_cta_link_url' => '#contacto',
         'gya_solutions_heading' => 'Acompañamos cada área clave de tu empresa.',
-        'gya_services_heading' => 'Soluciones a los retos que realmente impactan tu negocio.',
+        'gya_services_heading' => 'La diferencia está en cómo trabajamos.',
         'gya_insights_heading' => 'Información clave para tomar mejores decisiones.',
         'gya_team_heading' => 'Profesionales que entienden tu negocio y hablan tu idioma.',
         'gya_header_cta_text' => 'Diagnóstico estratégico',
