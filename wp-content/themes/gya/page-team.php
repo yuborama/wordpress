@@ -75,37 +75,6 @@ usort(
     }
 );
 
-$areas = get_posts(
-    array(
-        'post_type' => 'gya_category',
-        'post_status' => 'publish',
-        'posts_per_page' => -1,
-        'orderby' => 'title',
-        'order' => 'ASC',
-    )
-);
-
-$categories = get_posts(
-    array(
-        'post_type' => 'gya_subcategory',
-        'post_status' => 'publish',
-        'posts_per_page' => -1,
-        'orderby' => 'title',
-        'order' => 'ASC',
-    )
-);
-
-$category_options = array();
-
-foreach ($categories as $category) {
-    $category_title = gya_get_post_field_value('title', $category->ID, get_the_title($category));
-    $category_key = sanitize_title($category_title);
-
-    if (!isset($category_options[$category_key])) {
-        $category_options[$category_key] = $category_title;
-    }
-}
-
 $upload_dir = wp_upload_dir();
 $network_image = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
 $hero_image = trailingslashit($upload_dir['baseurl']) . '2026/07/insightsCardTeam.jpg';
@@ -120,28 +89,6 @@ get_header();
             <div class="team-page-hero__copy">
                 <span>NUESTRO EQUIPO</span>
                 <h1>Profesionales que entienden <strong>tu negocio y hablan tu idioma.</strong></h1>
-            </div>
-
-            <div class="team-page-filters" aria-label="Filtros de equipo">
-                <label>
-                    <span>&Aacute;rea</span>
-                    <select>
-                        <option>&Aacute;rea</option>
-                        <?php foreach ($areas as $area) : ?>
-                            <option><?php echo esc_html(get_the_title($area)); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </label>
-
-                <label>
-                    <span>Categor&iacute;a</span>
-                    <select>
-                        <option>Categor&iacute;a</option>
-                        <?php foreach ($category_options as $category_title) : ?>
-                            <option><?php echo esc_html($category_title); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </label>
             </div>
         </div>
     </section>
