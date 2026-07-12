@@ -43,7 +43,7 @@ while ($insights_query->have_posts()) {
     if (is_array($author_image) && isset($author_image['url'])) {
         $author_image = $author_image['url'];
     } elseif (is_numeric($author_image)) {
-        $author_image = wp_get_attachment_image_url((int) $author_image, 'thumbnail');
+        $author_image = wp_get_attachment_image_url((int) $author_image, 'medium');
     }
 
     $insights[] = array(
