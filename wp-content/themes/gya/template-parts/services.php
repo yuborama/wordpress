@@ -53,6 +53,7 @@ if ($services_query->have_posts()) {
             'title' => $title,
             'body' => $body,
             'image' => $image_url ? $image_url : '',
+            'url' => get_permalink($service_id),
         );
     }
 
@@ -62,20 +63,20 @@ if ($services_query->have_posts()) {
 <section class="section dark-section" id="servicios" style="background-image:url('<?php echo esc_url($services_bg); ?>');">
     <div class="shell">
         <header class="section-header section-header-light">
-            <span>CÓMO AYUDAMOS</span>
+            <span>LO QUE NOS DISTINGUE</span>
             <h2><?php echo esc_html($services_heading); ?></h2>
         </header>
         <div class="services-slider js-services-slider" data-services-index="0">
             <div class="services-grid">
                 <?php foreach ($services as $service) : ?>
                     <div class="services-slide">
-                        <article class="service-card">
+                        <a class="service-card" href="<?php echo esc_url($service['url']); ?>">
                             <div class="card-photo" style="background-image:url('<?php echo esc_url($service['image']); ?>');"></div>
                             <div class="service-copy">
                                 <h3><?php echo esc_html($service['title']); ?> <span>&rsaquo;</span></h3>
                                 <p><?php echo esc_html($service['body']); ?></p>
                             </div>
-                        </article>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>

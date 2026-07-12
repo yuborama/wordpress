@@ -58,7 +58,7 @@ $header_is_insights_active = is_post_type_archive('insights') || is_singular('in
                     <a class="header-menu-link <?php echo $header_is_insights_active ? 'is-active' : ''; ?>" href="<?php echo esc_url(get_post_type_archive_link('insights') ?: home_url('/insights/')); ?>">Insights</a>
                 </li>
                 <li class="header-menu-item">
-                    <a class="header-menu-link" href="<?php echo esc_url(home_url('/#servicios')); ?>">Cómo ayudamos</a>
+                    <a class="header-menu-link" href="<?php echo esc_url(home_url('/#servicios')); ?>">Lo que nos distingue</a>
                 </li>
                 <li class="header-menu-item header-menu-item--dropdown">
                     <a class="header-menu-link" href="<?php echo esc_url(home_url('/#nosotros')); ?>" aria-haspopup="true">
@@ -120,7 +120,7 @@ $header_is_insights_active = is_post_type_archive('insights') || is_singular('in
             </details>
 
             <a href="<?php echo esc_url(get_post_type_archive_link('insights') ?: home_url('/insights/')); ?>">Insights</a>
-            <a href="<?php echo esc_url(home_url('/#servicios')); ?>">Cómo ayudamos</a>
+            <a href="<?php echo esc_url(home_url('/#servicios')); ?>">Lo que nos distingue</a>
 
             <details class="mobile-menu-group">
                 <summary>Nosotros</summary>

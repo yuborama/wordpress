@@ -10,7 +10,7 @@ function gya_asset_uri($path) {
 
 function gya_get_landing_data() {
     return array(
-        'nav_items' => array('Soluciones', 'Insights', 'Cómo ayudamos', 'Nosotros'),
+        'nav_items' => array('Soluciones', 'Insights', 'Lo que nos distingue', 'Nosotros'),
         'stats' => array(
             array('value' => '+ 15', 'label' => 'años de experiencia', 'icon' => 'years'),
             array('value' => '+140', 'label' => 'soluciones especializadas', 'icon' => 'solutions'),

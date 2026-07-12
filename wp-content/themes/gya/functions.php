@@ -199,10 +199,10 @@ add_action('manage_gya_subcategory_posts_custom_column', 'gya_subcategory_admin_
 function gya_register_como_ayudamos_cpt()
 {
     $labels = array(
-        'name' => 'Cómo ayudamos',
-        'singular_name' => 'Item Cómo ayudamos',
-        'menu_name' => 'Cómo ayudamos',
-        'name_admin_bar' => 'Item Cómo ayudamos',
+        'name' => 'Lo que nos distingue',
+        'singular_name' => 'Item Lo que nos distingue',
+        'menu_name' => 'Lo que nos distingue',
+        'name_admin_bar' => 'Item Lo que nos distingue',
         'add_new' => 'Agregar nuevo',
         'add_new_item' => 'Agregar nuevo item',
         'new_item' => 'Nuevo item',
@@ -294,7 +294,7 @@ add_action('init', 'gya_register_insights_cpt');
 
 function gya_flush_rewrite_rules_once()
 {
-    $rewrite_version = '20260706_insights_detail';
+    $rewrite_version = '20260712_service_detail';
 
     if (get_option('gya_rewrite_rules_version') === $rewrite_version) {
         return;
@@ -350,6 +350,7 @@ function gya_enqueue_assets()
     $insights_css_path = get_template_directory() . '/assets/css/insights.css';
     $insights_archive_css_path = get_template_directory() . '/assets/css/insights-archive.css';
     $insight_detail_css_path = get_template_directory() . '/assets/css/insight-detail.css';
+    $service_detail_css_path = get_template_directory() . '/assets/css/service-detail.css';
     $category_detail_css_path = get_template_directory() . '/assets/css/category-detail.css';
     $cta_css_path = get_template_directory() . '/assets/css/cta-banner.css';
     $iso_banner_css_path = get_template_directory() . '/assets/css/iso-banner.css';
@@ -408,6 +409,15 @@ function gya_enqueue_assets()
             get_template_directory_uri() . '/assets/css/insight-detail.css',
             array('gya-main-style'),
             file_exists($insight_detail_css_path) ? filemtime($insight_detail_css_path) : $theme_version
+        );
+    }
+
+    if (is_singular('como_ayudamos')) {
+        wp_enqueue_style(
+            'gya-service-detail-style',
+            get_template_directory_uri() . '/assets/css/service-detail.css',
+            array('gya-main-style', 'gya-services-style'),
+            file_exists($service_detail_css_path) ? filemtime($service_detail_css_path) : $theme_version
         );
     }
 
@@ -682,7 +692,7 @@ function gya_primary_menu_fallback()
     echo '<ul class="menu">';
     echo '<li><a href="#soluciones">Soluciones</a></li>';
     echo '<li><a href="#insights">Insights</a></li>';
-    echo '<li><a href="#servicios">Cómo ayudamos</a></li>';
+    echo '<li><a href="#servicios">Lo que nos distingue</a></li>';
     echo '<li><a href="#nosotros">Nosotros</a></li>';
     echo '</ul>';
 }

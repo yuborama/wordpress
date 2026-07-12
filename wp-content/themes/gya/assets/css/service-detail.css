@@ -1,0 +1,143 @@
+.service-detail {
+  background: var(--white);
+  color: #435365;
+}
+
+.service-detail-hero {
+  position: relative;
+  width: min(100%, var(--max));
+  min-height: 512px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #00020e;
+}
+
+.service-detail-hero__image {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.9;
+}
+
+.service-detail-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, #00020e 0%, rgba(0, 2, 14, 0.9) 28%, rgba(0, 2, 14, 0.52) 58%, rgba(0, 2, 14, 0.12) 100%),
+    linear-gradient(180deg, rgba(0, 2, 14, 0.04) 0%, rgba(0, 2, 14, 0.58) 100%);
+}
+
+.service-detail-hero__inner {
+  position: relative;
+  z-index: 2;
+  min-height: 512px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 58px;
+  color: var(--white);
+}
+
+.service-detail-hero__eyebrow {
+  color: var(--orange);
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.service-detail-hero h1 {
+  max-width: 610px;
+  margin: 24px 0 0;
+  color: var(--white);
+  font-size: 46px;
+  line-height: 1.08;
+  font-weight: 800;
+}
+
+.service-detail-hero p {
+  max-width: 620px;
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 18px;
+  line-height: 1.36;
+  font-weight: 500;
+}
+
+.service-detail-content {
+  padding: 62px 0 76px;
+}
+
+.service-detail-content__inner {
+  max-width: 930px;
+}
+
+.service-detail-body {
+  color: #435365;
+  font-size: 18px;
+  line-height: 1.46;
+}
+
+.service-detail-body p {
+  margin: 0 0 22px;
+}
+
+.service-detail-body h2,
+.service-detail-body h3 {
+  margin: 36px 0 16px;
+  color: #0b304c;
+  line-height: 1.18;
+}
+
+.service-detail-body ul,
+.service-detail-body ol {
+  margin: 14px 0 24px;
+  padding-left: 28px;
+}
+
+@media (max-width: 900px) {
+  .service-detail-hero,
+  .service-detail-hero__inner {
+    min-height: 460px;
+  }
+
+  .service-detail-hero__inner {
+    padding: 74px 28px;
+  }
+
+  .service-detail-hero h1 {
+    font-size: 38px;
+  }
+
+  .service-detail-content {
+    padding: 44px 0 58px;
+  }
+
+  .service-detail-body {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .service-detail-hero,
+  .service-detail-hero__inner {
+    min-height: 420px;
+  }
+
+  .service-detail-hero__inner {
+    padding: 62px 24px;
+  }
+
+  .service-detail-hero h1 {
+    font-size: 32px;
+  }
+
+  .service-detail-hero p {
+    font-size: 16px;
+  }
+}
