@@ -93,7 +93,6 @@ if ($services_query->have_posts()) {
                 </div>
             <?php endif; ?>
         </div>
-        <a class="outline-link centered services-cta" href="#servicios">Ver servicios especializados</a>
     </div>
 </section>
 
