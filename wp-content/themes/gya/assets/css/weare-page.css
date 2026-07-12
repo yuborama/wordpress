@@ -12,24 +12,13 @@
   background: #00020e;
 }
 
-.weare-hero__office,
-.weare-hero__network {
+.weare-hero__image {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.weare-hero__office {
-  left: 38%;
   background-position: center;
-  opacity: 0.8;
-}
-
-.weare-hero__network {
-  right: 44%;
-  background-position: left bottom;
-  opacity: 0.72;
+  background-color: #07101f;
 }
 
 .weare-hero::before {
@@ -40,17 +29,6 @@
   background:
     linear-gradient(90deg, rgba(0, 2, 14, 0.98) 0%, rgba(0, 2, 14, 0.86) 37%, rgba(0, 2, 14, 0.28) 68%, rgba(0, 2, 14, 0.02) 100%),
     linear-gradient(180deg, rgba(0, 2, 14, 0.06) 0%, rgba(0, 2, 14, 0.38) 100%);
-}
-
-.weare-hero__person {
-  position: absolute;
-  right: 9%;
-  bottom: 0;
-  z-index: 2;
-  width: min(35vw, 470px);
-  max-height: 520px;
-  object-fit: contain;
-  object-position: bottom center;
 }
 
 .weare-hero__inner {
@@ -304,23 +282,7 @@
   font-weight: var(--font-bold);
 }
 
-.weare-message-card__person {
-  position: absolute;
-  right: 9%;
-  bottom: 0;
-  z-index: 2;
-  width: min(34vw, 390px);
-  max-height: 370px;
-  object-fit: contain;
-  object-position: bottom center;
-}
-
 @media (max-width: 1100px) {
-  .weare-hero__person {
-    right: 2%;
-    opacity: 0.86;
-  }
-
   .weare-features__grid {
     grid-template-columns: 1fr;
   }
@@ -342,17 +304,6 @@
     min-height: 620px;
   }
 
-  .weare-hero__office {
-    left: 0;
-    opacity: 0.34;
-  }
-
-  .weare-hero__person {
-    right: -15%;
-    width: 70vw;
-    opacity: 0.38;
-  }
-
   .weare-hero h1 {
     font-size: var(--font-h2);
   }
@@ -361,7 +312,4 @@
     padding: 52px 28px;
   }
 
-  .weare-message-card__person {
-    display: none;
-  }
 }

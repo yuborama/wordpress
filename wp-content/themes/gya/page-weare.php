@@ -9,6 +9,11 @@ $uploads_base = trailingslashit($upload_dir['baseurl']) . '2026/07/';
 $network_image = $uploads_base . 'network-bg.png';
 $office_image = $uploads_base . 'office.jpg';
 $office_alt_image = $uploads_base . 'office3.png';
+$weare_hero_image = get_the_post_thumbnail_url(get_queried_object_id(), 'full');
+
+if (!$weare_hero_image) {
+    $weare_hero_image = $office_image;
+}
 
 $director_query = new WP_Query(
     array(
@@ -94,11 +99,7 @@ get_header();
 ?>
 <main class="weare-page">
     <section class="weare-hero">
-        <div class="weare-hero__office" style="background-image:url('<?php echo esc_url($office_image); ?>');"></div>
-        <div class="weare-hero__network" style="background-image:url('<?php echo esc_url($network_image); ?>');"></div>
-        <?php if (!empty($director['image'])) : ?>
-            <img class="weare-hero__person" src="<?php echo esc_url($director['image']); ?>" alt="<?php echo esc_attr($director['name']); ?>">
-        <?php endif; ?>
+        <div class="weare-hero__image" style="background-image:url('<?php echo esc_url($weare_hero_image); ?>');"></div>
         <div class="shell weare-hero__inner">
             <div class="weare-hero__copy">
                 <span>NOSOTROS</span>
@@ -151,9 +152,6 @@ get_header();
                     <h3><?php echo esc_html($director['name']); ?></h3>
                     <span><?php echo esc_html($director['position']); ?></span>
                 </div>
-                <?php if (!empty($director['image'])) : ?>
-                    <img class="weare-message-card__person" src="<?php echo esc_url($director['image']); ?>" alt="<?php echo esc_attr($director['name']); ?>">
-                <?php endif; ?>
             </article>
         </div>
     </section>
