@@ -60,6 +60,13 @@ function gya_register_email_settings()
     register_setting('gya_email_settings_group', 'gya_email_from');
     register_setting('gya_email_settings_group', 'gya_email_to');
     register_setting('gya_email_settings_group', 'gya_email_subject');
+    register_setting(
+        'gya_email_settings_group',
+        'gya_contact_phone',
+        array(
+            'sanitize_callback' => 'sanitize_text_field',
+        )
+    );
 
     foreach (gya_social_networks() as $network) {
         register_setting(
@@ -83,6 +90,7 @@ function gya_render_email_settings_page()
     $from = get_option('gya_email_from', '');
     $to = get_option('gya_email_to', '');
     $subject = get_option('gya_email_subject', 'Nueva solicitud de diagnóstico');
+    $phone = get_option('gya_contact_phone', '');
     ?>
     <div class="wrap">
         <h1>Configuración GYA</h1>
@@ -116,6 +124,13 @@ function gya_render_email_settings_page()
                     <th scope="row"><label for="gya_email_subject">Asunto por defecto</label></th>
                     <td>
                         <input type="text" name="gya_email_subject" id="gya_email_subject" value="<?php echo esc_attr($subject); ?>" class="regular-text">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="gya_contact_phone">Teléfono de contacto</label></th>
+                    <td>
+                        <input type="text" name="gya_contact_phone" id="gya_contact_phone" value="<?php echo esc_attr($phone); ?>" class="regular-text" placeholder="+52 55 0000 0000">
+                        <p class="description">Se usa en enlaces de teléfono del sitio, como el detalle del equipo.</p>
                     </td>
                 </tr>
             </table>

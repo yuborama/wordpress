@@ -37,6 +37,9 @@ while (have_posts()) :
     $uploads_base = trailingslashit($upload_dir['baseurl']) . '2026/07/';
     $office_image = $uploads_base . 'office.jpg';
     $network_image = $uploads_base . 'network-bg.png';
+    $contact_email = sanitize_email(get_option('gya_email_to', ''));
+    $contact_phone = sanitize_text_field(get_option('gya_contact_phone', ''));
+    $contact_phone_href = preg_replace('/[^\d+]/', '', $contact_phone);
     ?>
     <main class="team-detail">
         <section class="team-detail-section">
@@ -47,18 +50,35 @@ while (have_posts()) :
                         <p class="team-detail-position"><?php echo esc_html($position); ?></p>
                     <?php endif; ?>
 
-                    <div class="team-detail-actions" aria-hidden="true">
-                        <span class="team-detail-action">
+                    <div class="team-detail-actions">
+                        <?php if (!empty($contact_email)) : ?>
+                            <a class="team-detail-action" href="mailto:<?php echo esc_attr($contact_email); ?>" aria-label="Enviar correo">
+                        <?php else : ?>
+                            <span class="team-detail-action" aria-hidden="true">
+                        <?php endif; ?>
                             <svg viewBox="0 0 24 24" focusable="false">
                                 <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
                                 <path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
                             </svg>
-                        </span>
-                        <span class="team-detail-action">
+                        <?php if (!empty($contact_email)) : ?>
+                            </a>
+                        <?php else : ?>
+                            </span>
+                        <?php endif; ?>
+
+                        <?php if (!empty($contact_phone_href)) : ?>
+                            <a class="team-detail-action" href="tel:<?php echo esc_attr($contact_phone_href); ?>" aria-label="Llamar por teléfono">
+                        <?php else : ?>
+                            <span class="team-detail-action" aria-hidden="true">
+                        <?php endif; ?>
                             <svg viewBox="0 0 24 24" focusable="false">
                                 <path d="M7 4h3l1.5 4-2 1.2c1 2 2.3 3.3 4.3 4.3l1.2-2 4 1.5v3c0 1.1-.9 2-2 2C10.4 19 5 13.6 5 7c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
                             </svg>
-                        </span>
+                        <?php if (!empty($contact_phone_href)) : ?>
+                            </a>
+                        <?php else : ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
 
                     <div class="team-detail-description">
