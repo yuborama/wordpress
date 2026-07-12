@@ -13,9 +13,12 @@ while (have_posts()) :
     $title = gya_get_post_field_value('title', $insight_id, get_the_title());
     $short_description = gya_get_post_field_value('short_description', $insight_id, '');
     $long_description = gya_get_post_field_value('long_description', $insight_id, '');
+    $youtube_link = gya_get_post_field_value('youtube_link', $insight_id, '');
+    $youtube_banner = (bool) gya_get_post_field_value('youtube_banner', $insight_id, false);
     $featured_image = has_post_thumbnail($insight_id) ? get_the_post_thumbnail_url($insight_id, 'full') : '';
     $upload_dir = wp_upload_dir();
     $network_image = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
+    $youtube_url = !empty($youtube_link) ? $youtube_link : 'https://www.youtube.com/';
 
     $tags = gya_get_post_field_value('tags', $insight_id, array());
     $tag = is_array($tags) ? reset($tags) : $tags;
@@ -84,21 +87,23 @@ while (have_posts()) :
             </div>
         </section>
 
-        <section class="insight-video-cta">
-            <div class="shell">
-                <article class="insight-video-card" style="background-image:url('<?php echo esc_url($network_image); ?>');">
-                    <div class="insight-video-card__copy">
-                        <h2>Nuestros especialistas te lo explican.</h2>
-                        <p>Profundiza en este tema a traves de nuestras sesiones especializadas, donde compartimos experiencias, recomendaciones y casos practicos para ayudarte a tomar mejores decisiones.</p>
-                        <a class="outline-link" href="https://www.youtube.com/" target="_blank" rel="noopener">Revisa nuestros cursos en YouTube <span>&rsaquo;</span></a>
-                    </div>
-                    <?php if (!empty($author_image)) : ?>
-                        <img class="insight-video-card__person" src="<?php echo esc_url($author_image); ?>" alt="<?php echo esc_attr($author_name); ?>">
-                    <?php endif; ?>
-                    <span class="insight-video-card__youtube" aria-hidden="true"></span>
-                </article>
-            </div>
-        </section>
+        <?php if ($youtube_banner) : ?>
+            <section class="insight-video-cta">
+                <div class="shell">
+                    <article class="insight-video-card" style="background-image:url('<?php echo esc_url($network_image); ?>');">
+                        <div class="insight-video-card__copy">
+                            <h2>Nuestros especialistas te lo explican.</h2>
+                            <p>Profundiza en este tema a traves de nuestras sesiones especializadas, donde compartimos experiencias, recomendaciones y casos practicos para ayudarte a tomar mejores decisiones.</p>
+                            <a class="outline-link" href="<?php echo esc_url($youtube_url); ?>" target="_blank" rel="noopener">Revisa nuestros cursos en YouTube <span>&rsaquo;</span></a>
+                        </div>
+                        <?php if (!empty($author_image)) : ?>
+                            <img class="insight-video-card__person" src="<?php echo esc_url($author_image); ?>" alt="<?php echo esc_attr($author_name); ?>">
+                        <?php endif; ?>
+                        <span class="insight-video-card__youtube" aria-hidden="true"></span>
+                    </article>
+                </div>
+            </section>
+        <?php endif; ?>
     </main>
     <?php
 endwhile;
