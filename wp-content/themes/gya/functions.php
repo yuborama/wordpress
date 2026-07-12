@@ -294,7 +294,7 @@ add_action('init', 'gya_register_insights_cpt');
 
 function gya_flush_rewrite_rules_once()
 {
-    $rewrite_version = '20260712_service_detail';
+    $rewrite_version = '20260712_team_detail';
 
     if (get_option('gya_rewrite_rules_version') === $rewrite_version) {
         return;
@@ -357,6 +357,7 @@ function gya_enqueue_assets()
     $services_css_path = get_template_directory() . '/assets/css/services.css';
     $team_css_path = get_template_directory() . '/assets/css/team.css';
     $team_page_css_path = get_template_directory() . '/assets/css/team-page.css';
+    $team_detail_css_path = get_template_directory() . '/assets/css/team-detail.css';
     $weare_page_css_path = get_template_directory() . '/assets/css/weare-page.css';
     $contact_page_css_path = get_template_directory() . '/assets/css/contact-page.css';
     $privacy_page_css_path = get_template_directory() . '/assets/css/privacy-page.css';
@@ -464,6 +465,15 @@ function gya_enqueue_assets()
             get_template_directory_uri() . '/assets/css/team-page.css',
             array('gya-main-style', 'gya-team-style'),
             file_exists($team_page_css_path) ? filemtime($team_page_css_path) : $theme_version
+        );
+    }
+
+    if (is_singular('team_member')) {
+        wp_enqueue_style(
+            'gya-team-detail-style',
+            get_template_directory_uri() . '/assets/css/team-detail.css',
+            array('gya-main-style'),
+            file_exists($team_detail_css_path) ? filemtime($team_detail_css_path) : $theme_version
         );
     }
 

@@ -58,6 +58,7 @@ if ($team_query->have_posts()) {
             'initials' => $initials,
             'order' => is_numeric($order) ? (int) $order : PHP_INT_MAX,
             'date' => get_the_date('U'),
+            'url' => get_permalink($member_id),
         );
     }
 
@@ -98,7 +99,7 @@ get_header();
             <?php if (!empty($team_members)) : ?>
                 <div class="team-page-grid">
                     <?php foreach ($team_members as $member) : ?>
-                        <article class="team-card">
+                        <a class="team-card" href="<?php echo esc_url($member['url']); ?>">
                             <div class="avatar">
                                 <?php if (!empty($member['image'])) : ?>
                                     <img src="<?php echo esc_url($member['image']); ?>" alt="<?php echo esc_attr($member['name']); ?>">
@@ -123,7 +124,7 @@ get_header();
                                     </svg>
                                 </span>
                             </div>
-                        </article>
+                        </a>
                     <?php endforeach; ?>
                 </div>
             <?php else : ?>

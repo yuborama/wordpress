@@ -61,6 +61,7 @@ if ($team_query->have_posts()) {
             'initials' => $initials,
             'order' => is_numeric($order) ? (int) $order : PHP_INT_MAX,
             'date' => get_the_date('U'),
+            'url' => get_permalink($member_id),
         );
     }
 
@@ -99,7 +100,7 @@ $team_pages = array_chunk($team, 4);
                         <?php foreach ($team_pages as $page_index => $team_page) : ?>
                             <div class="team-page" data-team-page="<?php echo esc_attr((string) $page_index); ?>">
                                 <?php foreach ($team_page as $member) : ?>
-                                    <article class="team-card" data-team-card>
+                                    <a class="team-card" href="<?php echo esc_url($member['url']); ?>" data-team-card>
                                         <div class="avatar">
                                             <?php if (!empty($member['image'])) : ?>
                                                 <img src="<?php echo esc_url($member['image']); ?>" alt="<?php echo esc_attr($member['name']); ?>">
@@ -124,7 +125,7 @@ $team_pages = array_chunk($team, 4);
                                                 </svg>
                                             </span>
                                         </div>
-                                    </article>
+                                    </a>
                                 <?php endforeach; ?>
                             </div>
                         <?php endforeach; ?>
