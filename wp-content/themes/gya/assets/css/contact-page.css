@@ -265,7 +265,29 @@
   .contact-director-card {
     position: relative;
     top: auto;
-    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-top: 32px;
+  }
+
+  .contact-director-card img {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    align-self: center;
+    width: min(72%, 360px);
+    max-height: 430px;
+    object-fit: contain;
+    object-position: bottom center;
+  }
+
+  .contact-quote {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    margin: -8px 24px 24px;
   }
 }
 
@@ -280,18 +302,17 @@
   }
 
   .contact-director-card {
-    min-height: 560px;
+    padding-top: 28px;
   }
 
   .contact-director-card img {
-    right: 0;
-    width: 86%;
+    width: min(86%, 320px);
+    max-height: 390px;
     opacity: 0.86;
   }
 
   .contact-quote {
-    right: 14px;
-    left: 14px;
+    margin: -6px 14px 18px;
     padding: 24px;
   }
 
