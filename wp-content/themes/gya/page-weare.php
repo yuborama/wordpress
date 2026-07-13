@@ -8,7 +8,7 @@ $upload_dir = wp_upload_dir();
 $uploads_base = trailingslashit($upload_dir['baseurl']) . '2026/07/';
 $network_image = $uploads_base . 'network-bg.png';
 $office_image = $uploads_base . 'office.jpg';
-$office_alt_image = $uploads_base . 'office3.png';
+$office_alt_image = $uploads_base . 'MENSAJE-DEL-DIRECTOR.png';
 $weare_hero_image = get_the_post_thumbnail_url(get_queried_object_id(), 'full');
 
 if (!$weare_hero_image) {
