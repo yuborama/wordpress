@@ -38,8 +38,8 @@ while (have_posts()) :
     $office_image = $uploads_base . 'office.jpg';
     $network_image = $uploads_base . 'network-bg.png';
     $contact_email = sanitize_email(get_option('gya_email_to', ''));
-    $contact_phone = sanitize_text_field(get_option('gya_contact_phone', ''));
-    $contact_phone_href = preg_replace('/[^\d+]/', '', $contact_phone);
+    $whatsapp_url = get_option('gya_social_whatsapp', '');
+    $whatsapp_icon = get_template_directory_uri() . '/assets/images/icons/social/whatsapp.svg';
     ?>
     <main class="team-detail">
         <section class="team-detail-section">
@@ -49,7 +49,6 @@ while (have_posts()) :
                     <?php if (!empty($position)) : ?>
                         <p class="team-detail-position"><?php echo esc_html($position); ?></p>
                     <?php endif; ?>
-
                     <div class="team-detail-actions">
                         <?php if (!empty($contact_email)) : ?>
                             <a class="team-detail-action" href="mailto:<?php echo esc_attr($contact_email); ?>" aria-label="Enviar correo">
@@ -66,18 +65,10 @@ while (have_posts()) :
                             </span>
                         <?php endif; ?>
 
-                        <?php if (!empty($contact_phone_href)) : ?>
-                            <a class="team-detail-action" href="tel:<?php echo esc_attr($contact_phone_href); ?>" aria-label="Llamar por teléfono">
-                        <?php else : ?>
-                            <span class="team-detail-action" aria-hidden="true">
-                        <?php endif; ?>
-                            <svg viewBox="0 0 24 24" focusable="false">
-                                <path d="M7 4h3l1.5 4-2 1.2c1 2 2.3 3.3 4.3 4.3l1.2-2 4 1.5v3c0 1.1-.9 2-2 2C10.4 19 5 13.6 5 7c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                            </svg>
-                        <?php if (!empty($contact_phone_href)) : ?>
+                        <?php if (!empty($whatsapp_url)) : ?>
+                            <a class="team-detail-action" href="<?php echo esc_url($whatsapp_url); ?>" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+                                <img src="<?php echo esc_url($whatsapp_icon); ?>" alt="">
                             </a>
-                        <?php else : ?>
-                            </span>
                         <?php endif; ?>
                     </div>
 

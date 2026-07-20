@@ -62,6 +62,13 @@ a.team-detail-action:focus-visible {
   height: 21px;
 }
 
+.team-detail-action img {
+  width: 21px;
+  height: 21px;
+  display: block;
+  filter: brightness(0);
+}
+
 .team-detail-description {
   max-width: 570px;
   margin-top: 42px;

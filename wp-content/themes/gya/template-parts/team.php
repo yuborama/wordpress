@@ -8,6 +8,8 @@ $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object
 $team_heading = gya_get_field_value('gya_team_heading', 'Profesionales que entienden tu negocio y hablan tu idioma.', $page_id);
 
 $carousel_autoplay_ms = function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_carousel_duration_seconds', 10) : 10000;
+$whatsapp_url = get_option('gya_social_whatsapp', '');
+$whatsapp_icon = get_template_directory_uri() . '/assets/images/icons/social/whatsapp.svg';
 
 $team_query = new WP_Query(
     array(
@@ -114,18 +116,18 @@ $team_pages = array_chunk($team, 4);
                                         <?php if (!empty($member['position'])) : ?>
                                             <p><?php echo esc_html($member['position']); ?></p>
                                         <?php endif; ?>
-                                        <div class="contact-icons" aria-hidden="true">
+                                        <div class="contact-icons">
                                             <span class="icon icon-mail">
                                                 <svg viewBox="0 0 24 24" focusable="false">
                                                     <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
                                                     <path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
                                                 </svg>
                                             </span>
-                                            <span class="icon icon-phone">
-                                                <svg viewBox="0 0 24 24" focusable="false">
-                                                    <path d="M7 4h3l1.5 4-2 1.2c1 2 2.3 3.3 4.3 4.3l1.2-2 4 1.5v3c0 1.1-.9 2-2 2C10.4 19 5 13.6 5 7c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                                                </svg>
-                                            </span>
+                                            <?php if (!empty($whatsapp_url)) : ?>
+                                                <span class="icon icon-whatsapp js-whatsapp-action" role="link" tabindex="0" data-whatsapp-url="<?php echo esc_url($whatsapp_url); ?>" aria-label="Abrir WhatsApp">
+                                                    <img src="<?php echo esc_url($whatsapp_icon); ?>" alt="">
+                                                </span>
+                                            <?php endif; ?>
                                         </div>
                                     </a>
                                 <?php endforeach; ?>

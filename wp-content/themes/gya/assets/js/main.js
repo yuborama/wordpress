@@ -57,6 +57,34 @@
 })();
 
 (function () {
+  var actions = document.querySelectorAll('.js-whatsapp-action[data-whatsapp-url]');
+
+  if (!actions.length) return;
+
+  function openWhatsapp(action, event) {
+    var url = action.dataset.whatsappUrl;
+
+    if (!url) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    window.open(url, '_blank', 'noopener');
+  }
+
+  actions.forEach(function (action) {
+    action.addEventListener('click', function (event) {
+      openWhatsapp(action, event);
+    });
+
+    action.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        openWhatsapp(action, event);
+      }
+    });
+  });
+})();
+
+(function () {
   var toggle = document.querySelector('.mobile-menu-toggle');
   var panel = document.querySelector('.mobile-menu-panel');
   var closeButton = document.querySelector('.mobile-menu-close');

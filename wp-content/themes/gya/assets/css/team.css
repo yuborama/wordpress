@@ -97,6 +97,20 @@
   height: 100%;
 }
 
+.contact-icons img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.contact-icons .icon-whatsapp {
+  cursor: pointer;
+}
+
+.contact-icons .icon-whatsapp img {
+  filter: brightness(0);
+}
+
 .team-rail {
   position: absolute;
   top: 50%;
