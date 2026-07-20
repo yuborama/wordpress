@@ -7,6 +7,8 @@ if (!defined('ABSPATH')) {
 $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object_id();
 $team_heading = gya_get_field_value('gya_team_heading', 'Profesionales que entienden tu negocio y hablan tu idioma.', $page_id);
 
+$carousel_autoplay_ms = function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_carousel_duration_seconds', 10) : 10000;
+
 $team_query = new WP_Query(
     array(
         'post_type' => 'team_member',
@@ -88,7 +90,7 @@ $team_pages = array_chunk($team, 4);
             <h2><?php echo esc_html($team_heading); ?></h2>
         </header>
         <?php if (!empty($team_pages)) : ?>
-            <div class="team-slider js-team-slider" data-team-index="0">
+            <div class="team-slider js-team-slider" data-team-index="0" data-team-autoplay="<?php echo esc_attr((string) $carousel_autoplay_ms); ?>">
                 <?php if (count($team) > 1) : ?>
                     <button class="team-rail team-rail-left" type="button" aria-label="Anterior" data-team-prev>
                         <span class="rail-arrow-icon" aria-hidden="true"></span>
@@ -171,6 +173,8 @@ $team_pages = array_chunk($team, 4);
     var dots = [];
     var activeIndex = 0;
     var cardsPerPage = 4;
+    var autoplayMs = Number(slider.dataset.teamAutoplay || 10000);
+    var autoplayId = null;
 
     if (!track || !cards.length) return;
 
@@ -206,6 +210,7 @@ $team_pages = array_chunk($team, 4);
       dots.forEach(function (dot) {
         dot.addEventListener('click', function () {
           setActivePage(Number(dot.dataset.teamDot || 0));
+          restartAutoplay();
         });
       });
     }
@@ -268,27 +273,63 @@ $team_pages = array_chunk($team, 4);
       });
     }
 
+    function stopAutoplay() {
+      if (autoplayId) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+
+      if (pages.length <= 1) {
+        return;
+      }
+
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+
+      autoplayId = setInterval(function () {
+        setActivePage(activeIndex + 1);
+      }, autoplayMs);
+    }
+
+    function restartAutoplay() {
+      startAutoplay();
+    }
+
     if (prevButton) {
       prevButton.addEventListener('click', function () {
         setActivePage(activeIndex - 1);
+        restartAutoplay();
       });
     }
 
     if (nextButton) {
       nextButton.addEventListener('click', function () {
         setActivePage(activeIndex + 1);
+        restartAutoplay();
       });
     }
+
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+    slider.addEventListener('focusin', stopAutoplay);
+    slider.addEventListener('focusout', startAutoplay);
 
     window.addEventListener('resize', function () {
       var nextCardsPerPage = getCardsPerPage();
 
       if (nextCardsPerPage !== cardsPerPage) {
         buildPages();
+        restartAutoplay();
       }
     });
 
     buildPages(0);
+    startAutoplay();
   });
 })();
 </script>

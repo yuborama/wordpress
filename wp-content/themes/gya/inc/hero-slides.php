@@ -5,20 +5,32 @@ if (!defined('ABSPATH')) {
 }
 
 function gya_register_hero_slide_post_type() {
+    if (post_type_exists('hero_slide')) {
+        return;
+    }
+
     register_post_type(
         'hero_slide',
         array(
             'labels' => array(
-                'name' => __('Hero slides', 'gya'),
-                'singular_name' => __('Hero slide', 'gya'),
-                'add_new_item' => __('Agregar hero slide', 'gya'),
-                'edit_item' => __('Editar hero slide', 'gya'),
+                'name' => __('Hero Slides', 'gya'),
+                'singular_name' => __('Hero Slide', 'gya'),
+                'menu_name' => __('Hero Slides', 'gya'),
+                'add_new' => __('Añadir slide', 'gya'),
+                'add_new_item' => __('Añadir nuevo slide', 'gya'),
+                'edit_item' => __('Editar slide', 'gya'),
+                'new_item' => __('Nuevo slide', 'gya'),
+                'view_item' => __('Ver slide', 'gya'),
+                'search_items' => __('Buscar slides', 'gya'),
+                'not_found' => __('No se encontraron slides', 'gya'),
+                'not_found_in_trash' => __('No hay slides en la papelera', 'gya'),
             ),
             'public' => false,
             'show_ui' => true,
             'show_in_menu' => true,
             'menu_icon' => 'dashicons-images-alt2',
             'supports' => array('title', 'thumbnail', 'page-attributes'),
+            'capability_type' => 'post',
             'has_archive' => false,
             'rewrite' => false,
         )
