@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
 
 $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object_id();
 $services_heading = gya_get_field_value('gya_services_heading', 'La diferencia está en cómo trabajamos.', $page_id);
+$carousel_autoplay_ms = function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_carousel_duration_seconds', 10) : 10000;
 $upload_dir = wp_upload_dir();
 $services_bg = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
 
@@ -66,7 +67,7 @@ if ($services_query->have_posts()) {
             <span>LO QUE NOS DISTINGUE</span>
             <h2><?php echo esc_html($services_heading); ?></h2>
         </header>
-        <div class="services-slider js-services-slider" data-services-index="0">
+        <div class="services-slider js-services-slider" data-services-index="0" data-services-autoplay="<?php echo esc_attr((string) $carousel_autoplay_ms); ?>">
             <div class="services-grid">
                 <?php foreach ($services as $service) : ?>
                     <div class="services-slide">
@@ -107,7 +108,7 @@ if ($services_query->have_posts()) {
     var dots = slider.querySelectorAll('[data-services-dot]');
     var activeIndex = 0;
     var autoplayId = null;
-    var autoplayMs = Number(slider.dataset.servicesAutoplay || 6000);
+    var autoplayMs = Number(slider.dataset.servicesAutoplay || 10000);
 
     if (!track || slides.length <= 1) return;
 

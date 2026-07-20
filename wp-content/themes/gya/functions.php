@@ -546,6 +546,15 @@ function gya_enqueue_assets()
         true
     );
 
+    wp_localize_script(
+        'gya-main-script',
+        'gyaTiming',
+        array(
+            'heroAutoplayMs' => function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_hero_duration_seconds', 10) : 10000,
+            'carouselAutoplayMs' => function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_carousel_duration_seconds', 10) : 10000,
+        )
+    );
+
     if (gya_is_contact_page_request()) {
         wp_enqueue_script(
             'gya-contact-form',

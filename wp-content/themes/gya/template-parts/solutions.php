@@ -7,6 +7,8 @@ if (!defined('ABSPATH')) {
 $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object_id();
 $solutions_heading = gya_get_field_value('gya_solutions_heading', 'Acompañamos cada área clave de tu empresa.', $page_id);
 
+$carousel_autoplay_ms = function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_carousel_duration_seconds', 10) : 10000;
+
 $solutions_query = new WP_Query(
     array(
         'post_type' => 'gya_category',
@@ -54,7 +56,7 @@ $solution_pages = array_chunk($solutions, 4);
             <h2><?php echo esc_html($solutions_heading); ?></h2>
         </header>
         <?php if (!empty($solution_pages)) : ?>
-            <div class="solutions-slider js-solutions-slider" data-solutions-index="0">
+            <div class="solutions-slider js-solutions-slider" data-solutions-index="0" data-solutions-autoplay="<?php echo esc_attr((string) $carousel_autoplay_ms); ?>">
                 <?php if (count($solutions) > 1) : ?>
                     <button class="solutions-rail solutions-rail-left" type="button" aria-label="Anterior" data-solutions-prev>
                         <span class="rail-arrow-icon" aria-hidden="true"></span>
@@ -121,7 +123,7 @@ $solution_pages = array_chunk($solutions, 4);
     var dots = [];
     var activeIndex = 0;
     var cardsPerPage = 4;
-    var autoplayMs = Number(slider.dataset.solutionsAutoplay || 6000);
+    var autoplayMs = Number(slider.dataset.solutionsAutoplay || 10000);
     var autoplayId = null;
     var resizeId = null;
 

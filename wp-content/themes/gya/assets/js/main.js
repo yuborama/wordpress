@@ -8,7 +8,9 @@
   var nextButton = heroSection.querySelector('.hero-next');
   var activeIndex = 0;
   var slideCount = Math.max(slides.length, copies.length);
-  var intervalMs = 6500;
+  var intervalMs = window.gyaTiming && Number(window.gyaTiming.heroAutoplayMs)
+    ? Number(window.gyaTiming.heroAutoplayMs)
+    : 10000;
   var timerId;
 
   function setActiveSlide(index) {

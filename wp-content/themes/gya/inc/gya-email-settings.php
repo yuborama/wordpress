@@ -67,6 +67,20 @@ function gya_register_email_settings()
             'sanitize_callback' => 'sanitize_text_field',
         )
     );
+    register_setting(
+        'gya_email_settings_group',
+        'gya_hero_duration_seconds',
+        array(
+            'sanitize_callback' => 'absint',
+        )
+    );
+    register_setting(
+        'gya_email_settings_group',
+        'gya_carousel_duration_seconds',
+        array(
+            'sanitize_callback' => 'absint',
+        )
+    );
 
     foreach (gya_social_networks() as $network) {
         register_setting(
@@ -80,6 +94,17 @@ function gya_register_email_settings()
 }
 add_action('admin_init', 'gya_register_email_settings');
 
+function gya_get_duration_ms($option_name, $default_seconds = 10)
+{
+    $seconds = absint(get_option($option_name, $default_seconds));
+
+    if ($seconds < 1) {
+        $seconds = absint($default_seconds);
+    }
+
+    return $seconds * 1000;
+}
+
 function gya_render_email_settings_page()
 {
     if (!current_user_can('manage_options')) {
@@ -91,6 +116,8 @@ function gya_render_email_settings_page()
     $to = get_option('gya_email_to', '');
     $subject = get_option('gya_email_subject', 'Nueva solicitud de diagnóstico');
     $phone = get_option('gya_contact_phone', '');
+    $hero_duration = absint(get_option('gya_hero_duration_seconds', 10));
+    $carousel_duration = absint(get_option('gya_carousel_duration_seconds', 10));
     ?>
     <div class="wrap">
         <h1>Configuración GYA</h1>
@@ -131,6 +158,24 @@ function gya_render_email_settings_page()
                     <td>
                         <input type="text" name="gya_contact_phone" id="gya_contact_phone" value="<?php echo esc_attr($phone); ?>" class="regular-text" placeholder="+52 55 0000 0000">
                         <p class="description">Se usa en enlaces de teléfono del sitio, como el detalle del equipo.</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Animaciones</h2>
+            <p class="description">Configura la duración automática de banners y carruseles en segundos.</p>
+
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row"><label for="gya_hero_duration_seconds">Duración del hero</label></th>
+                    <td>
+                        <input type="number" min="1" step="1" name="gya_hero_duration_seconds" id="gya_hero_duration_seconds" value="<?php echo esc_attr((string) ($hero_duration ?: 10)); ?>" class="small-text"> segundos
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="gya_carousel_duration_seconds">Duración de carruseles</label></th>
+                    <td>
+                        <input type="number" min="1" step="1" name="gya_carousel_duration_seconds" id="gya_carousel_duration_seconds" value="<?php echo esc_attr((string) ($carousel_duration ?: 10)); ?>" class="small-text"> segundos
                     </td>
                 </tr>
             </table>

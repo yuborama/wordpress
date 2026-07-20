@@ -7,6 +7,8 @@ if (!defined('ABSPATH')) {
 $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object_id();
 $insights_heading = gya_get_field_value('gya_insights_heading', 'Información clave para tomar mejores decisiones.', $page_id);
 
+$carousel_autoplay_ms = function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_carousel_duration_seconds', 10) : 10000;
+
 $insights_query = new WP_Query(
     array(
         'post_type' => 'insights',
@@ -66,7 +68,7 @@ wp_reset_postdata();
             <span>INSIGHTS</span>
             <h2><?php echo esc_html($insights_heading); ?></h2>
         </header>
-        <div class="insights-slider js-insights-slider" data-insights-index="0">
+        <div class="insights-slider js-insights-slider" data-insights-index="0" data-insights-autoplay="<?php echo esc_attr((string) $carousel_autoplay_ms); ?>">
             <div class="insights-grid">
                 <?php foreach ($insights as $insight) : ?>
                     <div class="insights-slide">
@@ -125,7 +127,7 @@ wp_reset_postdata();
     var dots = slider.querySelectorAll('[data-insights-dot]');
     var activeIndex = 0;
     var autoplayId = null;
-    var autoplayMs = Number(slider.dataset.insightsAutoplay || 6000);
+    var autoplayMs = Number(slider.dataset.insightsAutoplay || 10000);
 
     if (!track || slides.length <= 1) return;
 
