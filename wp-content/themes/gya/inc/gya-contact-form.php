@@ -31,7 +31,6 @@ function gya_handle_contact_form()
         'email' => $email,
         'phone' => sanitize_text_field(wp_unslash($_POST['phone'] ?? '')),
         'company' => sanitize_text_field(wp_unslash($_POST['company'] ?? '')),
-        'income' => sanitize_text_field(wp_unslash($_POST['income'] ?? '')),
         'message' => sanitize_textarea_field(wp_unslash($_POST['message'] ?? '')),
     );
 

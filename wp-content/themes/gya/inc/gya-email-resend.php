@@ -86,7 +86,6 @@ function gya_build_contact_email_html($data)
         'Correo electrónico' => $data['email'] ?? '',
         'Teléfono / WhatsApp' => $data['phone'] ?? '',
         'Compañía / Organización' => $data['company'] ?? '',
-        'Ingresos anuales' => $data['income'] ?? '',
     );
 
     $rows = '';

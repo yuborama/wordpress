@@ -64,12 +64,6 @@ if ($director_query->have_posts()) {
     wp_reset_postdata();
 }
 
-$income_options = array(
-    'Menos de 500M',
-    '500M - 1.000M',
-    '1.000M - 5.000M',
-    'Más de 5.000M',
-);
 
 get_header();
 ?>
@@ -118,16 +112,6 @@ get_header();
                     <label>
                         <span>Compañía / Organización*</span>
                         <input type="text" name="company" placeholder="Compañía / Organización*" required>
-                    </label>
-
-                    <label>
-                        <span>Ingresos anuales</span>
-                        <select name="income">
-                            <option value="">Ingresos anuales</option>
-                            <?php foreach ($income_options as $income_option) : ?>
-                                <option value="<?php echo esc_attr($income_option); ?>"><?php echo esc_html($income_option); ?></option>
-                            <?php endforeach; ?>
-                        </select>
                     </label>
 
                     <label class="contact-file">
