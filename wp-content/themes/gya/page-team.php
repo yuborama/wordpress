@@ -4,6 +4,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+$contact_email = sanitize_email(get_option('gya_email_to', ''));
+$contact_email_url = $contact_email ? 'mailto:' . $contact_email : '';
+
 $team_query = new WP_Query(
     array(
         'post_type' => 'team_member',
@@ -112,12 +115,14 @@ get_header();
                                 <p><?php echo esc_html($member['position']); ?></p>
                             <?php endif; ?>
                             <div class="contact-icons">
-                                <span class="icon icon-mail">
-                                    <svg viewBox="0 0 24 24" focusable="false">
-                                        <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                                        <path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                                    </svg>
-                                </span>
+                                <?php if (!empty($contact_email_url)) : ?>
+                                    <span class="icon icon-mail js-mail-action" role="link" tabindex="0" data-mail-url="<?php echo esc_url($contact_email_url); ?>" aria-label="Enviar correo">
+                                        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                                            <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                                            <path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                <?php endif; ?>
                                 <?php if (!empty($whatsapp_url)) : ?>
                                     <span class="icon icon-whatsapp js-whatsapp-action" role="link" tabindex="0" data-whatsapp-url="<?php echo esc_url($whatsapp_url); ?>" aria-label="Abrir WhatsApp">
                                         <img src="<?php echo esc_url($whatsapp_icon); ?>" alt="">

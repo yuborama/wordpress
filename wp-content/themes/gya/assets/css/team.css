@@ -122,6 +122,7 @@
   display: block;
 }
 
+.contact-icons .icon-mail,
 .contact-icons .icon-whatsapp {
   cursor: pointer;
 }

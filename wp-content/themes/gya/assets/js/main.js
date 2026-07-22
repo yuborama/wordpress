@@ -85,6 +85,34 @@
 })();
 
 (function () {
+  var actions = document.querySelectorAll('.js-mail-action[data-mail-url]');
+
+  if (!actions.length) return;
+
+  function openMail(action, event) {
+    var url = action.dataset.mailUrl;
+
+    if (!url) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    window.location.href = url;
+  }
+
+  actions.forEach(function (action) {
+    action.addEventListener('click', function (event) {
+      openMail(action, event);
+    });
+
+    action.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        openMail(action, event);
+      }
+    });
+  });
+})();
+
+(function () {
   var toggle = document.querySelector('.mobile-menu-toggle');
   var panel = document.querySelector('.mobile-menu-panel');
   var closeButton = document.querySelector('.mobile-menu-close');
