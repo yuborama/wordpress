@@ -21,7 +21,7 @@
   background-color: #07101f;
 }
 
-.weare-hero::before {
+/* .weare-hero::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -29,7 +29,7 @@
   background:
     linear-gradient(90deg, rgba(0, 2, 14, 0.98) 0%, rgba(0, 2, 14, 0.86) 37%, rgba(0, 2, 14, 0.28) 68%, rgba(0, 2, 14, 0.02) 100%),
     linear-gradient(180deg, rgba(0, 2, 14, 0.06) 0%, rgba(0, 2, 14, 0.38) 100%);
-}
+} */
 
 .weare-hero__inner {
   position: relative;
@@ -222,7 +222,7 @@
   min-height: 380px;
   overflow: hidden;
   border-radius: 7px;
-  background: #f4f2ee;
+  background: transparent;
 }
 
 .weare-message-card__bg {
@@ -230,17 +230,17 @@
   inset: 0;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: right center;
-  opacity: 0.78;
+  background-position: center;
+  opacity: 1;
 }
 
-.weare-message-card::before {
+/* .weare-message-card::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(90deg, rgba(248, 247, 243, 0.98) 0%, rgba(248, 247, 243, 0.88) 40%, rgba(248, 247, 243, 0.18) 72%, rgba(248, 247, 243, 0) 100%);
-}
+} */
 
 .weare-message-card__copy {
   position: relative;
@@ -336,6 +336,10 @@
 
   .weare-client-logo {
     min-height: 62px;
+  }
+
+  .weare-message-card {
+    min-height: 220px;
   }
 
   .weare-client-logo img {
