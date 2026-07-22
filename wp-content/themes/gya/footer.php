@@ -2,10 +2,6 @@
 $front_page_id = (int) get_option('page_on_front');
 $footer_legal_links = array(
     array(
-        'text' => gya_get_field_value('gya_footer_legal_1_text', 'Términos de uso', $front_page_id),
-        'url' => gya_get_field_value('gya_footer_legal_1_url', '#terminos', $front_page_id),
-    ),
-    array(
         'text' => gya_get_field_value('gya_footer_legal_2_text', 'Aviso de privacidad', $front_page_id),
         'url' => gya_get_field_value('gya_footer_legal_2_url', '#privacidad', $front_page_id),
     ),
