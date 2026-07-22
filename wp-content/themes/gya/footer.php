@@ -22,6 +22,10 @@ foreach ($footer_legal_links as &$legal_link) {
     if (!empty($legal_link['url']) && $legal_link['url'] === '#privacidad') {
         $legal_link['url'] = home_url('/aviso-de-privacidad/');
     }
+
+    if (!empty($legal_link['url']) && $legal_link['url'] === '#cookies') {
+        $legal_link['url'] = home_url('/cookies/');
+    }
 }
 unset($legal_link);
 

@@ -341,6 +341,15 @@ function gya_is_privacy_page_request()
     return is_page('privacy') || is_page('aviso-de-privacidad') || in_array($request, array('privacy', 'aviso-de-privacidad'), true);
 }
 
+function gya_is_cookies_page_request()
+{
+    global $wp;
+
+    $request = isset($wp->request) ? trim((string) $wp->request, '/') : '';
+
+    return is_page('cookies') || is_page('politica-de-cookies') || in_array($request, array('cookies', 'politica-de-cookies'), true);
+}
+
 function gya_enqueue_assets()
 {
     $theme_version = wp_get_theme()->get('Version');
@@ -495,7 +504,7 @@ function gya_enqueue_assets()
         );
     }
 
-    if (gya_is_privacy_page_request()) {
+    if (gya_is_privacy_page_request() || gya_is_cookies_page_request()) {
         wp_enqueue_style(
             'gya-privacy-page-style',
             get_template_directory_uri() . '/assets/css/privacy-page.css',
@@ -662,6 +671,28 @@ function gya_privacy_page_template($template)
     return file_exists($privacy_template) ? $privacy_template : $template;
 }
 add_filter('template_include', 'gya_privacy_page_template');
+
+function gya_cookies_page_template($template)
+{
+    if (!gya_is_cookies_page_request()) {
+        return $template;
+    }
+
+    $cookies_template = get_template_directory() . '/page-cookies.php';
+
+    if (file_exists($cookies_template)) {
+        global $wp_query;
+
+        if ($wp_query) {
+            $wp_query->is_404 = false;
+        }
+
+        status_header(200);
+    }
+
+    return file_exists($cookies_template) ? $cookies_template : $template;
+}
+add_filter('template_include', 'gya_cookies_page_template');
 
 function gya_add_favicon()
 {

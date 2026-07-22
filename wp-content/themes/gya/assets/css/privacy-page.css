@@ -54,6 +54,11 @@
   align-items: start;
 }
 
+.privacy-layout--single {
+  grid-template-columns: minmax(0, 880px);
+  justify-content: center;
+}
+
 .privacy-meta {
   position: sticky;
   top: 116px;

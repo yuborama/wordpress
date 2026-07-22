@@ -102,15 +102,7 @@ get_header();
     </section>
 
     <section class="privacy-content">
-        <div class="shell privacy-layout">
-            <aside class="privacy-meta">
-                <div>
-                    <span>Última actualización</span>
-                    <strong>20/06/2024</strong>
-                </div>
-                <a href="<?php echo esc_url(home_url('/contact/')); ?>">Contáctenos</a>
-            </aside>
-
+        <div class="shell privacy-layout privacy-layout--single">
             <article class="privacy-article">
                 <?php foreach ($sections as $section) : ?>
                     <section class="privacy-block">
