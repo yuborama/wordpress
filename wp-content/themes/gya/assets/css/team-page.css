@@ -13,8 +13,7 @@
   background: #00020e;
 }
 
-.team-page-hero__image,
-.team-page-hero__network {
+.team-page-hero__image {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
@@ -22,30 +21,13 @@
 }
 
 .team-page-hero__image {
-  left: 43%;
   background-position: center;
-  opacity: 0.88;
-}
-
-.team-page-hero__network {
-  right: 50%;
-  background-position: left bottom;
-  opacity: 0.72;
-}
-
-.team-page-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(90deg, rgba(0, 2, 14, 0.98) 0%, rgba(0, 2, 14, 0.9) 34%, rgba(0, 2, 14, 0.38) 66%, rgba(0, 2, 14, 0.04) 100%),
-    linear-gradient(180deg, rgba(0, 2, 14, 0.02) 0%, rgba(0, 2, 14, 0.42) 100%);
+  opacity: 1;
 }
 
 .team-page-hero__inner {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   min-height: 380px;
   display: flex;
   flex-direction: column;
@@ -176,8 +158,7 @@
   }
 
   .team-page-hero__image {
-    left: 0;
-    opacity: 0.4;
+    opacity: 1;
   }
 
   .team-page-hero h1 {

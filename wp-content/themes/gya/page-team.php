@@ -77,8 +77,7 @@ usort(
 );
 
 $upload_dir = wp_upload_dir();
-$network_image = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
-$hero_image = trailingslashit($upload_dir['baseurl']) . '2026/07/insightsCardTeam.jpg';
+$hero_image = trailingslashit($upload_dir['baseurl']) . '2026/07/EQUIPO.png';
 $whatsapp_url = get_option('gya_social_whatsapp', '');
 $whatsapp_icon = get_template_directory_uri() . '/assets/images/icons/social/whatsapp.svg';
 
@@ -87,7 +86,6 @@ get_header();
 <main class="team-page">
     <section class="team-page-hero">
         <div class="team-page-hero__image" style="background-image:url('<?php echo esc_url($hero_image); ?>');"></div>
-        <div class="team-page-hero__network" style="background-image:url('<?php echo esc_url($network_image); ?>');"></div>
         <div class="shell team-page-hero__inner">
             <div class="team-page-hero__copy">
                 <span>NUESTRO EQUIPO</span>
