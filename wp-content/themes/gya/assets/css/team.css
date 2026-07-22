@@ -87,19 +87,27 @@
 }
 
 .contact-icons .icon {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.contact-icons svg {
+.contact-icons .icon-mail svg,
+.contact-icons .icon-whatsapp img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
+}
+
+.contact-icons .icon-mail svg {
+  width: 28px;
+  height: 28px;
+  max-width: none;
 }
 
 .contact-icons img {
-  width: 100%;
-  height: 100%;
   display: block;
 }
 
