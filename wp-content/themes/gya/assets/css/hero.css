@@ -190,13 +190,40 @@
 
 @media (max-width: 900px) {
   .hero-section {
-    height: 560px;
+    height: auto;
+    min-height: 760px;
+    overflow: hidden;
+  }
+
+  .hero-media {
+    position: relative;
+    height: 300px;
+  }
+
+  .hero-media::after {
+    background:
+      linear-gradient(180deg, rgba(0, 2, 14, 0.1) 0%, rgba(0, 2, 14, 0.06) 48%, #00020e 100%),
+      linear-gradient(90deg, rgba(0, 2, 14, 0.46) 0%, rgba(0, 2, 14, 0.08) 48%, rgba(0, 2, 14, 0.16) 100%);
+  }
+
+  .hero-office-image {
+    background-size: cover;
+    background-position: center top !important;
   }
 
   .hero-content {
-    height: 560px;
+    height: auto;
+    min-height: 460px;
+    justify-content: flex-start;
     padding-left: 32px;
     padding-right: 32px;
+    padding-top: 38px;
+    padding-bottom: 72px;
+    margin-top: -34px;
+  }
+
+  .hero-copy {
+    max-width: 520px;
   }
 
   .hero-copy h1 {
@@ -237,8 +264,30 @@
 }
 
 @media (max-width: 560px) {
+  .hero-section {
+    min-height: 730px;
+  }
+
+  .hero-media {
+    height: 260px;
+  }
+
+  .hero-content {
+    min-height: 470px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 34px;
+    padding-bottom: 66px;
+    margin-top: -28px;
+  }
+
   .hero-copy h1 {
-    font-size: 2.125rem;
+    width: 100%;
+    font-size: 2.5rem;
+  }
+
+  .hero-copy p {
+    width: 100%;
   }
 
   .stats-grid article {
