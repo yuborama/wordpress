@@ -27,6 +27,12 @@
   aspect-ratio: 1;
 }
 
+@media (min-width: 901px) {
+  .page-loader__animation {
+    width: min(30vw, 576px);
+  }
+}
+
 body.has-page-loader {
   overflow: hidden;
 }
