@@ -146,6 +146,10 @@
 }
 
 @media (max-width: 900px) {
+  .category-detail {
+    overflow-x: hidden;
+  }
+
   .category-detail-hero,
   .category-detail-hero__inner {
     min-height: 430px;
@@ -157,5 +161,35 @@
 
   .category-detail-solutions-grid {
     grid-template-columns: 1fr;
+  }
+
+  .category-detail-insights-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+    transform: none !important;
+    transition: none;
+    will-change: auto;
+  }
+
+  .category-detail-insights-grid .insight-card {
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .category-detail-hero,
+  .category-detail-hero__inner {
+    min-height: 340px;
+  }
+
+  .category-detail-hero h1,
+  .category-detail-hero p {
+    max-width: 100%;
+  }
+
+  .category-detail-section {
+    padding-top: 42px;
   }
 }
