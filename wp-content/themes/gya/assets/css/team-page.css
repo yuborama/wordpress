@@ -131,12 +131,18 @@
 }
 
 .team-page-grid .contact-icons {
-  margin-top: 17px;
+  margin-top: auto;
+  padding-top: 17px;
 }
 
 .team-page-grid .contact-icons .icon {
   width: 18px;
   height: 18px;
+}
+
+.team-page-grid .contact-icons .icon-mail {
+  width: 26px;
+  height: 26px;
 }
 
 .team-page-empty {
