@@ -11,6 +11,8 @@
 }
 
 .contact-layout {
+  width: min(100%, 1240px);
+  margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 590px) minmax(420px, 590px);
   gap: 54px;
