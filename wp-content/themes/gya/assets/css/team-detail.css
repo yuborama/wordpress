@@ -11,6 +11,8 @@
 }
 
 .team-detail-layout {
+  width: min(100%, 1220px);
+  margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 560px) minmax(420px, 590px);
   gap: 70px;
