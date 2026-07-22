@@ -663,6 +663,20 @@ function gya_privacy_page_template($template)
 }
 add_filter('template_include', 'gya_privacy_page_template');
 
+function gya_add_favicon()
+{
+    $favicon_path = get_template_directory() . '/assets/images/icons/favicon.ico';
+
+    if (!file_exists($favicon_path)) {
+        return;
+    }
+
+    echo '<link rel="icon" href="' . esc_url(get_template_directory_uri() . '/assets/images/icons/favicon.ico') . '" sizes="any">' . "\n";
+}
+add_action('wp_head', 'gya_add_favicon');
+add_action('admin_head', 'gya_add_favicon');
+add_action('login_head', 'gya_add_favicon');
+
 function gya_intro_loader_head_state()
 {
     if (!(is_front_page() || is_home())) {
