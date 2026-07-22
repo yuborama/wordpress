@@ -89,10 +89,11 @@ $clients = array(
     array('name' => 'Vix', 'logo' => 'vix_Logo.svg'),
     array('name' => 'Pfizer', 'logo' => 'pfizer_Logo.svg'),
     array('name' => 'DSV', 'logo' => 'dvs_Logo.svg'),
-    array('name' => 'Senator International', 'logo' => 'senator_Logo.svg'),
     array('name' => 'Maersk', 'logo' => 'maersk_Logo.svg'),
     array('name' => 'AIT Home Delivery', 'logo' => 'ait_Logo.svg'),
     array('name' => 'Fracht Group', 'logo' => 'fracht_Logo.svg'),
+    array('name' => 'Crane Worldwide Logistics', 'logo' => 'crane_Logo.svg'),
+    array('name' => 'Senator International', 'logo' => 'senator_Logo.svg'),
 );
 
 get_header();

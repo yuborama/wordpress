@@ -149,12 +149,12 @@
 
 .weare-clients {
   position: relative;
-  padding: 78px 0 92px;
+  padding: 64px 0 68px;
   overflow: hidden;
   background-color: #00020e;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center 55%;
   color: var(--white);
 }
 
@@ -162,7 +162,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 2, 14, 0.72);
+  background: rgba(0, 2, 14, 0.64);
 }
 
 .weare-clients .shell {
@@ -175,20 +175,22 @@
 }
 
 .weare-section-header--light h2 {
-  max-width: 720px;
+  max-width: 660px;
   margin: 0 auto;
   color: var(--white);
-  font-size: var(--font-h2);
+  font-size: var(--font-h3);
   line-height: var(--leading-tight);
   font-weight: var(--font-regular);
 }
 
 .weare-client-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
-  justify-content: space-between;
-  gap: 36px;
-  margin-top: 58px;
+  justify-items: center;
+  gap: 26px 58px;
+  width: min(100%, 920px);
+  margin: 42px auto 0;
   color: var(--white);
 }
 
@@ -196,14 +198,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   min-width: 0;
+  min-height: 82px;
 }
 
 .weare-client-logo img {
   display: block;
   width: auto;
-  max-width: 170px;
-  height: 52px;
+  max-width: 255px;
+  max-height: 82px;
+  height: auto;
   object-fit: contain;
 }
 
@@ -288,13 +293,14 @@
   }
 
   .weare-client-list {
-    flex-wrap: wrap;
-    justify-content: center;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 48px;
+    width: min(100%, 620px);
   }
 
   .weare-client-logo img {
-    max-width: 150px;
-    height: 46px;
+    max-width: 210px;
+    max-height: 68px;
   }
 }
 
@@ -312,4 +318,28 @@
     padding: 52px 28px;
   }
 
+}
+
+@media (max-width: 560px) {
+  .weare-clients {
+    padding: 54px 0 58px;
+  }
+
+  .weare-section-header--light h2 {
+    font-size: var(--font-title);
+  }
+
+  .weare-client-list {
+    gap: 24px 28px;
+    margin-top: 34px;
+  }
+
+  .weare-client-logo {
+    min-height: 62px;
+  }
+
+  .weare-client-logo img {
+    max-width: 166px;
+    max-height: 56px;
+  }
 }
