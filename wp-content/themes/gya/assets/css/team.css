@@ -247,8 +247,8 @@
   }
 
   .team-card {
-    flex: 0 0 min(100%, 280px);
-    width: min(100%, 280px);
+    flex: 0 0 100%;
+    width: 100%;
   }
 }
 
