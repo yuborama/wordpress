@@ -126,10 +126,10 @@ a.team-detail-action:focus-visible {
 .team-detail-card img {
   position: absolute;
   right: 7%;
-  bottom: 160px;
+  bottom: 0;
   z-index: 2;
-  width: 72%;
-  max-height: 620px;
+  width: 84%;
+  max-height: 720px;
   object-fit: contain;
   object-position: bottom center;
 }
