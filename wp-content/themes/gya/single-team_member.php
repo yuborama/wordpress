@@ -35,7 +35,7 @@ while (have_posts()) :
 
     $upload_dir = wp_upload_dir();
     $uploads_base = trailingslashit($upload_dir['baseurl']) . '2026/07/';
-    $office_image = $uploads_base . 'office.jpg';
+    $office_image = $uploads_base . 'cardservice3-scaled.jpg';
     $network_image = $uploads_base . 'network-bg.png';
     $contact_email = sanitize_email(get_option('gya_email_to', ''));
     $whatsapp_url = get_option('gya_social_whatsapp', '');
