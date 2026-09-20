@@ -48,6 +48,21 @@ if (function_exists('gya_social_networks')) {
     }
 }
 $whatsapp_url = get_option('gya_social_whatsapp', '');
+$footer_logo_path = get_template_directory() . '/assets/images/icons/logo.svg';
+$footer_logo_markup = '';
+
+$footer_is_redesign_page = is_front_page()
+    || (function_exists('gya_is_areas_page_request') && gya_is_areas_page_request())
+    || (function_exists('gya_is_team_page_request') && gya_is_team_page_request())
+    || (function_exists('gya_is_contact_page_request') && gya_is_contact_page_request())
+    || is_singular('gya_category')
+    || is_singular('team_member');
+
+if ($footer_is_redesign_page && file_exists($footer_logo_path)) {
+    $footer_logo_markup = file_get_contents($footer_logo_path);
+    $footer_logo_markup = str_replace('fill="white"', 'fill="#062236"', $footer_logo_markup);
+    $footer_logo_markup = str_replace('<svg ', '<svg role="img" aria-label="G&amp;A" ', $footer_logo_markup);
+}
 
 $has_legal_links = false;
 foreach ($footer_legal_links as $legal_link) {
@@ -60,7 +75,11 @@ foreach ($footer_legal_links as $legal_link) {
 <footer class="site-footer" id="contacto">
     <div class="shell">
         <a class="footer-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Inicio GYA">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
+            <?php if ($footer_logo_markup !== '') : ?>
+                <?php echo $footer_logo_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted local SVG. ?>
+            <?php else : ?>
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
+            <?php endif; ?>
         </a>
         <div class="footer-line"></div>
         <nav class="footer-nav" aria-label="Footer">

@@ -28,18 +28,58 @@ $header_solution_items = get_posts(
     )
 );
 $header_is_insights_active = is_post_type_archive('insights') || is_singular('insights');
+$header_logo_path = get_template_directory() . '/assets/images/icons/logo.svg';
+$header_logo_markup = '';
+
+$header_is_areas_request = function_exists('gya_is_areas_page_request') && gya_is_areas_page_request();
+$header_is_team_request = function_exists('gya_is_team_page_request') && gya_is_team_page_request();
+$header_is_category_request = is_singular('gya_category');
+$header_is_contact_request = function_exists('gya_is_contact_page_request') && gya_is_contact_page_request();
+$header_is_member_request = is_singular('team_member');
+
+if ((is_front_page() || $header_is_areas_request || $header_is_team_request || $header_is_category_request || $header_is_contact_request || $header_is_member_request) && file_exists($header_logo_path)) {
+    $header_logo_markup = file_get_contents($header_logo_path);
+    $header_logo_markup = str_replace('fill="white"', 'fill="#062236"', $header_logo_markup);
+    $header_logo_markup = str_replace('<svg ', '<svg role="img" aria-label="G&amp;A" ', $header_logo_markup);
+}
+
+$header_social_links = array();
+if (function_exists('gya_social_networks')) {
+    $header_networks = gya_social_networks();
+
+    foreach (array('facebook', 'linkedin', 'tiktok', 'youtube') as $network_key) {
+        if (!isset($header_networks[$network_key])) {
+            continue;
+        }
+
+        $network = $header_networks[$network_key];
+        $network_url = get_option($network['option'], '');
+
+        if (!empty($network_url)) {
+            $header_social_links[] = array(
+                'label' => $network['label'],
+                'url' => $network_url,
+                'icon' => get_template_directory_uri() . '/assets/images/icons/social/' . $network['icon'],
+            );
+        }
+    }
+}
 ?>
 <header class="site-header" id="top">
     <div class="shell header-inner">
         <a class="logo-mark" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Inicio GYA">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
+            <?php if ($header_logo_markup !== '') : ?>
+                <?php echo $header_logo_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted local SVG. ?>
+            <?php else : ?>
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
+            <?php endif; ?>
         </a>
 
         <nav class="desktop-nav" aria-label="Principal">
             <ul class="header-menu">
                 <li class="header-menu-item header-menu-item--dropdown">
-                    <a class="header-menu-link" href="<?php echo esc_url(home_url('/#soluciones')); ?>" aria-haspopup="true">
-                        Soluciones
+                    <a class="header-menu-link" href="<?php echo esc_url(home_url('/areas/')); ?>" aria-haspopup="true">
+                        Áreas
                         <span class="header-menu-chevron" aria-hidden="true"></span>
                     </a>
 
@@ -89,48 +129,51 @@ $header_is_insights_active = is_post_type_archive('insights') || is_singular('in
             <span></span>
             <span></span>
         </button>
+        <?php if (!empty($header_social_links)) : ?>
+            <div class="header-social" aria-label="Redes sociales">
+                <?php foreach ($header_social_links as $social_link) : ?>
+                    <a href="<?php echo esc_url($social_link['url']); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($social_link['label']); ?>">
+                        <img src="<?php echo esc_url($social_link['icon']); ?>" alt="">
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
     <?php if (file_exists($header_iso_badge_path)) : ?>
         <div class="header-iso-ribbon" aria-label="Certificación ISO 9001">
             <img src="<?php echo esc_url($header_iso_badge_url); ?>" alt="ISO 9001">
         </div>
     <?php endif; ?>
-
-    <div class="mobile-menu-panel" id="mobile-menu" aria-hidden="true">
-        <div class="mobile-menu-head">
-            <a class="mobile-menu-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Inicio GYA">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
-            </a>
-            <button class="mobile-menu-close" type="button" aria-label="Cerrar menú">
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-
-        <nav class="mobile-menu-nav" aria-label="Menú móvil">
-            <details class="mobile-menu-group">
-                <summary>Soluciones</summary>
-                <?php if (!empty($header_solution_items)) : ?>
-                    <div class="mobile-submenu">
-                        <?php foreach ($header_solution_items as $solution_item) : ?>
-                            <a href="<?php echo esc_url(get_permalink($solution_item->ID)); ?>"><?php echo esc_html(get_the_title($solution_item)); ?></a>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </details>
-
-            <a href="<?php echo esc_url(get_post_type_archive_link('insights') ?: home_url('/insights/')); ?>">Insights</a>
-            <a href="<?php echo esc_url(home_url('/#servicios')); ?>">Lo que nos distingue</a>
-
-            <details class="mobile-menu-group">
-                <summary>Nosotros</summary>
-                <div class="mobile-submenu">
-                    <a href="<?php echo esc_url(home_url('/weare/')); ?>">Quiénes somos</a>
-                    <a href="<?php echo esc_url(home_url('/team/')); ?>">Nuestro equipo</a>
-                </div>
-            </details>
-
-            <a class="mobile-menu-cta" href="<?php echo esc_url($header_cta_url); ?>"><?php echo esc_html($header_cta_text); ?></a>
-        </nav>
-    </div>
 </header>
+
+<div class="mobile-menu-backdrop" data-menu-close></div>
+<div class="mobile-menu-panel" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-head">
+        <a class="mobile-menu-logo" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Inicio GYA">
+            <?php if ($header_logo_markup !== '') : ?>
+                <?php echo $header_logo_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted local SVG. ?>
+            <?php else : ?>
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/icons/logo.svg'); ?>" alt="G&amp;A">
+            <?php endif; ?>
+        </a>
+        <button class="mobile-menu-close" type="button" aria-label="Cerrar menú">×</button>
+    </div>
+
+    <nav class="mobile-menu-nav" aria-label="Menú móvil">
+        <a class="<?php echo is_front_page() ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/')); ?>">INICIO</a>
+        <a class="<?php echo ($header_is_areas_request || $header_is_category_request) ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/areas/')); ?>">ÁREAS</a>
+        <a class="<?php echo ($header_is_team_request || $header_is_member_request) ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/team/')); ?>">NUESTRO EQUIPO</a>
+        <a class="mobile-menu-cta <?php echo $header_is_contact_request ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/contact/')); ?>">CONTACTO <span aria-hidden="true">→</span></a>
+
+        <strong>NUESTRAS REDES</strong>
+        <div class="mobile-menu-social">
+            <?php if (!empty($header_social_links)) : ?>
+                <?php foreach ($header_social_links as $social_link) : ?>
+                    <a href="<?php echo esc_url($social_link['url']); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($social_link['label']); ?>">
+                        <img src="<?php echo esc_url($social_link['icon']); ?>" alt="">
+                    </a>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </nav>
+</div>

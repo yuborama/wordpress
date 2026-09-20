@@ -116,6 +116,7 @@
   var toggle = document.querySelector('.mobile-menu-toggle');
   var panel = document.querySelector('.mobile-menu-panel');
   var closeButton = document.querySelector('.mobile-menu-close');
+  var backdrop = document.querySelector('.mobile-menu-backdrop');
 
   if (!toggle || !panel || !closeButton) return;
 
@@ -123,6 +124,7 @@
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
     panel.classList.toggle('is-open', isOpen);
+    if (backdrop) backdrop.classList.toggle('is-open', isOpen);
     document.body.classList.toggle('mobile-menu-open', isOpen);
   }
 
@@ -133,6 +135,12 @@
   closeButton.addEventListener('click', function () {
     setMenuOpen(false);
   });
+
+  if (backdrop) {
+    backdrop.addEventListener('click', function () {
+      setMenuOpen(false);
+    });
+  }
 
   panel.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', function () {
@@ -145,4 +153,40 @@
       setMenuOpen(false);
     }
   });
+})();
+
+(function () {
+  var directory = document.querySelector('[data-team-directory]');
+  if (!directory) return;
+
+  var filters = Array.prototype.slice.call(directory.querySelectorAll('[data-team-filter]'));
+  var members = Array.prototype.slice.call(directory.querySelectorAll('[data-team-member]'));
+  var emptyState = directory.querySelector('[data-team-empty]');
+
+  function setActiveGroup(group) {
+    var visibleMembers = 0;
+
+    filters.forEach(function (filter) {
+      var isActive = filter.dataset.teamFilter === group;
+      filter.classList.toggle('is-active', isActive);
+      filter.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    members.forEach(function (member) {
+      var isVisible = member.dataset.teamMember === group;
+      member.hidden = !isVisible;
+      if (isVisible) visibleMembers += 1;
+    });
+
+    if (emptyState) emptyState.hidden = visibleMembers > 0;
+    directory.dataset.activeGroup = group;
+  }
+
+  filters.forEach(function (filter) {
+    filter.addEventListener('click', function () {
+      setActiveGroup(filter.dataset.teamFilter || 'gerentes');
+    });
+  });
+
+  setActiveGroup(directory.dataset.activeGroup || 'gerentes');
 })();

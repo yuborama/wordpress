@@ -1,0 +1,437 @@
+body.gya-redesign-page {
+  background: #fff;
+}
+
+body.gya-redesign-page .site-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 70;
+  width: min(100%, var(--max));
+  transform: translateX(-50%);
+  border: 0;
+  background: rgba(255, 255, 255, 0.96);
+  color: #062236;
+}
+
+body.admin-bar.gya-redesign-page .site-header {
+  top: 32px;
+}
+
+body.gya-redesign-page .header-inner {
+  width: min(calc(100% - 48px), 1200px);
+  height: 79px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  grid-template-rows: 79px;
+  align-items: center;
+  gap: 18px;
+}
+
+body.gya-redesign-page .logo-mark {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  width: 119px;
+}
+
+body.gya-redesign-page .logo-mark svg,
+body.gya-redesign-page .mobile-menu-logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+body.gya-redesign-page .desktop-nav,
+body.gya-redesign-page .header-tools,
+body.gya-redesign-page .header-social,
+body.gya-redesign-page .header-iso-ribbon {
+  display: none;
+}
+
+body.gya-redesign-page .mobile-menu-toggle {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 32px;
+  height: 32px;
+  color: #062236;
+}
+
+body.gya-redesign-page .mobile-menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 0;
+  background: currentColor;
+}
+
+body.gya-redesign-page .header-social {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+body.gya-redesign-page .header-social a {
+  display: inline-flex;
+  width: 17px;
+  height: 17px;
+}
+
+body.gya-redesign-page .header-social img,
+body.gya-redesign-page .mobile-menu-social img,
+body.gya-redesign-page .footer-social img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(12%) sepia(22%) saturate(1902%) hue-rotate(158deg) brightness(91%) contrast(101%);
+}
+
+.areas-page {
+  padding-top: 79px;
+}
+
+.areas-page .gya-areas {
+  padding-top: 72px;
+}
+
+.areas-page .gya-areas h1 {
+  margin: 0 0 54px;
+  color: #062236;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.areas-page .gya-relations {
+  padding-top: 58px;
+  padding-bottom: 90px;
+}
+
+body.gya-redesign-page .site-footer {
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  padding: 52px 0 36px;
+  background: #fff;
+  color: #062236;
+}
+
+body.gya-redesign-page .site-footer .shell {
+  position: relative;
+  width: min(calc(100% - 48px), 1200px);
+  display: grid;
+  grid-template-columns: 1.45fr 1fr 0.7fr;
+  grid-template-rows: auto auto;
+  gap: 22px 68px;
+  align-items: start;
+  padding-bottom: 62px;
+}
+
+body.gya-redesign-page .footer-logo {
+  grid-column: 1;
+  grid-row: 1;
+  width: 119px;
+  margin: 0;
+}
+
+body.gya-redesign-page .footer-logo svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+body.gya-redesign-page .footer-line {
+  display: none;
+}
+
+body.gya-redesign-page .footer-nav .menu {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0;
+  min-height: 48px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(6, 34, 54, 0.65);
+}
+
+body.gya-redesign-page .footer-nav .menu li:nth-child(n + 2) {
+  display: none;
+}
+
+body.gya-redesign-page .footer-nav .menu a {
+  color: #ff641f;
+  font-size: 11px;
+}
+
+body.gya-redesign-page .footer-nav {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  width: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  padding-top: 6px;
+}
+
+body.gya-redesign-page .footer-nav::before {
+  content: "NUESTRAS REDES";
+  margin-bottom: 24px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+body.gya-redesign-page .footer-social {
+  gap: 22px;
+}
+
+body.gya-redesign-page .footer-social a {
+  width: 17px;
+  height: 17px;
+}
+
+body.gya-redesign-page .footer-body {
+  display: contents;
+}
+
+body.gya-redesign-page .footer-copy {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: 11px;
+}
+
+body.gya-redesign-page .footer-contact {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  padding-top: 6px;
+  color: #062236;
+  font-size: 11px;
+}
+
+body.gya-redesign-page .footer-contact::before {
+  content: "UBICACIÓN";
+  margin-bottom: 4px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+body.gya-redesign-page .site-footer p,
+body.gya-redesign-page .site-footer small {
+  color: #062236;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+body.gya-redesign-page .floating-whatsapp {
+  width: 56px;
+  height: 56px;
+  right: max(28px, calc((100vw - 1440px) / 2 + 44px));
+  bottom: 36px;
+  background: #ff641f;
+}
+
+body.gya-redesign-page .mobile-menu-backdrop {
+  inset: 0;
+}
+
+body.admin-bar.gya-redesign-page .mobile-menu-backdrop {
+  inset-block-start: 32px;
+}
+
+body.gya-redesign-page .mobile-menu-panel {
+  inset: 0 auto 0 0;
+  z-index: 80;
+  display: block;
+  width: min(405px, 90vw);
+  min-height: 0;
+  height: 100vh;
+  padding: 58px 76px 48px 92px;
+  overflow-y: auto;
+  background: #fff;
+  color: #062236;
+  transform: translateX(-100%);
+  transition: transform 220ms ease, opacity 180ms ease, visibility 180ms ease;
+}
+
+body.gya-redesign-page .mobile-menu-panel.is-open {
+  transform: translateX(0);
+}
+
+body.gya-redesign-page .mobile-menu-head {
+  min-height: auto;
+  padding: 0;
+}
+
+body.gya-redesign-page .mobile-menu-logo {
+  width: 120px;
+}
+
+body.gya-redesign-page .mobile-menu-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: #062236;
+  font-size: 28px;
+  line-height: 1;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+body.gya-redesign-page .mobile-menu-close:hover,
+body.gya-redesign-page .mobile-menu-close:focus-visible {
+  color: #ff641f;
+  transform: rotate(90deg);
+}
+
+body.gya-redesign-page .mobile-menu-nav {
+  display: grid;
+  gap: 0;
+  padding: 48px 0 0;
+}
+
+body.gya-redesign-page .mobile-menu-nav > a {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border-bottom: 1px solid rgba(6, 34, 54, 0.7);
+  color: #062236;
+  font-size: 13px;
+  font-weight: 800;
+  transition: color 160ms ease, padding-left 160ms ease;
+}
+
+body.gya-redesign-page .mobile-menu-nav > a:not(.mobile-menu-cta):hover,
+body.gya-redesign-page .mobile-menu-nav > a:not(.mobile-menu-cta):focus-visible,
+body.gya-redesign-page .mobile-menu-nav > a.is-current:not(.mobile-menu-cta) {
+  color: #ff641f;
+  padding-left: 6px;
+}
+
+body.gya-redesign-page .mobile-menu-nav > a:focus-visible {
+  outline: 2px solid #ff641f;
+  outline-offset: 3px;
+}
+
+body.gya-redesign-page .mobile-menu-nav > a.mobile-menu-cta {
+  justify-content: space-between;
+  min-height: 48px;
+  margin: 18px 0 24px;
+  padding: 0 22px;
+  border: 0;
+  background: #ff641f;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  transition: background-color 160ms ease;
+}
+
+body.gya-redesign-page .mobile-menu-nav > a.mobile-menu-cta:hover,
+body.gya-redesign-page .mobile-menu-nav > a.mobile-menu-cta:focus-visible {
+  background: #e94b0b;
+  color: #fff;
+}
+
+body.gya-redesign-page .mobile-menu-cta span {
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+body.gya-redesign-page .mobile-menu-nav strong {
+  margin: 0 0 20px 6px;
+  font-size: 14px;
+}
+
+body.gya-redesign-page .mobile-menu-social a {
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+body.gya-redesign-page .mobile-menu-social a:hover,
+body.gya-redesign-page .mobile-menu-social a:focus-visible {
+  opacity: 0.65;
+  transform: translateY(-2px);
+}
+
+body.admin-bar.gya-redesign-page .mobile-menu-panel {
+  inset-block-start: 32px;
+  height: calc(100vh - 32px);
+}
+
+@media (max-width: 900px) {
+  body.admin-bar.gya-redesign-page .site-header {
+    top: 46px;
+  }
+
+  body.admin-bar.gya-redesign-page .mobile-menu-panel {
+    inset-block-start: 46px;
+    height: calc(100vh - 46px);
+  }
+
+  body.admin-bar.gya-redesign-page .mobile-menu-backdrop {
+    inset-block-start: 46px;
+  }
+
+  body.gya-redesign-page .site-footer .shell {
+    width: min(calc(100% - 48px), 720px);
+    grid-template-columns: 1fr;
+  }
+
+  body.gya-redesign-page .footer-logo,
+  body.gya-redesign-page .footer-nav,
+  body.gya-redesign-page .footer-copy,
+  body.gya-redesign-page .footer-contact {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  body.gya-redesign-page .header-inner {
+    width: calc(100% - 36px);
+    grid-template-columns: 40px 1fr auto;
+  }
+
+  body.gya-redesign-page .logo-mark {
+    width: 92px;
+  }
+
+  body.gya-redesign-page .header-social {
+    gap: 8px;
+  }
+
+  body.gya-redesign-page .header-social a {
+    width: 15px;
+    height: 15px;
+  }
+
+  body.gya-redesign-page .mobile-menu-panel {
+    width: min(405px, 90vw);
+    padding: 38px 32px;
+  }
+
+  .areas-page .gya-areas {
+    padding-top: 64px;
+  }
+
+  .areas-page .gya-areas h1 {
+    margin-bottom: 36px;
+    font-size: 28px;
+  }
+}

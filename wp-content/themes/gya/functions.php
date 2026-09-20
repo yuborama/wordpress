@@ -43,6 +43,11 @@ function gya_register_categories_cpt()
         'public' => true,
         'menu_icon' => 'dashicons-category',
         'supports' => ['title', 'thumbnail'],
+        'has_archive' => false,
+        'rewrite' => array(
+            'slug' => 'areas',
+            'with_front' => false,
+        ),
         'show_in_rest' => true,
     ]);
 }
@@ -294,7 +299,7 @@ add_action('init', 'gya_register_insights_cpt');
 
 function gya_flush_rewrite_rules_once()
 {
-    $rewrite_version = '20260712_team_detail';
+    $rewrite_version = '20260920_areas_category_urls';
 
     if (get_option('gya_rewrite_rules_version') === $rewrite_version) {
         return;
@@ -332,6 +337,15 @@ function gya_is_contact_page_request()
     return is_page('contact') || $request === 'contact';
 }
 
+function gya_is_areas_page_request()
+{
+    global $wp;
+
+    $request = isset($wp->request) ? trim((string) $wp->request, '/') : '';
+
+    return is_page('areas') || $request === 'areas';
+}
+
 function gya_is_privacy_page_request()
 {
     global $wp;
@@ -355,7 +369,9 @@ function gya_enqueue_assets()
     $theme_version = wp_get_theme()->get('Version');
     $css_path = get_template_directory() . '/assets/css/main.css';
     $hero_css_path = get_template_directory() . '/assets/css/hero.css';
+    $home_redesign_css_path = get_template_directory() . '/assets/css/home-redesign.css';
     $solutions_css_path = get_template_directory() . '/assets/css/solutions.css';
+    $areas_page_css_path = get_template_directory() . '/assets/css/areas-page.css';
     $insights_css_path = get_template_directory() . '/assets/css/insights.css';
     $insights_archive_css_path = get_template_directory() . '/assets/css/insights-archive.css';
     $insight_detail_css_path = get_template_directory() . '/assets/css/insight-detail.css';
@@ -481,7 +497,7 @@ function gya_enqueue_assets()
         wp_enqueue_style(
             'gya-team-detail-style',
             get_template_directory_uri() . '/assets/css/team-detail.css',
-            array('gya-main-style'),
+            array('gya-main-style', 'gya-home-redesign-style', 'gya-areas-page-style'),
             file_exists($team_detail_css_path) ? filemtime($team_detail_css_path) : $theme_version
         );
     }
@@ -555,6 +571,24 @@ function gya_enqueue_assets()
         true
     );
 
+    if (is_front_page() || gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || is_singular('gya_category') || is_singular('team_member')) {
+        wp_enqueue_style(
+            'gya-home-redesign-style',
+            get_template_directory_uri() . '/assets/css/home-redesign.css',
+            array('gya-main-style'),
+            file_exists($home_redesign_css_path) ? filemtime($home_redesign_css_path) : $theme_version
+        );
+    }
+
+    if (gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || is_singular('gya_category') || is_singular('team_member')) {
+        wp_enqueue_style(
+            'gya-areas-page-style',
+            get_template_directory_uri() . '/assets/css/areas-page.css',
+            array('gya-main-style', 'gya-home-redesign-style'),
+            file_exists($areas_page_css_path) ? filemtime($areas_page_css_path) : $theme_version
+        );
+    }
+
     wp_localize_script(
         'gya-main-script',
         'gyaTiming',
@@ -605,6 +639,42 @@ function gya_team_page_template($template)
     return file_exists($team_template) ? $team_template : $template;
 }
 add_filter('template_include', 'gya_team_page_template');
+
+function gya_areas_page_template($template)
+{
+    if (!gya_is_areas_page_request()) {
+        return $template;
+    }
+
+    $areas_template = get_template_directory() . '/page-areas.php';
+
+    if (file_exists($areas_template)) {
+        global $wp_query;
+
+        if ($wp_query) {
+            $wp_query->is_404 = false;
+        }
+
+        status_header(200);
+    }
+
+    return file_exists($areas_template) ? $areas_template : $template;
+}
+add_filter('template_include', 'gya_areas_page_template');
+
+function gya_areas_body_class($classes)
+{
+    if (gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || is_singular('gya_category') || is_singular('team_member')) {
+        $classes[] = 'gya-redesign-page';
+    }
+
+    if (gya_is_areas_page_request()) {
+        $classes[] = 'gya-areas-page';
+    }
+
+    return $classes;
+}
+add_filter('body_class', 'gya_areas_body_class');
 
 function gya_weare_page_template($template)
 {

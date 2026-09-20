@@ -4,15 +4,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object_id();
-$team_heading = gya_get_field_value('gya_team_heading', 'Profesionales que entienden tu negocio y hablan tu idioma.', $page_id);
-
-$carousel_autoplay_ms = function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_carousel_duration_seconds', 10) : 10000;
-$contact_email = sanitize_email(get_option('gya_email_to', ''));
-$contact_email_url = $contact_email ? 'mailto:' . $contact_email : '';
-$whatsapp_url = get_option('gya_social_whatsapp', '');
-$whatsapp_icon = get_template_directory_uri() . '/assets/images/icons/social/whatsapp.svg';
-
 $team_query = new WP_Query(
     array(
         'post_type' => 'team_member',
@@ -23,8 +14,7 @@ $team_query = new WP_Query(
         'no_found_rows' => true,
     )
 );
-
-$team = array();
+$team_members = array();
 
 if ($team_query->have_posts()) {
     while ($team_query->have_posts()) {
@@ -40,31 +30,31 @@ if ($team_query->have_posts()) {
         if (is_array($image) && isset($image['url'])) {
             $image_url = $image['url'];
         } elseif (is_numeric($image)) {
-            $image_url = wp_get_attachment_image_url((int) $image, 'medium');
+            $image_url = wp_get_attachment_image_url((int) $image, 'large');
         } elseif (is_string($image)) {
             $image_url = $image;
         }
 
         if (!$image_url && has_post_thumbnail($member_id)) {
-            $image_url = get_the_post_thumbnail_url($member_id, 'medium');
+            $image_url = get_the_post_thumbnail_url($member_id, 'large');
         }
 
-        $name_parts = preg_split('/\s+/', trim($name));
-        $initials = '';
+        $normalized_position = function_exists('remove_accents') ? remove_accents(strtolower($position)) : strtolower($position);
+        $group = 'colaboradores';
 
-        if (!empty($name_parts[0])) {
-            $initials .= function_exists('mb_substr') ? mb_substr($name_parts[0], 0, 1) : substr($name_parts[0], 0, 1);
+        if (strpos($normalized_position, 'socio') !== false) {
+            $group = 'socios';
+        } elseif (strpos($normalized_position, 'director') !== false) {
+            $group = 'directores';
+        } elseif (strpos($normalized_position, 'gerente') !== false) {
+            $group = 'gerentes';
         }
 
-        if (!empty($name_parts[1])) {
-            $initials .= function_exists('mb_substr') ? mb_substr($name_parts[1], 0, 1) : substr($name_parts[1], 0, 1);
-        }
-
-        $team[] = array(
+        $team_members[] = array(
             'name' => $name,
             'position' => $position,
-            'image' => $image_url ? $image_url : '',
-            'initials' => $initials,
+            'image' => $image_url,
+            'group' => $group,
             'order' => is_numeric($order) ? (int) $order : PHP_INT_MAX,
             'date' => get_the_date('U'),
             'url' => get_permalink($member_id),
@@ -75,267 +65,58 @@ if ($team_query->have_posts()) {
 }
 
 usort(
-    $team,
-    function ($a, $b) {
-        if ($a['order'] === $b['order']) {
-            return $a['date'] <=> $b['date'];
+    $team_members,
+    function ($first_member, $second_member) {
+        if ($first_member['order'] === $second_member['order']) {
+            return $first_member['date'] <=> $second_member['date'];
         }
 
-        return $a['order'] <=> $b['order'];
+        return $first_member['order'] <=> $second_member['order'];
     }
 );
 
-$team_pages = array_chunk($team, 4);
+$team_groups = array(
+    'socios' => 'SOCIOS',
+    'directores' => 'DIRECTORES',
+    'gerentes' => 'GERENTES',
+    'colaboradores' => 'COLABORADORES',
+);
 ?>
-<section class="section light-section" id="equipo">
-    <div class="shell">
-        <header class="section-header">
-            <span>NUESTRO EQUIPO</span>
-            <h2><?php echo esc_html($team_heading); ?></h2>
-        </header>
-        <?php if (!empty($team_pages)) : ?>
-            <div class="team-slider js-team-slider" data-team-index="0" data-team-autoplay="<?php echo esc_attr((string) $carousel_autoplay_ms); ?>">
-                <?php if (count($team) > 1) : ?>
-                    <button class="team-rail team-rail-left" type="button" aria-label="Anterior" data-team-prev>
-                        <span class="rail-arrow-icon" aria-hidden="true"></span>
-                    </button>
-                <?php endif; ?>
-
-                <div class="team-viewport">
-                    <div class="team-track">
-                        <?php foreach ($team_pages as $page_index => $team_page) : ?>
-                            <div class="team-page" data-team-page="<?php echo esc_attr((string) $page_index); ?>">
-                                <?php foreach ($team_page as $member) : ?>
-                                    <a class="team-card" href="<?php echo esc_url($member['url']); ?>" data-team-card>
-                                        <div class="avatar">
-                                            <?php if (!empty($member['image'])) : ?>
-                                                <img src="<?php echo esc_url($member['image']); ?>" alt="<?php echo esc_attr($member['name']); ?>">
-                                            <?php else : ?>
-                                                <span><?php echo esc_html($member['initials']); ?></span>
-                                            <?php endif; ?>
-                                        </div>
-                                        <h3><?php echo esc_html($member['name']); ?></h3>
-                                        <?php if (!empty($member['position'])) : ?>
-                                            <p><?php echo esc_html($member['position']); ?></p>
-                                        <?php endif; ?>
-                                        <div class="contact-icons">
-                                            <?php if (!empty($contact_email_url)) : ?>
-                                                <span class="icon icon-mail js-mail-action" role="link" tabindex="0" data-mail-url="<?php echo esc_url($contact_email_url); ?>" aria-label="Enviar correo">
-                                                    <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                                                        <path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                                                        <path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                                                    </svg>
-                                                </span>
-                                            <?php endif; ?>
-                                            <?php if (!empty($whatsapp_url)) : ?>
-                                                <span class="icon icon-whatsapp js-whatsapp-action" role="link" tabindex="0" data-whatsapp-url="<?php echo esc_url($whatsapp_url); ?>" aria-label="Abrir WhatsApp">
-                                                    <img src="<?php echo esc_url($whatsapp_icon); ?>" alt="">
-                                                </span>
-                                            <?php endif; ?>
-                                        </div>
-                                    </a>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-
-                <?php if (count($team) > 1) : ?>
-                    <button class="team-rail team-rail-right" type="button" aria-label="Siguiente" data-team-next>
-                        <span class="rail-arrow-icon" aria-hidden="true"></span>
-                    </button>
-                <?php endif; ?>
-            </div>
-
-            <?php if (count($team) > 1) : ?>
-                <div class="team-dots" aria-label="P&aacute;ginas de equipo">
-                    <?php foreach ($team_pages as $page_index => $_team_page) : ?>
-                        <button
-                            class="<?php echo $page_index === 0 ? 'is-active' : ''; ?>"
-                            type="button"
-                            aria-label="<?php echo esc_attr(sprintf('Ir a pagina %d', $page_index + 1)); ?>"
-                            <?php echo $page_index === 0 ? 'aria-current="true"' : ''; ?>
-                            data-team-dot="<?php echo esc_attr((string) $page_index); ?>"></button>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-        <?php endif; ?>
-        <a class="primary-button team-cta" href="<?php echo esc_url(home_url('/team/')); ?>">Explora nuestro equipo y experiencia</a>
+<div class="team-directory" data-team-directory data-active-group="gerentes">
+    <div class="team-directory__filters" role="tablist" aria-label="Filtrar equipo por puesto">
+        <?php foreach ($team_groups as $group_key => $group_label) : ?>
+            <button
+                class="team-directory__filter <?php echo $group_key === 'gerentes' ? 'is-active' : ''; ?>"
+                type="button"
+                role="tab"
+                aria-selected="<?php echo $group_key === 'gerentes' ? 'true' : 'false'; ?>"
+                data-team-filter="<?php echo esc_attr($group_key); ?>">
+                <?php echo esc_html($group_label); ?>
+            </button>
+        <?php endforeach; ?>
     </div>
-</section>
 
-<script>
-(function () {
-  var sliders = document.querySelectorAll('.js-team-slider');
-  if (!sliders.length) return;
-
-  sliders.forEach(function (slider) {
-    var track = slider.querySelector('.team-track');
-    var cards = track ? Array.prototype.slice.call(track.querySelectorAll('[data-team-card]')) : [];
-    var pages = [];
-    var prevButton = slider.querySelector('[data-team-prev]');
-    var nextButton = slider.querySelector('[data-team-next]');
-    var dotsContainer = slider.parentNode ? slider.parentNode.querySelector('.team-dots') : null;
-    var dots = [];
-    var activeIndex = 0;
-    var cardsPerPage = 4;
-    var autoplayMs = Number(slider.dataset.teamAutoplay || 10000);
-    var autoplayId = null;
-
-    if (!track || !cards.length) return;
-
-    function getCardsPerPage() {
-      if (window.matchMedia && window.matchMedia('(max-width: 560px)').matches) {
-        return 1;
-      }
-
-      if (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) {
-        return 2;
-      }
-
-      return 4;
-    }
-
-    function updateControls() {
-      var hasMultiplePages = pages.length > 1;
-
-      if (prevButton) {
-        prevButton.hidden = !hasMultiplePages;
-      }
-
-      if (nextButton) {
-        nextButton.hidden = !hasMultiplePages;
-      }
-
-      if (dotsContainer) {
-        dotsContainer.hidden = !hasMultiplePages;
-      }
-    }
-
-    function bindDots() {
-      dots.forEach(function (dot) {
-        dot.addEventListener('click', function () {
-          setActivePage(Number(dot.dataset.teamDot || 0));
-          restartAutoplay();
-        });
-      });
-    }
-
-    function buildDots() {
-      if (!dotsContainer) return;
-
-      dotsContainer.innerHTML = '';
-
-      pages.forEach(function (_page, pageIndex) {
-        var dot = document.createElement('button');
-        dot.type = 'button';
-        dot.dataset.teamDot = String(pageIndex);
-        dot.setAttribute('aria-label', 'Ir a pagina ' + (pageIndex + 1));
-        dotsContainer.appendChild(dot);
-      });
-
-      dots = Array.prototype.slice.call(dotsContainer.querySelectorAll('[data-team-dot]'));
-      bindDots();
-    }
-
-    function buildPages(nextActiveIndex) {
-      var previousFirstCardIndex = activeIndex * cardsPerPage;
-      cardsPerPage = getCardsPerPage();
-      track.innerHTML = '';
-
-      cards.forEach(function (card, cardIndex) {
-        if (cardIndex % cardsPerPage === 0) {
-          var page = document.createElement('div');
-          page.className = 'team-page';
-          page.dataset.teamPage = String(Math.floor(cardIndex / cardsPerPage));
-          track.appendChild(page);
-        }
-
-        track.lastElementChild.appendChild(card);
-      });
-
-      pages = Array.prototype.slice.call(slider.querySelectorAll('[data-team-page]'));
-      buildDots();
-      updateControls();
-      setActivePage(typeof nextActiveIndex === 'number' ? nextActiveIndex : Math.floor(previousFirstCardIndex / cardsPerPage));
-    }
-
-    function setActivePage(index) {
-      if (!pages.length) return;
-
-      activeIndex = (index + pages.length) % pages.length;
-      slider.dataset.teamIndex = String(activeIndex);
-      track.style.transform = 'translateX(-' + activeIndex * 100 + '%)';
-
-      dots.forEach(function (dot, dotIndex) {
-        var isActive = dotIndex === activeIndex;
-        dot.classList.toggle('is-active', isActive);
-
-        if (isActive) {
-          dot.setAttribute('aria-current', 'true');
-        } else {
-          dot.removeAttribute('aria-current');
-        }
-      });
-    }
-
-    function stopAutoplay() {
-      if (autoplayId) {
-        clearInterval(autoplayId);
-        autoplayId = null;
-      }
-    }
-
-    function startAutoplay() {
-      stopAutoplay();
-
-      if (pages.length <= 1) {
-        return;
-      }
-
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-      }
-
-      autoplayId = setInterval(function () {
-        setActivePage(activeIndex + 1);
-      }, autoplayMs);
-    }
-
-    function restartAutoplay() {
-      startAutoplay();
-    }
-
-    if (prevButton) {
-      prevButton.addEventListener('click', function () {
-        setActivePage(activeIndex - 1);
-        restartAutoplay();
-      });
-    }
-
-    if (nextButton) {
-      nextButton.addEventListener('click', function () {
-        setActivePage(activeIndex + 1);
-        restartAutoplay();
-      });
-    }
-
-    slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
-    slider.addEventListener('focusin', stopAutoplay);
-    slider.addEventListener('focusout', startAutoplay);
-
-    window.addEventListener('resize', function () {
-      var nextCardsPerPage = getCardsPerPage();
-
-      if (nextCardsPerPage !== cardsPerPage) {
-        buildPages();
-        restartAutoplay();
-      }
-    });
-
-    buildPages(0);
-    startAutoplay();
-  });
-})();
-</script>
+    <?php if (!empty($team_members)) : ?>
+        <div class="team-directory__grid" aria-live="polite">
+            <?php foreach ($team_members as $member) : ?>
+                <a class="team-profile-card" href="<?php echo esc_url($member['url']); ?>" data-team-member="<?php echo esc_attr($member['group']); ?>">
+                    <div class="team-profile-card__media">
+                        <?php if ($member['image']) : ?>
+                            <img src="<?php echo esc_url($member['image']); ?>" alt="<?php echo esc_attr($member['name']); ?>" loading="lazy">
+                        <?php endif; ?>
+                    </div>
+                    <div class="team-profile-card__body">
+                        <h2><?php echo esc_html($member['name']); ?></h2>
+                        <?php if ($member['position']) : ?>
+                            <p><?php echo esc_html($member['position']); ?></p>
+                        <?php endif; ?>
+                        <span aria-hidden="true">→</span>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+        <p class="team-directory__empty" data-team-empty hidden>No hay integrantes publicados en esta categoría.</p>
+    <?php else : ?>
+        <p class="team-directory__empty">No hay miembros del equipo publicados.</p>
+    <?php endif; ?>
+</div>
