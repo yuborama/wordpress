@@ -778,6 +778,12 @@ add_action('wp_head', 'gya_add_favicon');
 add_action('admin_head', 'gya_add_favicon');
 add_action('login_head', 'gya_add_favicon');
 
+function gya_media_upload_size_limit($size)
+{
+    return 100 * MB_IN_BYTES;
+}
+add_filter('upload_size_limit', 'gya_media_upload_size_limit', 999);
+
 function gya_intro_loader_head_state()
 {
     if (!(is_front_page() || is_home())) {
