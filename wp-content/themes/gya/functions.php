@@ -263,7 +263,7 @@ function gya_register_team_member_cpt()
         'show_ui' => true,
         'show_in_menu' => true,
         'menu_icon' => 'dashicons-groups',
-        'supports' => array('title', 'thumbnail'),
+        'supports' => array('title', 'thumbnail', 'page-attributes'),
         'has_archive' => false,
         'rewrite' => array('slug' => 'equipo'),
         'show_in_rest' => true,
@@ -272,6 +272,183 @@ function gya_register_team_member_cpt()
     register_post_type('team_member', $args);
 }
 add_action('init', 'gya_register_team_member_cpt');
+
+function gya_register_team_category_taxonomy()
+{
+    register_taxonomy(
+        'team_category',
+        array('team_member'),
+        array(
+            'labels' => array(
+                'name' => 'Categorías del equipo',
+                'singular_name' => 'Categoría del equipo',
+                'search_items' => 'Buscar categorías',
+                'all_items' => 'Todas las categorías',
+                'edit_item' => 'Editar categoría',
+                'update_item' => 'Actualizar categoría',
+                'add_new_item' => 'Añadir categoría',
+                'new_item_name' => 'Nombre de la categoría',
+                'menu_name' => 'Categorías',
+            ),
+            'public' => false,
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'show_in_rest' => true,
+            'hierarchical' => true,
+            'query_var' => true,
+            'rewrite' => false,
+        )
+    );
+}
+add_action('init', 'gya_register_team_category_taxonomy');
+
+function gya_seed_team_categories()
+{
+    $categories = array(
+        'socios' => 'Socios',
+        'directores' => 'Directores',
+        'gerentes' => 'Gerentes',
+        'colaboradores' => 'Colaboradores',
+    );
+
+    foreach ($categories as $slug => $name) {
+        if (!term_exists($slug, 'team_category')) {
+            wp_insert_term($name, 'team_category', array('slug' => $slug));
+        }
+    }
+
+    if (get_option('gya_team_categories_migrated')) {
+        return;
+    }
+
+    $members = get_posts(array(
+        'post_type' => 'team_member',
+        'post_status' => 'any',
+        'posts_per_page' => -1,
+        'orderby' => 'date',
+        'order' => 'ASC',
+    ));
+
+    foreach ($members as $index => $member) {
+        if (!has_term('', 'team_category', $member->ID)) {
+            $position = gya_get_post_field_value('position', $member->ID, '');
+            $normalized = function_exists('remove_accents') ? remove_accents(strtolower($position)) : strtolower($position);
+            $category = 'colaboradores';
+
+            if (strpos($normalized, 'socio') !== false) {
+                $category = 'socios';
+            } elseif (strpos($normalized, 'director') !== false) {
+                $category = 'directores';
+            } elseif (strpos($normalized, 'gerente') !== false) {
+                $category = 'gerentes';
+            }
+
+            wp_set_object_terms($member->ID, $category, 'team_category');
+        }
+
+        if ((int) $member->menu_order === 0) {
+            wp_update_post(array('ID' => $member->ID, 'menu_order' => $index + 1));
+        }
+    }
+
+    update_option('gya_team_categories_migrated', 1, false);
+}
+add_action('init', 'gya_seed_team_categories', 20);
+
+function gya_team_admin_columns($columns)
+{
+    $ordered = array();
+
+    foreach ($columns as $key => $label) {
+        if ($key === 'title') {
+            $ordered['gya_team_order'] = '<span class="dashicons dashicons-menu" aria-label="Orden"></span>';
+        }
+        $ordered[$key] = $label;
+    }
+
+    return $ordered;
+}
+add_filter('manage_team_member_posts_columns', 'gya_team_admin_columns');
+
+function gya_team_admin_column_content($column, $post_id)
+{
+    if ($column === 'gya_team_order') {
+        echo '<button type="button" class="gya-order-handle" aria-label="Mover integrante" title="Arrastra para cambiar el orden"><span class="dashicons dashicons-move"></span></button>';
+    }
+}
+add_action('manage_team_member_posts_custom_column', 'gya_team_admin_column_content', 10, 2);
+
+function gya_team_admin_order($query)
+{
+    if (!is_admin() || !$query->is_main_query() || $query->get('post_type') !== 'team_member') {
+        return;
+    }
+
+    $query->set('orderby', array('menu_order' => 'ASC', 'title' => 'ASC'));
+    $query->set('order', 'ASC');
+    $query->set('posts_per_page', -1);
+}
+add_action('pre_get_posts', 'gya_team_admin_order');
+
+function gya_team_category_filter()
+{
+    global $typenow;
+
+    if ($typenow !== 'team_member') {
+        return;
+    }
+
+    wp_dropdown_categories(array(
+        'show_option_all' => 'Todas las categorías',
+        'taxonomy' => 'team_category',
+        'name' => 'team_category',
+        'orderby' => 'name',
+        'selected' => isset($_GET['team_category']) ? sanitize_text_field(wp_unslash($_GET['team_category'])) : '',
+        'value_field' => 'slug',
+        'hide_empty' => false,
+    ));
+}
+add_action('restrict_manage_posts', 'gya_team_category_filter');
+
+function gya_team_admin_assets($hook)
+{
+    if ($hook !== 'edit.php' || get_current_screen()->post_type !== 'team_member') {
+        return;
+    }
+
+    $script_path = get_template_directory() . '/assets/js/team-admin-order.js';
+    $style_path = get_template_directory() . '/assets/css/team-admin.css';
+
+    wp_enqueue_script('jquery-ui-sortable');
+    wp_enqueue_script('gya-team-admin-order', get_template_directory_uri() . '/assets/js/team-admin-order.js', array('jquery', 'jquery-ui-sortable'), filemtime($script_path), true);
+    wp_localize_script('gya-team-admin-order', 'gyaTeamOrder', array(
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('gya_team_order'),
+        'errorMessage' => 'No se pudo guardar el orden. Recarga la página e inténtalo de nuevo.',
+    ));
+    wp_enqueue_style('gya-team-admin', get_template_directory_uri() . '/assets/css/team-admin.css', array(), filemtime($style_path));
+}
+add_action('admin_enqueue_scripts', 'gya_team_admin_assets');
+
+function gya_save_team_order()
+{
+    check_ajax_referer('gya_team_order', 'nonce');
+
+    if (!current_user_can('edit_posts')) {
+        wp_send_json_error(array('message' => 'No tienes permisos para ordenar integrantes.'), 403);
+    }
+
+    $post_ids = isset($_POST['postIds']) ? array_map('absint', (array) $_POST['postIds']) : array();
+
+    foreach ($post_ids as $index => $post_id) {
+        if (get_post_type($post_id) === 'team_member' && current_user_can('edit_post', $post_id)) {
+            wp_update_post(array('ID' => $post_id, 'menu_order' => $index + 1));
+        }
+    }
+
+    wp_send_json_success();
+}
+add_action('wp_ajax_gya_save_team_order', 'gya_save_team_order');
 
 function gya_register_insights_cpt() {
     register_post_type('insights', array(

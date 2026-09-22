@@ -9,7 +9,7 @@ $team_query = new WP_Query(
         'post_type' => 'team_member',
         'post_status' => 'publish',
         'posts_per_page' => -1,
-        'orderby' => 'date',
+        'orderby' => array('menu_order' => 'ASC', 'title' => 'ASC'),
         'order' => 'ASC',
         'no_found_rows' => true,
     )
@@ -23,7 +23,6 @@ if ($team_query->have_posts()) {
         $member_id = get_the_ID();
         $name = gya_get_post_field_value('name', $member_id, get_the_title());
         $position = gya_get_post_field_value('position', $member_id, '');
-        $order = gya_get_post_field_value('order', $member_id, '');
         $image = gya_get_post_field_value('image', $member_id, '');
         $image_url = '';
 
@@ -39,41 +38,20 @@ if ($team_query->have_posts()) {
             $image_url = get_the_post_thumbnail_url($member_id, 'large');
         }
 
-        $normalized_position = function_exists('remove_accents') ? remove_accents(strtolower($position)) : strtolower($position);
-        $group = 'colaboradores';
-
-        if (strpos($normalized_position, 'socio') !== false) {
-            $group = 'socios';
-        } elseif (strpos($normalized_position, 'director') !== false) {
-            $group = 'directores';
-        } elseif (strpos($normalized_position, 'gerente') !== false) {
-            $group = 'gerentes';
-        }
+        $member_categories = wp_get_post_terms($member_id, 'team_category', array('fields' => 'slugs'));
+        $group = !is_wp_error($member_categories) && !empty($member_categories) ? $member_categories[0] : 'colaboradores';
 
         $team_members[] = array(
             'name' => $name,
             'position' => $position,
             'image' => $image_url,
             'group' => $group,
-            'order' => is_numeric($order) ? (int) $order : PHP_INT_MAX,
-            'date' => get_the_date('U'),
             'url' => get_permalink($member_id),
         );
     }
 
     wp_reset_postdata();
 }
-
-usort(
-    $team_members,
-    function ($first_member, $second_member) {
-        if ($first_member['order'] === $second_member['order']) {
-            return $first_member['date'] <=> $second_member['date'];
-        }
-
-        return $first_member['order'] <=> $second_member['order'];
-    }
-);
 
 $team_groups = array(
     'socios' => 'SOCIOS',
