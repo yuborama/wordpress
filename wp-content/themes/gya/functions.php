@@ -390,7 +390,7 @@ function gya_enqueue_assets()
     $js_path = get_template_directory() . '/assets/js/main.js';
     $contact_form_js_path = get_template_directory() . '/assets/js/contact-form.js';
     $intro_loader_js_path = get_template_directory() . '/assets/js/intro-loader.js';
-    $intro_lottie_path = get_template_directory() . '/assets/lottie/intro.json';
+    $intro_lottie_path = get_template_directory() . '/assets/lottie/intro_white.json';
 
     wp_enqueue_style(
         'gya-main-style',
@@ -557,7 +557,7 @@ function gya_enqueue_assets()
             'gya-intro-loader',
             'gyaIntroLoader',
             array(
-                'animationPath' => get_template_directory_uri() . '/assets/lottie/intro.json',
+                'animationPath' => get_template_directory_uri() . '/assets/lottie/intro_white.json',
                 'storageKey' => 'gyaIntroLoaderPlayed',
             )
         );
@@ -784,7 +784,7 @@ function gya_intro_loader_head_state()
         return;
     }
 
-    if (!file_exists(get_template_directory() . '/assets/lottie/intro.json')) {
+    if (!file_exists(get_template_directory() . '/assets/lottie/intro_white.json')) {
         return;
     }
 
@@ -808,7 +808,7 @@ function gya_intro_loader_markup()
         return;
     }
 
-    if (!file_exists(get_template_directory() . '/assets/lottie/intro.json')) {
+    if (!file_exists(get_template_directory() . '/assets/lottie/intro_white.json')) {
         return;
     }
 
