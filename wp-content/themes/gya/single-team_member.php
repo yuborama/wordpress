@@ -33,11 +33,18 @@ while (have_posts()) :
     <main class="team-detail">
         <section class="team-detail-section" aria-labelledby="team-member-name">
             <div class="team-detail-layout">
-                <figure class="team-detail-portrait">
-                    <?php if ($image_url) : ?>
-                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($name); ?>">
-                    <?php endif; ?>
-                </figure>
+                <?php
+                get_template_part(
+                    'template-parts/team-portrait',
+                    null,
+                    array(
+                        'class' => 'team-detail-portrait',
+                        'image_url' => $image_url,
+                        'alt' => $name,
+                        'loading' => 'eager',
+                    )
+                );
+                ?>
 
                 <article class="team-detail-copy">
                     <h1 id="team-member-name"><?php echo esc_html($name); ?></h1>

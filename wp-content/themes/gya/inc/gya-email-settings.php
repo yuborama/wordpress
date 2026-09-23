@@ -105,6 +105,13 @@ function gya_register_email_settings()
             'sanitize_callback' => 'absint',
         )
     );
+    register_setting(
+        'gya_email_settings_group',
+        'gya_team_background_image_id',
+        array(
+            'sanitize_callback' => 'absint',
+        )
+    );
 
     foreach (gya_social_networks() as $network) {
         register_setting(
@@ -146,6 +153,8 @@ function gya_render_email_settings_page()
     $relations_image_url = $relations_image_id ? wp_get_attachment_image_url($relations_image_id, 'medium') : '';
     $contact_image_id = absint(get_option('gya_contact_image_id', 0));
     $contact_image_url = $contact_image_id ? wp_get_attachment_image_url($contact_image_id, 'medium') : '';
+    $team_background_image_id = absint(get_option('gya_team_background_image_id', 0));
+    $team_background_image_url = $team_background_image_id ? wp_get_attachment_image_url($team_background_image_id, 'medium') : '';
     ?>
     <div class="wrap">
         <h1>Configuración GYA</h1>
@@ -185,6 +194,24 @@ function gya_render_email_settings_page()
                         <button type="button" class="button gya-select-image" data-target="gya_contact_image_id">Seleccionar imagen</button>
                         <button type="button" class="button gya-remove-image" data-target="gya_contact_image_id"<?php echo $contact_image_id ? '' : ' style="display:none;"'; ?>>Quitar imagen</button>
                         <p class="description">Imagen vertical que aparece al lado derecho del formulario de contacto.</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Página de equipo</h2>
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row">Fondo de los retratos</th>
+                    <td>
+                        <input type="hidden" name="gya_team_background_image_id" id="gya_team_background_image_id" value="<?php echo esc_attr((string) $team_background_image_id); ?>">
+                        <div id="gya_team_background_image_preview" style="margin-bottom: 10px;">
+                            <?php if ($team_background_image_url) : ?>
+                                <img src="<?php echo esc_url($team_background_image_url); ?>" alt="" style="display: block; max-width: 300px; height: auto;">
+                            <?php endif; ?>
+                        </div>
+                        <button type="button" class="button gya-select-image" data-target="gya_team_background_image_id">Seleccionar imagen</button>
+                        <button type="button" class="button gya-remove-image" data-target="gya_team_background_image_id"<?php echo $team_background_image_id ? '' : ' style="display:none;"'; ?>>Quitar imagen</button>
+                        <p class="description">Fondo común para los retratos del directorio y el detalle de cada integrante. Las fotografías de las personas deben tener fondo transparente.</p>
                     </td>
                 </tr>
             </table>

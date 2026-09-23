@@ -75,17 +75,12 @@
   background: #dfe5e8;
 }
 
-.team-profile-card__media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
+.team-profile-card__media .team-portrait__person {
   transition: transform 240ms ease;
 }
 
-.team-profile-card:hover .team-profile-card__media img,
-.team-profile-card:focus-visible .team-profile-card__media img {
+.team-profile-card:hover .team-portrait__person,
+.team-profile-card:focus-visible .team-portrait__person {
   transform: scale(1.015);
 }
 
@@ -172,7 +167,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .team-profile-card__media img,
+  .team-profile-card__media .team-portrait__person,
   .team-directory__filter {
     transition: none;
   }

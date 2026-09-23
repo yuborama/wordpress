@@ -78,11 +78,17 @@ $team_groups = array(
         <div class="team-directory__grid" aria-live="polite">
             <?php foreach ($team_members as $member) : ?>
                 <a class="team-profile-card" href="<?php echo esc_url($member['url']); ?>" data-team-member="<?php echo esc_attr($member['group']); ?>">
-                    <div class="team-profile-card__media">
-                        <?php if ($member['image']) : ?>
-                            <img src="<?php echo esc_url($member['image']); ?>" alt="<?php echo esc_attr($member['name']); ?>" loading="lazy">
-                        <?php endif; ?>
-                    </div>
+                    <?php
+                    get_template_part(
+                        'template-parts/team-portrait',
+                        null,
+                        array(
+                            'class' => 'team-profile-card__media',
+                            'image_url' => $member['image'],
+                            'alt' => $member['name'],
+                        )
+                    );
+                    ?>
                     <div class="team-profile-card__body">
                         <h2><?php echo esc_html($member['name']); ?></h2>
                         <?php if ($member['position']) : ?>

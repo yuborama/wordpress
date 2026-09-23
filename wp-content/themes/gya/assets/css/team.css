@@ -1,3 +1,31 @@
+.team-portrait {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #dfe5e8;
+}
+
+.team-portrait__background,
+.team-portrait__person {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.team-portrait__background {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.team-portrait__person {
+  z-index: 1;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
 .team-slider {
   position: relative;
 }
