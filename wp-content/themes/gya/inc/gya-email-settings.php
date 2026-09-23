@@ -18,6 +18,16 @@ function gya_register_email_settings_page()
 }
 add_action('admin_menu', 'gya_register_email_settings_page');
 
+function gya_enqueue_config_media($hook_suffix)
+{
+    if ($hook_suffix !== 'toplevel_page_gya-email-settings') {
+        return;
+    }
+
+    wp_enqueue_media();
+}
+add_action('admin_enqueue_scripts', 'gya_enqueue_config_media');
+
 function gya_social_networks()
 {
     return array(
@@ -81,6 +91,20 @@ function gya_register_email_settings()
             'sanitize_callback' => 'absint',
         )
     );
+    register_setting(
+        'gya_email_settings_group',
+        'gya_relations_image_id',
+        array(
+            'sanitize_callback' => 'absint',
+        )
+    );
+    register_setting(
+        'gya_email_settings_group',
+        'gya_contact_image_id',
+        array(
+            'sanitize_callback' => 'absint',
+        )
+    );
 
     foreach (gya_social_networks() as $network) {
         register_setting(
@@ -118,12 +142,52 @@ function gya_render_email_settings_page()
     $phone = get_option('gya_contact_phone', '');
     $hero_duration = absint(get_option('gya_hero_duration_seconds', 10));
     $carousel_duration = absint(get_option('gya_carousel_duration_seconds', 10));
+    $relations_image_id = absint(get_option('gya_relations_image_id', 0));
+    $relations_image_url = $relations_image_id ? wp_get_attachment_image_url($relations_image_id, 'medium') : '';
+    $contact_image_id = absint(get_option('gya_contact_image_id', 0));
+    $contact_image_url = $contact_image_id ? wp_get_attachment_image_url($contact_image_id, 'medium') : '';
     ?>
     <div class="wrap">
         <h1>Configuración GYA</h1>
 
         <form method="post" action="options.php">
             <?php settings_fields('gya_email_settings_group'); ?>
+
+            <h2>Página de inicio</h2>
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row">Más que servicios</th>
+                    <td>
+                        <input type="hidden" name="gya_relations_image_id" id="gya_relations_image_id" value="<?php echo esc_attr((string) $relations_image_id); ?>">
+                        <div id="gya_relations_image_preview" style="margin-bottom: 10px;">
+                            <?php if ($relations_image_url) : ?>
+                                <img src="<?php echo esc_url($relations_image_url); ?>" alt="" style="display: block; max-width: 300px; height: auto;">
+                            <?php endif; ?>
+                        </div>
+                        <button type="button" class="button gya-select-image" data-target="gya_relations_image_id">Seleccionar imagen</button>
+                        <button type="button" class="button gya-remove-image" data-target="gya_relations_image_id"<?php echo $relations_image_id ? '' : ' style="display:none;"'; ?>>Quitar imagen</button>
+                        <p class="description">Imagen de la sección “Más que servicios, construimos relaciones”.</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Página de contacto</h2>
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row">Imagen del formulario</th>
+                    <td>
+                        <input type="hidden" name="gya_contact_image_id" id="gya_contact_image_id" value="<?php echo esc_attr((string) $contact_image_id); ?>">
+                        <div id="gya_contact_image_preview" style="margin-bottom: 10px;">
+                            <?php if ($contact_image_url) : ?>
+                                <img src="<?php echo esc_url($contact_image_url); ?>" alt="" style="display: block; max-width: 300px; height: auto;">
+                            <?php endif; ?>
+                        </div>
+                        <button type="button" class="button gya-select-image" data-target="gya_contact_image_id">Seleccionar imagen</button>
+                        <button type="button" class="button gya-remove-image" data-target="gya_contact_image_id"<?php echo $contact_image_id ? '' : ' style="display:none;"'; ?>>Quitar imagen</button>
+                        <p class="description">Imagen vertical que aparece al lado derecho del formulario de contacto.</p>
+                    </td>
+                </tr>
+            </table>
 
             <h2>Emails</h2>
             <table class="form-table" role="presentation">
@@ -198,5 +262,48 @@ function gya_render_email_settings_page()
             <?php submit_button('Guardar configuración'); ?>
         </form>
     </div>
+    <script>
+        jQuery(function ($) {
+            $('.gya-select-image').on('click', function (event) {
+                event.preventDefault();
+
+                var targetId = $(this).data('target');
+                var $imageId = $('#' + targetId);
+                var $preview = $('#' + targetId.replace('_id', '_preview'));
+                var $removeButton = $('.gya-remove-image[data-target="' + targetId + '"]');
+                var mediaFrame = wp.media({
+                    title: 'Seleccionar imagen',
+                    button: { text: 'Usar esta imagen' },
+                    library: { type: 'image' },
+                    multiple: false
+                });
+
+                mediaFrame.on('select', function () {
+                    var attachment = mediaFrame.state().get('selection').first().toJSON();
+                    var previewUrl = attachment.sizes && attachment.sizes.medium ? attachment.sizes.medium.url : attachment.url;
+
+                    $imageId.val(attachment.id);
+                    $preview.html($('<img>', {
+                        src: previewUrl,
+                        alt: '',
+                        css: { display: 'block', maxWidth: '300px', height: 'auto' }
+                    }));
+                    $removeButton.show();
+                });
+
+                mediaFrame.open();
+            });
+
+            $('.gya-remove-image').on('click', function (event) {
+                event.preventDefault();
+
+                var targetId = $(this).data('target');
+
+                $('#' + targetId).val('');
+                $('#' + targetId.replace('_id', '_preview')).empty();
+                $(this).hide();
+            });
+        });
+    </script>
     <?php
 }

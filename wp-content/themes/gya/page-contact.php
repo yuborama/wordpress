@@ -13,7 +13,12 @@ $areas = get_posts(array(
 ));
 
 $upload_dir = wp_upload_dir();
-$finance_image = trailingslashit($upload_dir['baseurl']) . '2026/07/EPT.png';
+$contact_image_id = absint(get_option('gya_contact_image_id', 0));
+$contact_image = $contact_image_id ? wp_get_attachment_image_url($contact_image_id, 'full') : '';
+
+if (!$contact_image) {
+    $contact_image = trailingslashit($upload_dir['baseurl']) . '2026/07/EPT.png';
+}
 $building_image = get_template_directory_uri() . '/assets/images/contact-building.png';
 $address = 'Anillo Perif. 3332 piso 1201, Jardines del Pedregal, Álvaro Obregón, 01900 Ciudad de México, CDMX';
 $phone = '(+52) 55 57 40 38 76';
@@ -53,7 +58,7 @@ get_header();
             </div>
 
             <div class="contact-visual" aria-hidden="true">
-                <img src="<?php echo esc_url($finance_image); ?>" alt="">
+                <img src="<?php echo esc_url($contact_image); ?>" alt="">
             </div>
         </div>
     </section>
