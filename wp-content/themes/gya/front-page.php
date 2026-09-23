@@ -96,10 +96,14 @@ if (empty($areas)) {
 }
 
 $clients = array(
-    array('name' => 'Vix', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/vix_Logo.svg'),
     array('name' => 'Pfizer', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/pfizer_Logo.svg'),
     array('name' => 'DSV', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/dvs_Logo.svg'),
     array('name' => 'Maersk', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/maersk_Logo.svg'),
+    array('name' => 'Crane Worldwide Logistics', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/crane_Logo.svg'),
+    array('name' => 'Senator International', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/senator_Logo.svg'),
+    array('name' => 'AIT Home Delivery', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/ait_Logo.svg'),
+    array('name' => 'Fracht Group', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/fracht_Logo.svg'),
+    array('name' => 'ViX', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/vix_Logo.svg'),
 );
 
 get_header();

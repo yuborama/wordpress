@@ -15,6 +15,7 @@ $footer_text_2 = gya_get_field_value('gya_footer_text_2', 'La información publi
 $footer_copyright = gya_get_field_value('gya_footer_copyright', 'G&A Gómez y Asociados, S.C.', $front_page_id);
 
 $footer_address = 'Anillo Perif. 3332 piso 1201, Jardines del Pedregal, Álvaro Obregón, 01900 Ciudad de México, CDMX';
+$footer_address_url = 'https://www.google.com/maps/place/YAMA+Jardines+del+Pedregal/@19.3233909,-99.2213661,17z/data=!3m1!4b1!4m6!3m5!1s0x85cdffbd0ac29d91:0xcb467e9fa04e9cfa!8m2!3d19.323391!4d-99.2165005!16s%2Fg%2F11qmmm235l?entry=ttu&g_ep=EgoyMDI2MDkyMC4wIKXMDSoASAFQAw%3D%3D';
 $footer_phone = '+52 55 57 40 38 76';
 $footer_phone_href = preg_replace('/[^\d+]/', '', $footer_phone);
 
@@ -119,13 +120,13 @@ foreach ($footer_legal_links as $legal_link) {
         <div class="footer-line"></div>
         <div class="footer-body">
             <address class="footer-contact" aria-label="Dirección">
-                <span class="footer-contact-row">
+                <a class="footer-contact-row" href="<?php echo esc_url($footer_address_url); ?>" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                         <path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
                         <circle cx="12" cy="9" r="2.4" fill="none" stroke="currentColor" stroke-width="2" />
                     </svg>
                     <span><?php echo esc_html($footer_address); ?></span>
-                </span>
+                </a>
                 <a class="footer-contact-row" href="tel:<?php echo esc_attr($footer_phone_href); ?>">
                     <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                         <path d="M7 4h3l1.5 4-2 1.2c1 2 2.3 3.3 4.3 4.3l1.2-2 4 1.5v3c0 1.1-.9 2-2 2C10.4 19 5 13.6 5 7c0-1.1.9-2 2-2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />

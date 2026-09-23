@@ -392,15 +392,17 @@ body.front-page .header-social img {
 
 .gya-clients__logos {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
   gap: 70px;
   padding: 66px 30px 0;
 }
 
 .gya-clients__logos img {
-  max-width: 190px;
-  max-height: 70px;
+  display: block;
+  max-width: min(300px, 100%);
+  max-height: 150px;
+  height: auto;
   justify-self: center;
   filter: brightness(0) saturate(100%) invert(12%) sepia(22%) saturate(1902%) hue-rotate(158deg) brightness(91%) contrast(101%);
 }
