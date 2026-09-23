@@ -95,7 +95,6 @@ get_header();
 <main class="privacy-page">
     <section class="privacy-hero">
         <div class="shell privacy-hero__inner">
-            <span>LEGAL</span>
             <h1>Aviso de privacidad</h1>
             <p>Marco normativo, datos recabados, finalidades del tratamiento y derechos ARCO.</p>
         </div>

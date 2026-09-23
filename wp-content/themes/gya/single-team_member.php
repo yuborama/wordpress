@@ -29,8 +29,6 @@ while (have_posts()) :
     }
 
     $contact_email = sanitize_email(get_option('gya_email_to', ''));
-    $contact_phone = get_option('gya_contact_phone', '');
-    $contact_phone_href = preg_replace('/[^0-9+]/', '', $contact_phone);
     ?>
     <main class="team-detail">
         <section class="team-detail-section" aria-labelledby="team-member-name">
@@ -55,14 +53,6 @@ while (have_posts()) :
                         <?php endif; ?>
                             <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3.5 5.5h17v13h-17zM4.5 6.5l7.5 6 7.5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
                         <?php echo $contact_email ? '</a>' : '</span>'; ?>
-
-                        <?php if ($contact_phone_href) : ?>
-                            <a class="team-detail-action" href="tel:<?php echo esc_attr($contact_phone_href); ?>" aria-label="Llamar a <?php echo esc_attr($name); ?>">
-                        <?php else : ?>
-                            <span class="team-detail-action" aria-hidden="true">
-                        <?php endif; ?>
-                            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M7.2 3.5H4.5c-.6 0-1 .5-1 1.1.2 8.8 7.1 15.7 15.9 15.9.6 0 1.1-.4 1.1-1v-2.7l-4.1-.9-1.1 2.2a14.1 14.1 0 0 1-9.4-9.4l2.2-1.1-.9-4.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <?php echo $contact_phone_href ? '</a>' : '</span>'; ?>
                     </div>
 
                     <div class="team-detail-description">
