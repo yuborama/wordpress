@@ -156,6 +156,51 @@
 })();
 
 (function () {
+  var hero = document.querySelector('[data-gya-hero]');
+  if (!hero) return;
+
+  var slides = Array.prototype.slice.call(hero.querySelectorAll('[data-gya-hero-slide]'));
+  var media = Array.prototype.slice.call(hero.querySelectorAll('[data-gya-hero-media]'));
+  var intervalMs = window.gyaTiming && Number(window.gyaTiming.heroAutoplayMs)
+    ? Number(window.gyaTiming.heroAutoplayMs)
+    : 10000;
+  var activeIndex = 0;
+  var timerId;
+
+  if (slides.length < 2) return;
+
+  function showSlide(index) {
+    activeIndex = (index + slides.length) % slides.length;
+    var slideKey = slides[activeIndex].dataset.gyaHeroSlide;
+
+    slides.forEach(function (slide, slideIndex) {
+      slide.classList.toggle('is-active', slideIndex === activeIndex);
+    });
+
+    media.forEach(function (item) {
+      item.classList.toggle('is-active', item.dataset.gyaHeroMedia === slideKey);
+    });
+  }
+
+  function startAutoplay() {
+    window.clearInterval(timerId);
+    timerId = window.setInterval(function () {
+      showSlide(activeIndex + 1);
+    }, intervalMs);
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      window.clearInterval(timerId);
+    } else {
+      startAutoplay();
+    }
+  });
+
+  startAutoplay();
+})();
+
+(function () {
   var directory = document.querySelector('[data-team-directory]');
   if (!directory) return;
 

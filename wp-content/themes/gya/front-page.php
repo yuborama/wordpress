@@ -9,6 +9,25 @@ $page_id = get_queried_object_id();
 $upload_dir = wp_upload_dir();
 $upload_base = trailingslashit($upload_dir['baseurl']);
 $stats = gya_get_fixed_items_from_acf(isset($data['stats']) ? $data['stats'] : array(), 'gya_stat', array('value', 'label', 'icon'), 4, $page_id);
+$hero_slides = function_exists('gya_get_hero_slides_from_posts') ? gya_get_hero_slides_from_posts() : array();
+
+if (empty($hero_slides)) {
+    $hero_slides[] = array(
+        'eyebrow' => '',
+        'title' => 'Estrategia y experiencia para decisiones que generan valor.',
+        'body' => 'G&A es una firma boutique de consultoría y asesoría empresarial que integra experiencia fiscal, financiera, jurídica y corporativa para acompañar a las empresas con claridad, certeza y visión estratégica.',
+        'cta' => 'LA FIRMA',
+        'href' => home_url('/weare/'),
+        'image' => $upload_base . '2026/07/cardservice3.jpg',
+    );
+}
+
+foreach ($hero_slides as &$hero_slide) {
+    if (empty($hero_slide['image'])) {
+        $hero_slide['image'] = $upload_base . '2026/07/cardservice3.jpg';
+    }
+}
+unset($hero_slide);
 
 $area_images = array(
     'Fiscal y Financiero' => $upload_base . '2026/07/cardservice1.jpg',
@@ -80,12 +99,34 @@ $clients = array(
 get_header();
 ?>
 <main class="home-redesign">
-    <section class="gya-hero" aria-labelledby="hero-title">
-        <div class="gya-hero__media" style="background-image:url('<?php echo esc_url($upload_base . '2026/07/cardservice3.jpg'); ?>');"></div>
-        <div class="gya-design-shell gya-hero__content">
-            <h1 id="hero-title">Estrategia y experiencia para decisiones que generan valor.</h1>
-            <p>G&amp;A es una firma boutique de consultoría y asesoría empresarial que integra experiencia fiscal, financiera, jurídica y corporativa para acompañar a las empresas con claridad, certeza y visión estratégica.</p>
-            <a class="gya-orange-button" href="<?php echo esc_url(home_url('/weare/')); ?>">LA FIRMA <span aria-hidden="true">→</span></a>
+    <section class="gya-hero" aria-labelledby="hero-title" data-gya-hero>
+        <div class="gya-hero__media-stack" aria-hidden="true">
+            <?php foreach ($hero_slides as $index => $slide) : ?>
+                <?php if (!empty($slide['image'])) : ?>
+                    <div
+                        class="gya-hero__media <?php echo $index === 0 ? 'is-active' : ''; ?>"
+                        style="background-image:url('<?php echo esc_url($slide['image']); ?>');"
+                        data-gya-hero-media="<?php echo esc_attr((string) $index); ?>"></div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+        <div class="gya-design-shell gya-hero__content" aria-live="polite">
+            <?php foreach ($hero_slides as $index => $slide) : ?>
+                <div class="gya-hero__slide <?php echo $index === 0 ? 'is-active' : ''; ?>" data-gya-hero-slide="<?php echo esc_attr((string) $index); ?>">
+                    <?php if (!empty($slide['eyebrow'])) : ?>
+                        <span class="gya-hero__eyebrow"><?php echo esc_html($slide['eyebrow']); ?></span>
+                    <?php endif; ?>
+                    <?php if (!empty($slide['title'])) : ?>
+                        <h1<?php echo $index === 0 ? ' id="hero-title"' : ''; ?>><?php echo esc_html($slide['title']); ?></h1>
+                    <?php endif; ?>
+                    <?php if (!empty($slide['body'])) : ?>
+                        <p><?php echo esc_html($slide['body']); ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($slide['cta']) && !empty($slide['href'])) : ?>
+                        <a class="gya-orange-button" href="<?php echo esc_url($slide['href']); ?>"><?php echo esc_html($slide['cta']); ?> <span aria-hidden="true">→</span></a>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
         </div>
     </section>
 
