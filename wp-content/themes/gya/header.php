@@ -36,8 +36,9 @@ $header_is_team_request = function_exists('gya_is_team_page_request') && gya_is_
 $header_is_category_request = is_singular('gya_category');
 $header_is_contact_request = function_exists('gya_is_contact_page_request') && gya_is_contact_page_request();
 $header_is_member_request = is_singular('team_member');
+$header_is_privacy_request = function_exists('gya_is_privacy_page_request') && gya_is_privacy_page_request();
 
-if ((is_front_page() || $header_is_areas_request || $header_is_team_request || $header_is_category_request || $header_is_contact_request || $header_is_member_request) && file_exists($header_logo_path)) {
+if ((is_front_page() || $header_is_areas_request || $header_is_team_request || $header_is_category_request || $header_is_contact_request || $header_is_member_request || $header_is_privacy_request) && file_exists($header_logo_path)) {
     $header_logo_markup = file_get_contents($header_logo_path);
     $header_logo_markup = str_replace('fill="white"', 'fill="#062236"', $header_logo_markup);
     $header_logo_markup = str_replace('<svg ', '<svg role="img" aria-label="G&amp;A" ', $header_logo_markup);

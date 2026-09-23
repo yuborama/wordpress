@@ -230,6 +230,41 @@ body.gya-redesign-page .footer-contact::before {
   font-weight: 700;
 }
 
+body.gya-redesign-page .footer-contact-row svg {
+  color: #062236;
+}
+
+body.gya-redesign-page a.footer-contact-row:hover,
+body.gya-redesign-page a.footer-contact-row:focus-visible {
+  color: #062236;
+  font-weight: 700;
+}
+
+body.gya-redesign-page .footer-legal {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  min-height: 48px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(6, 34, 54, 0.65);
+}
+
+body.gya-redesign-page .footer-legal a {
+  color: #ff641f;
+  font-size: 11px;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+body.gya-redesign-page .footer-legal a:hover,
+body.gya-redesign-page .footer-legal a:focus-visible {
+  color: #d94708;
+  font-weight: 700;
+}
+
 body.gya-redesign-page .site-footer p,
 body.gya-redesign-page .site-footer small {
   color: #062236;

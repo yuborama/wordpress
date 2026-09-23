@@ -748,7 +748,7 @@ function gya_enqueue_assets()
         true
     );
 
-    if (is_front_page() || gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || is_singular('gya_category') || is_singular('team_member')) {
+    if (is_front_page() || gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || gya_is_privacy_page_request() || is_singular('gya_category') || is_singular('team_member')) {
         wp_enqueue_style(
             'gya-home-redesign-style',
             get_template_directory_uri() . '/assets/css/home-redesign.css',
@@ -757,7 +757,7 @@ function gya_enqueue_assets()
         );
     }
 
-    if (gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || is_singular('gya_category') || is_singular('team_member')) {
+    if (gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || gya_is_privacy_page_request() || is_singular('gya_category') || is_singular('team_member')) {
         wp_enqueue_style(
             'gya-areas-page-style',
             get_template_directory_uri() . '/assets/css/areas-page.css',
@@ -841,7 +841,7 @@ add_filter('template_include', 'gya_areas_page_template');
 
 function gya_areas_body_class($classes)
 {
-    if (gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || is_singular('gya_category') || is_singular('team_member')) {
+    if (gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || gya_is_privacy_page_request() || is_singular('gya_category') || is_singular('team_member')) {
         $classes[] = 'gya-redesign-page';
     }
 

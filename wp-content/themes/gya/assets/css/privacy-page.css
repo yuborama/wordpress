@@ -1,6 +1,7 @@
 .privacy-page {
   width: min(100%, var(--max));
   margin: 0 auto;
+  padding-top: 79px;
   background: var(--white);
   color: #435365;
 }

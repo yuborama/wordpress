@@ -55,6 +55,7 @@ $footer_is_redesign_page = is_front_page()
     || (function_exists('gya_is_areas_page_request') && gya_is_areas_page_request())
     || (function_exists('gya_is_team_page_request') && gya_is_team_page_request())
     || (function_exists('gya_is_contact_page_request') && gya_is_contact_page_request())
+    || (function_exists('gya_is_privacy_page_request') && gya_is_privacy_page_request())
     || is_singular('gya_category')
     || is_singular('team_member');
 
@@ -83,25 +84,27 @@ foreach ($footer_legal_links as $legal_link) {
         </a>
         <div class="footer-line"></div>
         <nav class="footer-nav" aria-label="Footer">
-            <?php if ($has_legal_links) : ?>
-                <ul class="menu">
-                    <?php foreach ($footer_legal_links as $legal_link) : ?>
-                        <?php if (!empty($legal_link['text']) && !empty($legal_link['url'])) : ?>
-                            <li><a href="<?php echo esc_url($legal_link['url']); ?>"><?php echo esc_html($legal_link['text']); ?></a></li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>
-            <?php else : ?>
-                <?php
-                wp_nav_menu(
-                    array(
-                        'theme_location' => 'footer',
-                        'container' => false,
-                        'menu_class' => 'menu',
-                        'fallback_cb' => 'gya_footer_menu_fallback',
-                    )
-                );
-                ?>
+            <?php if (!$footer_is_redesign_page) : ?>
+                <?php if ($has_legal_links) : ?>
+                    <ul class="menu">
+                        <?php foreach ($footer_legal_links as $legal_link) : ?>
+                            <?php if (!empty($legal_link['text']) && !empty($legal_link['url'])) : ?>
+                                <li><a href="<?php echo esc_url($legal_link['url']); ?>"><?php echo esc_html($legal_link['text']); ?></a></li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php else : ?>
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'theme_location' => 'footer',
+                            'container' => false,
+                            'menu_class' => 'menu',
+                            'fallback_cb' => 'gya_footer_menu_fallback',
+                        )
+                    );
+                    ?>
+                <?php endif; ?>
             <?php endif; ?>
             <?php if (!empty($footer_social_links)) : ?>
                 <div class="footer-social" aria-label="Redes sociales">
@@ -136,6 +139,16 @@ foreach ($footer_legal_links as $legal_link) {
                 <small>&copy; <?php echo esc_html(date_i18n('Y')); ?> <?php echo esc_html($footer_copyright); ?></small>
             </div>
         </div>
+        <?php if ($footer_is_redesign_page && $has_legal_links) : ?>
+            <nav class="footer-legal" aria-label="Información legal">
+                <?php foreach ($footer_legal_links as $legal_link) : ?>
+                    <?php if (!empty($legal_link['text']) && !empty($legal_link['url'])) : ?>
+                        <a href="<?php echo esc_url($legal_link['url']); ?>"><?php echo esc_html($legal_link['text']); ?></a>
+                        <?php break; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </nav>
+        <?php endif; ?>
     </div>
 </footer>
 <?php if (!empty($whatsapp_url)) : ?>
