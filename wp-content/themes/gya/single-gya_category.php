@@ -87,16 +87,18 @@ while (have_posts()) :
             </div>
         </section>
 
-        <section class="category-detail-relations" aria-labelledby="category-relations-title">
-            <div class="shell category-detail-relations__grid">
-                <div>
-                    <h2 id="category-relations-title">Más que servicios, construimos relaciones.</h2>
-                    <p>G&amp;A es una firma boutique que acompaña a empresas con claridad, experiencia y atención personalizada.</p>
-                    <a class="gya-orange-button" href="<?php echo esc_url(home_url('/weare/')); ?>">CONÓCENOS <span aria-hidden="true">→</span></a>
-                </div>
-                <img src="<?php echo esc_url($upload_base . 'office.jpg'); ?>" alt="Equipo de consultoría G&amp;A" loading="lazy">
-            </div>
-        </section>
+        <?php
+        get_template_part(
+            'template-parts/relations-section',
+            null,
+            array(
+                'section_class' => 'category-detail-relations',
+                'inner_class' => 'shell category-detail-relations__grid',
+                'copy_class' => '',
+                'title_id' => 'category-relations-title',
+            )
+        );
+        ?>
     </main>
     <?php
 endwhile;

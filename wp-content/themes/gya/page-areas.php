@@ -6,12 +6,6 @@ if (!defined('ABSPATH')) {
 
 $upload_dir = wp_upload_dir();
 $upload_base = trailingslashit($upload_dir['baseurl']) . '2026/07/';
-$relations_image_id = absint(get_option('gya_relations_image_id', 0));
-$relations_image = $relations_image_id ? wp_get_attachment_image_url($relations_image_id, 'full') : '';
-
-if (!$relations_image) {
-    $relations_image = $upload_base . 'office.jpg';
-}
 $area_images = array(
     'Fiscal y Financiero' => $upload_base . 'cardservice1.jpg',
     'Legal' => $upload_base . 'BANNER-2.png',
@@ -88,16 +82,7 @@ get_header();
         </div>
     </section>
 
-    <section class="gya-relations gya-grid-bg" aria-labelledby="relations-title">
-        <div class="gya-design-shell gya-relations__grid">
-            <div class="gya-relations__copy">
-                <h2 id="relations-title">Más que servicios, construimos relaciones.</h2>
-                <p>G&amp;A es una firma boutique que acompaña a empresas con claridad, experiencia y atención personalizada.</p>
-                <a class="gya-orange-button" href="<?php echo esc_url(home_url('/weare/')); ?>">CONÓCENOS <span aria-hidden="true">→</span></a>
-            </div>
-            <img src="<?php echo esc_url($relations_image); ?>" alt="Equipo de consultoría G&amp;A" loading="lazy">
-        </div>
-    </section>
+    <?php get_template_part('template-parts/relations-section'); ?>
 </main>
 <?php
 get_footer();
