@@ -201,9 +201,7 @@
   }
 
   .hero-media::after {
-    background:
-      linear-gradient(180deg, rgba(0, 2, 14, 0.1) 0%, rgba(0, 2, 14, 0.06) 48%, #00020e 100%),
-      linear-gradient(90deg, rgba(0, 2, 14, 0.46) 0%, rgba(0, 2, 14, 0.08) 48%, rgba(0, 2, 14, 0.16) 100%);
+    background: linear-gradient(180deg, rgba(0, 2, 14, 0) 55%, #00020e 100%);
   }
 
   .hero-office-image {
@@ -217,9 +215,9 @@
     justify-content: flex-start;
     padding-left: 32px;
     padding-right: 32px;
-    padding-top: 38px;
+    padding-top: 0;
     padding-bottom: 72px;
-    margin-top: -34px;
+    margin-top: 0;
   }
 
   .hero-copy {
@@ -228,6 +226,7 @@
 
   .hero-copy h1 {
     width: min(100%, 430px);
+    margin-top: 0;
     font-size: var(--font-h2);
   }
 
@@ -276,9 +275,9 @@
     min-height: 470px;
     padding-left: 32px;
     padding-right: 32px;
-    padding-top: 34px;
+    padding-top: 0;
     padding-bottom: 66px;
-    margin-top: -28px;
+    margin-top: 0;
   }
 
   .hero-copy h1 {

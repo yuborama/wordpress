@@ -12,7 +12,7 @@ $relations = wp_parse_args(
         'inner_class' => 'gya-design-shell gya-relations__grid',
         'copy_class' => 'gya-relations__copy',
         'title_id' => 'relations-title',
-        'cta_url' => home_url('/weare/'),
+        'cta_url' => home_url('/contact/'),
     )
 );
 

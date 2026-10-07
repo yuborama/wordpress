@@ -869,10 +869,26 @@ body.front-page .mobile-menu-social img {
 
   .gya-hero {
     min-height: 620px;
+    display: block;
+  }
+
+  .gya-hero__media-stack {
+    position: relative;
+    height: 260px;
+  }
+
+  .gya-hero__content {
+    padding-top: 0;
+    padding-bottom: 66px;
   }
 
   .gya-hero__media {
+    inset: 0;
     background-position: 62% center;
+  }
+
+  .gya-hero__media::after {
+    background: linear-gradient(180deg, rgba(3, 17, 27, 0) 55%, #03111b 100%);
   }
 
   .gya-hero h1 {
@@ -916,6 +932,26 @@ body.front-page .mobile-menu-social img {
 
   .gya-relations h2 {
     font-size: 36px;
+  }
+
+  .gya-relations,
+  .areas-page .gya-relations {
+    padding-top: 0;
+  }
+
+  .gya-relations__grid {
+    width: 100%;
+    gap: 24px;
+  }
+
+  .gya-relations__copy {
+    padding-inline: 18px;
+  }
+
+  .gya-relations__grid > img {
+    order: -1;
+    display: block;
+    aspect-ratio: 8 / 5;
   }
 
   .gya-clients__logos {

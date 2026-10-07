@@ -5,8 +5,6 @@
 
   var message = document.getElementById('gya-contact-message');
   var submit = form.querySelector('.contact-submit');
-  var fileInput = form.querySelector('input[type="file"]');
-  var fileName = form.querySelector('[data-file-name]');
 
   function setMessage(text, type) {
     if (!message) return;
@@ -14,12 +12,6 @@
     message.textContent = text || '';
     message.classList.toggle('is-success', type === 'success');
     message.classList.toggle('is-error', type === 'error');
-  }
-
-  if (fileInput && fileName) {
-    fileInput.addEventListener('change', function () {
-      fileName.textContent = fileInput.files && fileInput.files.length ? fileInput.files[0].name : '';
-    });
   }
 
   form.addEventListener('submit', function (event) {
@@ -49,10 +41,6 @@
         }
 
         form.reset();
-
-        if (fileName) {
-          fileName.textContent = '';
-        }
 
         setMessage(result.data && result.data.message ? result.data.message : 'Tu solicitud fue enviada correctamente.', 'success');
       })

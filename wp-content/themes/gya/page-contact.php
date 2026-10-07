@@ -35,7 +35,7 @@ get_header();
                     <p>Cuéntanos brevemente qué necesitas y un especialista de G&amp;A te contactará para orientarte.</p>
                 </header>
 
-                <form id="gya-contact-form" class="contact-form" enctype="multipart/form-data" novalidate>
+                <form id="gya-contact-form" class="contact-form" novalidate>
                     <?php wp_nonce_field('gya_contact_form', 'gya_contact_nonce'); ?>
                     <label><span>Área de interés</span><select name="area"><option value="">Área de interés</option><?php foreach ($areas as $area) : ?><option value="<?php echo esc_attr(get_the_title($area)); ?>"><?php echo esc_html(get_the_title($area)); ?></option><?php endforeach; ?></select></label>
                     <label><span>Nombre completo*</span><input type="text" name="name" placeholder="Nombre completo*" autocomplete="name" required></label>
@@ -44,15 +44,9 @@ get_header();
                     <label><span>Teléfono / WhatsApp</span><input type="tel" name="phone" placeholder="Teléfono / WhatsApp" autocomplete="tel"></label>
                     <label><span>Compañía / Organización*</span><input type="text" name="company" placeholder="Compañía / Organización*" autocomplete="organization" required></label>
 
-                    <label class="contact-file">
-                        <span class="contact-file__button">Adjuntar documento</span>
-                        <input type="file" name="document" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.webp">
-                    </label>
-                    <p class="contact-file-help">Formatos permitidos: PDF, Excel, Word e imágenes. Tamaño máximo: 10 MB.</p>
-                    <p class="contact-file-name" data-file-name></p>
                     <label><span>Describe tu necesidad</span><textarea name="message" placeholder="Describe tu necesidad" required></textarea></label>
 
-                    <button class="contact-submit" type="submit"><span>SOLICITAR DIAGNÓSTICO</span><span class="contact-submit__arrow" aria-hidden="true">→</span></button>
+                    <button class="contact-submit" type="submit"><span>Enviar</span><span class="contact-submit__arrow" aria-hidden="true">→</span></button>
                     <p class="contact-message" id="gya-contact-message" role="status" aria-live="polite"></p>
                 </form>
             </div>

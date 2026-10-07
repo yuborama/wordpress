@@ -71,13 +71,12 @@ while (have_posts()) :
                             $subcategory_title = gya_get_post_field_value('title', $subcategory_id, get_the_title());
                             $subcategory_description = gya_get_post_field_value('description', $subcategory_id, '');
                             ?>
-                            <a class="category-detail-solution-card" href="<?php echo esc_url(get_permalink($subcategory_id)); ?>">
+                            <article class="category-detail-solution-card">
                                 <h3><?php echo esc_html($subcategory_title); ?></h3>
                                 <?php if ($subcategory_description !== '') : ?>
                                     <p><?php echo esc_html($subcategory_description); ?></p>
                                 <?php endif; ?>
-                                <span aria-hidden="true">→</span>
-                            </a>
+                            </article>
                         <?php endwhile; ?>
                     </div>
                     <?php wp_reset_postdata(); ?>
