@@ -107,6 +107,13 @@ function gya_register_email_settings()
     );
     register_setting(
         'gya_email_settings_group',
+        'gya_firma_image_id',
+        array(
+            'sanitize_callback' => 'absint',
+        )
+    );
+    register_setting(
+        'gya_email_settings_group',
         'gya_team_background_image_id',
         array(
             'sanitize_callback' => 'absint',
@@ -153,6 +160,8 @@ function gya_render_email_settings_page()
     $relations_image_url = $relations_image_id ? wp_get_attachment_image_url($relations_image_id, 'medium') : '';
     $contact_image_id = absint(get_option('gya_contact_image_id', 0));
     $contact_image_url = $contact_image_id ? wp_get_attachment_image_url($contact_image_id, 'medium') : '';
+    $firma_image_id = absint(get_option('gya_firma_image_id', 0));
+    $firma_image_url = $firma_image_id ? wp_get_attachment_image_url($firma_image_id, 'medium') : '';
     $team_background_image_id = absint(get_option('gya_team_background_image_id', 0));
     $team_background_image_url = $team_background_image_id ? wp_get_attachment_image_url($team_background_image_id, 'medium') : '';
     ?>
@@ -194,6 +203,24 @@ function gya_render_email_settings_page()
                         <button type="button" class="button gya-select-image" data-target="gya_contact_image_id">Seleccionar imagen</button>
                         <button type="button" class="button gya-remove-image" data-target="gya_contact_image_id"<?php echo $contact_image_id ? '' : ' style="display:none;"'; ?>>Quitar imagen</button>
                         <p class="description">Imagen vertical que aparece al lado derecho del formulario de contacto.</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h2>Página de la firma</h2>
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row">Imagen principal</th>
+                    <td>
+                        <input type="hidden" name="gya_firma_image_id" id="gya_firma_image_id" value="<?php echo esc_attr((string) $firma_image_id); ?>">
+                        <div id="gya_firma_image_preview" style="margin-bottom: 10px;">
+                            <?php if ($firma_image_url) : ?>
+                                <img src="<?php echo esc_url($firma_image_url); ?>" alt="" style="display: block; max-width: 300px; height: auto;">
+                            <?php endif; ?>
+                        </div>
+                        <button type="button" class="button gya-select-image" data-target="gya_firma_image_id">Seleccionar imagen</button>
+                        <button type="button" class="button gya-remove-image" data-target="gya_firma_image_id"<?php echo $firma_image_id ? '' : ' style="display:none;"'; ?>>Quitar imagen</button>
+                        <p class="description">Imagen del banner principal de La firma. Si no seleccionas una imagen, se usará la imagen destacada de la página.</p>
                     </td>
                 </tr>
             </table>

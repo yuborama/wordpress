@@ -97,7 +97,7 @@ if (function_exists('gya_social_networks')) {
         <a class="<?php echo ($header_is_areas_request || $header_is_category_request) ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/areas/')); ?>">ÁREAS</a>
         <a class="<?php echo ($header_is_team_request || $header_is_member_request) ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/team/')); ?>">NUESTRO EQUIPO</a>
         <a class="<?php echo $header_is_firma_request ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/weare/')); ?>">LA FIRMA</a>
-        <a href="https://capacitaciongya.educacionitel.com/">CURSOS</a>
+        <a href="https://capacitaciongya.educacionitel.com/" target="_blank" rel="noopener noreferrer">CURSOS</a>
         <a class="<?php echo $header_is_insights_active ? 'is-current' : ''; ?>" href="<?php echo esc_url(get_post_type_archive_link('insights')); ?>">CONTENIDOS</a>
         <a class="mobile-menu-cta <?php echo $header_is_contact_request ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/contact/')); ?>">CONTACTO <span aria-hidden="true">→</span></a>
 

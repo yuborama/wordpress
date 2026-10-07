@@ -3,12 +3,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$upload_dir = wp_upload_dir();
-$uploads_base = trailingslashit($upload_dir['baseurl']) . '2026/07/';
 $asset_base = get_template_directory_uri() . '/assets/images/';
-$weare_hero_image = get_the_post_thumbnail_url(get_queried_object_id(), 'full');
+$weare_hero_image_id = absint(get_option('gya_firma_image_id', 0));
+$weare_hero_image = $weare_hero_image_id ? wp_get_attachment_image_url($weare_hero_image_id, 'full') : '';
 if (!$weare_hero_image) {
-    $weare_hero_image = $uploads_base . 'insightsCardTeam.jpg';
+    $weare_hero_image = get_the_post_thumbnail_url(get_queried_object_id(), 'full');
 }
 
 $stats = array(
@@ -62,7 +61,9 @@ get_header();
                 <h1 id="firma-title">Estrategia, experiencia y respaldo para decisiones que generan valor.</h1>
                 <p>Acompañamos a nuestros clientes con soluciones especializadas, atención personalizada y una visión integral de sus necesidades, respaldados por una cultura de calidad y mejora continua.</p>
             </div>
-            <img class="weare-hero__image" src="<?php echo esc_url($weare_hero_image); ?>" alt="Equipo de G&amp;A trabajando en conjunto" fetchpriority="high">
+            <?php if ($weare_hero_image) : ?>
+                <img class="weare-hero__image" src="<?php echo esc_url($weare_hero_image); ?>" alt="Equipo de G&amp;A trabajando en conjunto" fetchpriority="high">
+            <?php endif; ?>
         </div>
     </section>
 
