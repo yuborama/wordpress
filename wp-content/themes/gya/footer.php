@@ -52,13 +52,7 @@ $whatsapp_url = get_option('gya_social_whatsapp', '');
 $footer_logo_path = get_template_directory() . '/assets/images/icons/logo.svg';
 $footer_logo_markup = '';
 
-$footer_is_redesign_page = is_front_page()
-    || (function_exists('gya_is_areas_page_request') && gya_is_areas_page_request())
-    || (function_exists('gya_is_team_page_request') && gya_is_team_page_request())
-    || (function_exists('gya_is_contact_page_request') && gya_is_contact_page_request())
-    || (function_exists('gya_is_privacy_page_request') && gya_is_privacy_page_request())
-    || is_singular('gya_category')
-    || is_singular('team_member');
+$footer_is_redesign_page = true;
 
 if ($footer_is_redesign_page && file_exists($footer_logo_path)) {
     $footer_logo_markup = file_get_contents($footer_logo_path);

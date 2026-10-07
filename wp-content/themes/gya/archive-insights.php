@@ -146,30 +146,22 @@ if (!empty($meta_query)) {
 }
 
 $insights_query = new WP_Query($insights_query_args);
-$upload_dir = wp_upload_dir();
-$network_image = trailingslashit($upload_dir['baseurl']) . '2026/07/network-bg.png';
-$hero_image = trailingslashit($upload_dir['baseurl']) . '2026/07/office.jpg';
+$hero_image = get_template_directory_uri() . '/assets/images/contents-buildings.jpg';
 
 get_header();
 ?>
 <main class="insights-archive">
     <section class="insights-archive-hero">
         <div class="insights-archive-hero__image" style="background-image:url('<?php echo esc_url($hero_image); ?>');"></div>
-        <div class="insights-archive-hero__network" style="background-image:url('<?php echo esc_url($network_image); ?>');"></div>
         <div class="shell insights-archive-hero__inner">
-            <h1>Insights</h1>
+            <h1>Contenidos</h1>
             <p>Análisis, infografías y contenido especializado para ayudarte a entender los cambios que impactan tu empresa.</p>
-        </div>
-    </section>
-
-    <section class="insights-archive-content">
-        <div class="shell insights-archive-layout">
-            <aside class="insights-archive-filters" aria-label="Filtros de insights">
+            <div class="insights-archive-filters" aria-label="Filtros de contenidos">
                 <form method="get" action="<?php echo esc_url(get_post_type_archive_link('insights')); ?>">
                     <label>
                         <span>Área</span>
                         <select name="area" onchange="this.form.category.value=''; this.form.submit()">
-                            <option value="">Todas</option>
+                            <option value="">Área</option>
                             <?php foreach ($areas as $area) : ?>
                                 <option value="<?php echo esc_attr((string) $area->ID); ?>" <?php selected($selected_area, $area->ID); ?>>
                                     <?php echo esc_html(get_the_title($area)); ?>
@@ -181,7 +173,7 @@ get_header();
                     <label>
                         <span>Categoría</span>
                         <select name="category" onchange="this.form.submit()">
-                            <option value="">Todas</option>
+                            <option value="">Categoría</option>
                             <?php foreach ($category_options as $category_option) : ?>
                                 <?php $category_value = implode(',', array_unique($category_option['ids'])); ?>
                                 <option value="<?php echo esc_attr($category_value); ?>" <?php selected($selected_category_value, $category_value); ?>>
@@ -191,8 +183,12 @@ get_header();
                         </select>
                     </label>
                 </form>
-            </aside>
+            </div>
+        </div>
+    </section>
 
+    <section class="insights-archive-content">
+        <div class="shell insights-archive-layout">
             <div class="insights-archive-results">
                 <?php if ($insights_query->have_posts()) : ?>
                     <div class="insights-grid insights-archive-grid">
@@ -217,7 +213,7 @@ get_header();
                                     <?php if ($tag_id) : ?>
                                         <span class="tag"><?php echo esc_html(get_the_title($tag_id)); ?></span>
                                     <?php endif; ?>
-                                    <h3><?php echo esc_html($title); ?> <span>&rsaquo;</span></h3>
+                                    <h3><?php echo esc_html($title); ?></h3>
                                     <?php if (!empty($body)) : ?>
                                         <p><?php echo esc_html($body); ?></p>
                                     <?php endif; ?>
@@ -238,14 +234,20 @@ get_header();
                         <?php endwhile; ?>
                     </div>
 
-                    <nav class="insights-archive-pagination" aria-label="Paginación de insights">
+                    <?php if ($insights_query->max_num_pages > 1) : ?>
+                    <nav class="insights-archive-pagination" aria-label="Paginación de contenidos">
+                        <?php if ($paged === 1) : ?>
+                            <span class="page-numbers prev is-disabled" aria-hidden="true">&larr;</span>
+                        <?php endif; ?>
                         <?php
                         echo paginate_links(
                             array(
                                 'total' => $insights_query->max_num_pages,
                                 'current' => $paged,
-                                'prev_text' => '<span aria-hidden="true">&larr;</span>',
-                                'next_text' => '<span aria-hidden="true">&rarr;</span>',
+                                'prev_text' => '<span aria-hidden="true">&larr;</span><span class="screen-reader-text">Página anterior</span>',
+                                'next_text' => '<span aria-hidden="true">&rarr;</span><span class="screen-reader-text">Página siguiente</span>',
+                                'mid_size' => 1,
+                                'end_size' => 1,
                                 'add_args' => array_filter(
                                     array(
                                         'area' => $selected_area ? $selected_area : null,
@@ -255,16 +257,18 @@ get_header();
                             )
                         );
                         ?>
+                        <?php if ($paged >= $insights_query->max_num_pages) : ?>
+                            <span class="page-numbers next is-disabled" aria-hidden="true">&rarr;</span>
+                        <?php endif; ?>
                     </nav>
+                    <?php endif; ?>
                     <?php wp_reset_postdata(); ?>
                 <?php else : ?>
-                    <p class="insights-archive-empty">No se encontraron insights para los filtros seleccionados.</p>
+                    <p class="insights-archive-empty">No se encontraron contenidos para los filtros seleccionados.</p>
                 <?php endif; ?>
             </div>
         </div>
     </section>
-
-    <?php get_template_part('template-parts/cta-banner', null, array('page_id' => (int) get_option('page_on_front'))); ?>
 </main>
 <?php
 get_footer();

@@ -2,6 +2,10 @@ body.gya-redesign-page {
   background: #fff;
 }
 
+.site-header-spacer {
+  height: 79px;
+}
+
 body.gya-redesign-page .site-header {
   position: fixed;
   top: 0;

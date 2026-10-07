@@ -748,23 +748,19 @@ function gya_enqueue_assets()
         true
     );
 
-    if (is_front_page() || gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || gya_is_privacy_page_request() || is_singular('gya_category') || is_singular('team_member')) {
-        wp_enqueue_style(
-            'gya-home-redesign-style',
-            get_template_directory_uri() . '/assets/css/home-redesign.css',
-            array('gya-main-style'),
-            file_exists($home_redesign_css_path) ? filemtime($home_redesign_css_path) : $theme_version
-        );
-    }
+    wp_enqueue_style(
+        'gya-home-redesign-style',
+        get_template_directory_uri() . '/assets/css/home-redesign.css',
+        array('gya-main-style'),
+        file_exists($home_redesign_css_path) ? filemtime($home_redesign_css_path) : $theme_version
+    );
 
-    if (gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || gya_is_privacy_page_request() || is_singular('gya_category') || is_singular('team_member')) {
-        wp_enqueue_style(
-            'gya-areas-page-style',
-            get_template_directory_uri() . '/assets/css/areas-page.css',
-            array('gya-main-style', 'gya-home-redesign-style'),
-            file_exists($areas_page_css_path) ? filemtime($areas_page_css_path) : $theme_version
-        );
-    }
+    wp_enqueue_style(
+        'gya-areas-page-style',
+        get_template_directory_uri() . '/assets/css/areas-page.css',
+        array('gya-main-style', 'gya-home-redesign-style'),
+        file_exists($areas_page_css_path) ? filemtime($areas_page_css_path) : $theme_version
+    );
 
     wp_localize_script(
         'gya-main-script',
@@ -841,9 +837,7 @@ add_filter('template_include', 'gya_areas_page_template');
 
 function gya_areas_body_class($classes)
 {
-    if (gya_is_areas_page_request() || gya_is_team_page_request() || gya_is_contact_page_request() || gya_is_privacy_page_request() || is_singular('gya_category') || is_singular('team_member')) {
-        $classes[] = 'gya-redesign-page';
-    }
+    $classes[] = 'gya-redesign-page';
 
     if (gya_is_areas_page_request()) {
         $classes[] = 'gya-areas-page';

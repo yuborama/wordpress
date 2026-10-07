@@ -89,17 +89,6 @@ if (empty($areas)) {
     );
 }
 
-$clients = array(
-    array('name' => 'Pfizer', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/pfizer_Logo.svg'),
-    array('name' => 'DSV', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/dvs_Logo.svg'),
-    array('name' => 'Maersk', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/maersk_Logo.svg'),
-    array('name' => 'Crane Worldwide Logistics', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/crane_Logo.svg'),
-    array('name' => 'Senator International', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/senator_Logo.svg'),
-    array('name' => 'AIT Home Delivery', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/ait_Logo.svg'),
-    array('name' => 'Fracht Group', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/fracht_Logo.svg'),
-    array('name' => 'ViX', 'logo' => get_template_directory_uri() . '/assets/images/sponsor/vix_Logo.svg'),
-);
-
 get_header();
 ?>
 <main class="home-redesign">
@@ -134,16 +123,7 @@ get_header();
         </div>
     </section>
 
-    <section class="gya-stats" aria-label="Indicadores">
-        <div class="gya-design-shell gya-stats__grid">
-            <?php foreach ($stats as $stat) : ?>
-                <article>
-                    <strong><?php echo esc_html($stat['value']); ?></strong>
-                    <span><?php echo esc_html($stat['label']); ?></span>
-                </article>
-            <?php endforeach; ?>
-        </div>
-    </section>
+    <?php get_template_part('template-parts/stats', null, array('stats' => $stats)); ?>
 
     <section class="gya-areas gya-grid-bg" id="areas">
         <div class="gya-design-shell">
@@ -195,16 +175,7 @@ get_header();
         </div>
     </section>
 
-    <section class="gya-clients gya-grid-bg" aria-labelledby="clients-title">
-        <div class="gya-design-shell">
-            <h2 id="clients-title">Nuestros clientes</h2>
-            <div class="gya-clients__logos">
-                <?php foreach ($clients as $client) : ?>
-                    <img src="<?php echo esc_url($client['logo']); ?>" alt="<?php echo esc_attr($client['name']); ?>">
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
+    <?php get_template_part('template-parts/clients'); ?>
 </main>
 <?php
 get_footer();

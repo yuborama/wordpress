@@ -1,161 +1,135 @@
 <?php
-
 if (!defined('ABSPATH')) {
     exit;
 }
 
 $upload_dir = wp_upload_dir();
 $uploads_base = trailingslashit($upload_dir['baseurl']) . '2026/07/';
-$network_image = $uploads_base . 'network-bg.png';
-$office_image = $uploads_base . 'office.jpg';
-$office_alt_image = $uploads_base . 'MENSAJE-DEL-DIRECTOR.png';
+$asset_base = get_template_directory_uri() . '/assets/images/';
 $weare_hero_image = get_the_post_thumbnail_url(get_queried_object_id(), 'full');
-
 if (!$weare_hero_image) {
-    $weare_hero_image = $office_image;
+    $weare_hero_image = $uploads_base . 'insightsCardTeam.jpg';
 }
 
-$director_query = new WP_Query(
-    array(
-        'post_type' => 'team_member',
-        'post_status' => 'publish',
-        'posts_per_page' => 1,
-        'orderby' => array(
-            'menu_order' => 'ASC',
-            'date' => 'ASC',
-        ),
-        'no_found_rows' => true,
-    )
+$stats = array(
+    array('value' => '+15', 'label' => 'Años de experiencia'),
+    array('value' => '+140', 'label' => 'Soluciones especializadas'),
+    array('value' => '+7', 'label' => 'Áreas de especialización'),
+    array('value' => '+40', 'label' => 'Especialistas y consultores'),
 );
-
-$director = array(
-    'name' => 'José Luis Gómez González',
-    'position' => 'Socio Director',
-    'image' => $uploads_base . 'team1.jpg',
-);
-
-if ($director_query->have_posts()) {
-    $director_query->the_post();
-
-    $director_id = get_the_ID();
-    $director_image = gya_get_post_field_value('image', $director_id, '');
-    $director_image_url = '';
-
-    if (is_array($director_image) && isset($director_image['url'])) {
-        $director_image_url = $director_image['url'];
-    } elseif (is_numeric($director_image)) {
-        $director_image_url = wp_get_attachment_image_url((int) $director_image, 'large');
-    } elseif (is_string($director_image)) {
-        $director_image_url = $director_image;
-    }
-
-    if (!$director_image_url && has_post_thumbnail($director_id)) {
-        $director_image_url = get_the_post_thumbnail_url($director_id, 'large');
-    }
-
-    $director = array(
-        'name' => gya_get_post_field_value('name', $director_id, get_the_title()),
-        'position' => gya_get_post_field_value('position', $director_id, 'Socio Director'),
-        'image' => $director_image_url,
-    );
-
-    wp_reset_postdata();
-}
-
-$feature_cards = array(
+$specialties = array(
     array(
-        'type' => 'tracking',
-        'image' => 'seguimiento.svg',
-        'title' => 'Tecnología y seguimiento',
-        'body' => 'Integramos herramientas y metodologías de trabajo que nos permiten dar seguimiento a proyectos, centralizar información clave y mantener una comunicación más clara durante cada etapa del servicio.',
+        'title' => 'Freight Forward',
+        'image' => 'firma-freight.jpg',
+        'body' => 'Conocemos la aplicación de tasas de IVA en servicios de transporte nacional e internacional, así como la operación de agentes de carga, incoterms y las disposiciones aplicables a su actividad.',
     ),
     array(
-        'type' => 'iso',
-        'image' => 'iso.svg',
-        'title' => 'Calidad certificada',
-        'body' => 'Nuestra firma evalúa y fortalece continuamente sus procesos mediante un Sistema de Calidad ISO 9001:2015, con el objetivo de ofrecer un servicio más sólido, ordenado y confiable.',
-    ),
-    array(
-        'type' => 'defensa',
-        'image' => 'defensa.svg',
-        'title' => 'Reconocimiento',
-        'body' => 'G&A fue reconocida por segundo año consecutivo por la revista Defensa Fiscal como una de las Grandes Firmas de Fiscalistas en México, reflejo de la experiencia y especialización de nuestro equipo.',
+        'title' => 'Shelter empresarial',
+        'image' => 'firma-shelter.jpg',
+        'body' => 'Acompañamos a empresas extranjeras y nuevos negocios en su establecimiento y operación en México, brindando soporte en aspectos legales y fiscales para facilitar el inicio y desarrollo de sus operaciones.',
     ),
 );
-
-$feature_image_base = get_template_directory_uri() . '/assets/images/nosotros/';
-$sponsor_base = get_template_directory_uri() . '/assets/images/sponsor/';
-$clients = array(
-    array('name' => 'Vix', 'logo' => 'vix_Logo.svg'),
-    array('name' => 'Pfizer', 'logo' => 'pfizer_Logo.svg'),
-    array('name' => 'DSV', 'logo' => 'dvs_Logo.svg'),
-    array('name' => 'Maersk', 'logo' => 'maersk_Logo.svg'),
-    array('name' => 'AIT Home Delivery', 'logo' => 'ait_Logo.svg'),
-    array('name' => 'Fracht Group', 'logo' => 'fracht_Logo.svg'),
-    array('name' => 'Crane Worldwide Logistics', 'logo' => 'crane_Logo.svg'),
-    array('name' => 'Senator International', 'logo' => 'senator_Logo.svg'),
+$experience = array(
+    array(
+        'title' => 'ISO 9001:2015',
+        'image' => 'nosotros/iso.svg',
+        'body' => 'Contamos con un Sistema de Gestión de la Calidad implementado y certificado bajo la Norma ISO 9001:2015, orientado a la calidad, satisfacción de nuestros clientes y mejora continua.',
+    ),
+    array(
+        'title' => 'Estándares internacionales de calidad',
+        'image' => 'nosotros/quality-badge.svg',
+        'body' => 'Realizamos revisiones semestrales de nuestras áreas de servicios profesionales conforme a las Normas Internacionales de Gestión de Calidad ISQM-1 e ISQM-2.',
+    ),
+    array(
+        'title' => 'Visibilidad y control de nuestros procesos',
+        'image' => 'nosotros/seguimiento.svg',
+        'body' => 'Integramos herramientas digitales de gestión para dar seguimiento a proyectos, procesos y actividades, fortaleciendo la coordinación de nuestros equipos y la visibilidad del trabajo.',
+    ),
+);
+$regions = array(
+    'México' => array('Ciudad de México', 'León, Guanajuato'),
+    'América' => array('Estados Unidos', 'Colombia', 'Argentina', 'Brasil', 'Perú', 'Ecuador', 'Chile', 'Panamá', 'Guatemala'),
+    'Europa' => array('República Checa', 'Reino Unido', 'Francia', 'España', 'Suiza', 'Polonia'),
 );
 
 get_header();
 ?>
 <main class="weare-page">
-    <section class="weare-hero">
-        <div class="weare-hero__image" style="background-image:url('<?php echo esc_url($weare_hero_image); ?>');"></div>
-        <div class="shell weare-hero__inner">
+    <section class="weare-hero" aria-labelledby="firma-title">
+        <div class="weare-hero__inner">
             <div class="weare-hero__copy">
-                <span>NOSOTROS</span>
-                <h1>Una firma boutique con <strong>visión estratégica y atención cercana</strong></h1>
-                <p>En G&A acompañamos a empresas con soluciones fiscales, legales, financieras y corporativas diseñadas para dar claridad, orden y dirección a sus operaciones.</p>
-                <p><strong>Más de 15 años de experiencia respaldan la trayectoria de nuestros socios y especialistas en la atención de empresas nacionales e internacionales.</strong></p>
+                <span class="weare-eyebrow">LA FIRMA</span>
+                <h1 id="firma-title">Estrategia, experiencia y respaldo para decisiones que generan valor.</h1>
+                <p>Acompañamos a nuestros clientes con soluciones especializadas, atención personalizada y una visión integral de sus necesidades, respaldados por una cultura de calidad y mejora continua.</p>
             </div>
+            <img class="weare-hero__image" src="<?php echo esc_url($weare_hero_image); ?>" alt="Equipo de G&amp;A trabajando en conjunto" fetchpriority="high">
         </div>
     </section>
 
-    <section class="weare-features">
-        <div class="shell weare-features__grid">
-            <?php foreach ($feature_cards as $feature) : ?>
-                <article class="weare-feature-card">
-                    <div class="weare-feature-mark weare-feature-mark--<?php echo esc_attr($feature['type']); ?>" aria-hidden="true">
-                        <img src="<?php echo esc_url($feature_image_base . $feature['image']); ?>" alt="">
+    <?php get_template_part('template-parts/stats', null, array(
+        'stats' => $stats,
+        'heading' => 'Una firma construida sobre experiencia y especialización.',
+    )); ?>
+
+    <section class="weare-specialties" aria-labelledby="specialties-title">
+        <div class="gya-design-shell weare-specialties__grid">
+            <div class="weare-section-copy">
+                <h2 id="specialties-title">Conocemos el negocio detrás de cada operación.</h2>
+                <p>Nuestra experiencia nos permite comprender no solo los requerimientos técnicos de nuestros clientes, sino también las particularidades de sectores que requieren conocimiento especializado.</p>
+            </div>
+            <?php foreach ($specialties as $specialty) : ?>
+                <article class="weare-specialty">
+                    <img src="<?php echo esc_url($asset_base . $specialty['image']); ?>" alt="<?php echo esc_attr($specialty['title']); ?>" loading="lazy">
+                    <div>
+                        <h3><?php echo esc_html($specialty['title']); ?></h3>
+                        <p><?php echo esc_html($specialty['body']); ?></p>
                     </div>
-                    <h2><?php echo esc_html($feature['title']); ?></h2>
-                    <p><?php echo esc_html($feature['body']); ?></p>
                 </article>
             <?php endforeach; ?>
         </div>
     </section>
 
-    <?php get_template_part('template-parts/team', null, array('page_id' => (int) get_option('page_on_front'))); ?>
-
-    <section class="weare-clients" style="background-image:url('<?php echo esc_url($network_image); ?>');">
-        <div class="shell">
-            <header class="weare-section-header weare-section-header--light">
-                <span>NUESTROS CLIENTES</span>
-                <h2>La confianza de nuestros clientes respalda nuestro trabajo</h2>
-            </header>
-            <div class="weare-client-list">
-                <?php foreach ($clients as $client) : ?>
-                    <span class="weare-client-logo">
-                        <img src="<?php echo esc_url($sponsor_base . $client['logo']); ?>" alt="<?php echo esc_attr($client['name']); ?>">
-                    </span>
+    <section class="gya-distinguish weare-experience" aria-labelledby="experience-title">
+        <div class="gya-design-shell">
+            <h2 id="experience-title">LA EXPERIENCIA IMPORTA.</h2>
+            <div class="gya-distinguish__grid">
+                <?php foreach ($experience as $feature) : ?>
+                    <article>
+                        <img class="<?php echo $feature['image'] === 'nosotros/quality-badge.svg' ? 'weare-quality-badge' : ''; ?>" src="<?php echo esc_url($asset_base . $feature['image']); ?>" alt="" loading="lazy">
+                        <h3><?php echo esc_html($feature['title']); ?></h3>
+                        <p><?php echo esc_html($feature['body']); ?></p>
+                    </article>
                 <?php endforeach; ?>
             </div>
         </div>
     </section>
 
-    <section class="weare-message">
-        <div class="shell">
-            <article class="weare-message-card">
-                <div class="weare-message-card__bg" style="background-image:url('<?php echo esc_url($office_alt_image); ?>');"></div>
-                <div class="weare-message-card__copy">
-                    <h2>Mensaje de nuestro <strong>Socio Director</strong></h2>
-                    <p>“Nuestro trabajo no se limita a resolver una obligación o atender un tema puntual. Buscamos acompañar a cada empresa con cercanía, criterio y una visión integral que le permita tomar mejores decisiones y crecer con mayor seguridad.”</p>
-                    <h3><?php echo esc_html($director['name']); ?></h3>
-                    <span><?php echo esc_html($director['position']); ?></span>
+    <section class="weare-presence" aria-labelledby="presence-title">
+        <div class="gya-design-shell">
+            <div class="weare-presence__grid">
+                <div class="weare-section-copy">
+                    <span class="weare-eyebrow">PRESENCIA</span>
+                    <h2 id="presence-title">Con una visión que cruza fronteras.</h2>
+                    <p>Nuestra operación continúa creciendo para acompañar las necesidades de nuestros clientes dentro y fuera de México.</p>
                 </div>
-            </article>
+                <img class="weare-map" src="<?php echo esc_url($asset_base . 'firma-presence.svg'); ?>" alt="Presencia en México, América y Europa" loading="lazy">
+            </div>
+            <div class="weare-regions">
+                <?php foreach ($regions as $region => $locations) : ?>
+                    <div>
+                        <h3><?php echo esc_html($region); ?></h3>
+                        <ul>
+                            <?php foreach ($locations as $location) : ?>
+                                <li><?php echo esc_html($location); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </section>
+
+    <?php get_template_part('template-parts/clients', null, array('section_class' => 'gya-clients weare-clients')); ?>
+    <?php get_template_part('template-parts/relations-section'); ?>
 </main>
-<?php
-get_footer();
+<?php get_footer(); ?>
