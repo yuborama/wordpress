@@ -64,15 +64,16 @@ if (function_exists('gya_social_networks')) {
             <span></span>
             <span></span>
         </button>
-        <?php if (!empty($header_social_links)) : ?>
-            <div class="header-social" aria-label="Redes sociales">
+            <div class="header-social" aria-label="Redes sociales y acceso">
                 <?php foreach ($header_social_links as $social_link) : ?>
                     <a href="<?php echo esc_url($social_link['url']); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($social_link['label']); ?>">
                         <img src="<?php echo esc_url($social_link['icon']); ?>" alt="">
                     </a>
                 <?php endforeach; ?>
+                <a class="header-access" href="<?php echo esc_url(home_url('/acceso/')); ?>" aria-label="Iniciar sesión" title="Iniciar sesión">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="7" r="3.5"/><path d="M5 21v-3a7 7 0 0 1 14 0v3Z"/></svg>
+                </a>
             </div>
-        <?php endif; ?>
     </div>
 </header>
 <?php if (!(is_front_page() || $header_is_areas_request || $header_is_team_request || $header_is_category_request || $header_is_contact_request || $header_is_member_request || $header_is_privacy_request)) : ?>
@@ -97,7 +98,7 @@ if (function_exists('gya_social_networks')) {
         <a class="<?php echo ($header_is_areas_request || $header_is_category_request) ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/areas/')); ?>">ÁREAS</a>
         <a class="<?php echo ($header_is_team_request || $header_is_member_request) ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/team/')); ?>">NUESTRO EQUIPO</a>
         <a class="<?php echo $header_is_firma_request ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/weare/')); ?>">LA FIRMA</a>
-        <a href="https://capacitaciongya.educacionitel.com/" target="_blank" rel="noopener noreferrer">CURSOS</a>
+        <a href="<?php echo esc_url(gya_platform_links()['courses']); ?>" target="_blank" rel="noopener noreferrer">CURSOS</a>
         <a class="<?php echo $header_is_insights_active ? 'is-current' : ''; ?>" href="<?php echo esc_url(get_post_type_archive_link('insights')); ?>">CONTENIDOS</a>
         <a class="mobile-menu-cta <?php echo $header_is_contact_request ? 'is-current' : ''; ?>" href="<?php echo esc_url(home_url('/contact/')); ?>">CONTACTO <span aria-hidden="true">→</span></a>
 

@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 $page_id = isset($args['page_id']) ? (int) $args['page_id'] : get_queried_object_id();
+$home_cards = !empty($args['home_cards']);
 $insights_heading = gya_get_field_value('gya_insights_heading', 'Información clave para tomar mejores decisiones.', $page_id);
 
 $carousel_autoplay_ms = function_exists('gya_get_duration_ms') ? gya_get_duration_ms('gya_carousel_duration_seconds', 10) : 10000;
@@ -13,7 +14,7 @@ $insights_query = new WP_Query(
     array(
         'post_type' => 'insights',
         'post_status' => 'publish',
-        'posts_per_page' => 3,
+        'posts_per_page' => $home_cards ? -1 : 3,
         'orderby' => 'date',
         'order' => 'DESC',
         'no_found_rows' => true,
@@ -61,6 +62,14 @@ while ($insights_query->have_posts()) {
 }
 
 wp_reset_postdata();
+if ($home_cards) {
+    get_template_part('template-parts/distinguish-posts', null, array(
+        'services' => $insights,
+        'section_id' => 'insights',
+        'heading' => 'CONTENIDOS',
+    ));
+    return;
+}
 ?>
 <section class="section light-section" id="insights">
     <div class="shell">

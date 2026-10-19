@@ -6,6 +6,8 @@ if (!defined('ABSPATH')) {
 
 require_once get_template_directory() . '/inc/site-data.php';
 require_once get_template_directory() . '/inc/theme-helpers.php';
+require_once get_template_directory() . '/inc/platform-access.php';
+require_once get_template_directory() . '/inc/virtual-pages.php';
 require_once get_template_directory() . '/inc/hero-slides.php';
 require_once get_template_directory() . '/inc/acf-fields.php';
 require_once get_template_directory() . '/inc/seed-front-page.php';

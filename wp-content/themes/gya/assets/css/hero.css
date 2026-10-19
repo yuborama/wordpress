@@ -1,7 +1,7 @@
 .hero-section {
   position: relative;
   width: min(100%, var(--max));
-  height: 596px;
+  height: 520px;
   margin: 0 auto;
   overflow: hidden;
   background: #00020e;
@@ -49,7 +49,7 @@
 .hero-content {
   position: relative;
   z-index: 4;
-  height: 596px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

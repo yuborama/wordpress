@@ -14,7 +14,7 @@ function gya_get_landing_data() {
         'stats' => array(
             array('value' => '+ 16', 'label' => 'años de experiencia', 'icon' => 'years'),
             array('value' => '+140', 'label' => 'soluciones especializadas', 'icon' => 'solutions'),
-            array('value' => '+7', 'label' => 'áreas de especialización', 'icon' => 'areas'),
+            array('value' => '+6', 'label' => 'áreas de especialización', 'icon' => 'areas'),
             array('value' => '+50', 'label' => 'especialistas y consultores', 'icon' => 'person'),
         ),
         'solutions' => array(

@@ -125,6 +125,8 @@ get_header();
 
     <?php get_template_part('template-parts/stats', null, array('stats' => $stats)); ?>
 
+    <?php get_template_part('template-parts/services', null, array('page_id' => $page_id, 'home_cards' => true)); ?>
+
     <section class="gya-areas gya-grid-bg" id="areas">
         <div class="gya-design-shell">
             <h2>ÁREAS</h2>
@@ -140,6 +142,8 @@ get_header();
             </div>
         </div>
     </section>
+
+    <?php get_template_part('template-parts/insights', null, array('page_id' => $page_id, 'home_cards' => true)); ?>
 
     <?php
     get_template_part(
