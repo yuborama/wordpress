@@ -111,8 +111,7 @@ body.admin-bar .site-header {
   flex-shrink: 0;
 }
 
-.header-access:focus-visible,
-.gya-access__button:focus-visible {
+.header-access:focus-visible {
   outline: 2px solid #ff641f;
   outline-offset: 5px;
 }
@@ -160,23 +159,34 @@ body.admin-bar .site-header {
   min-height: 64px;
   padding: 16px;
   background: #fff;
-  color: #071e2b;
+  color: #062236;
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
 }
 
 .gya-access__button + .gya-access__button {
   margin-top: 14px;
 }
 
-.gya-access__button--orange {
-  background: #ff641f;
-  color: #fff;
+.gya-access__button:hover,
+.gya-access__button:focus-visible {
+  color: #ff641f;
+  outline: 2px solid #ff641f;
+  outline-offset: -2px;
 }
 
-.gya-access__button:hover {
-  box-shadow: inset 0 0 0 2px #ff641f;
+.gya-access__button:active {
+  background: #ff641f;
+  color: #fff;
+  outline: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gya-access__button {
+    transition: none;
+  }
 }
 
 .header-inner {
