@@ -1,0 +1,226 @@
+.category-detail {
+  width: min(100%, var(--max));
+  margin: 0 auto;
+  padding-top: 79px;
+  overflow: hidden;
+  background: #f7f7f7;
+  color: #062236;
+}
+
+.category-detail .shell {
+  width: min(calc(100% - 48px), 1200px);
+}
+
+.category-detail-hero {
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  background: #07131b;
+  color: #fff;
+}
+
+.category-detail-hero__image {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.category-detail-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15, 12, 14, 0.78) 0%, rgba(12, 19, 23, 0.5) 45%, rgba(4, 20, 31, 0.08) 100%);
+}
+
+.category-detail-hero__inner {
+  position: relative;
+  z-index: 1;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.category-detail-hero h1 {
+  max-width: 580px;
+  margin: 0;
+  color: #fff;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.category-detail-hero p {
+  max-width: 510px;
+  margin: 24px 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.category-detail-solutions {
+  padding: 40px 0 0;
+  background: #f7f7f7;
+}
+
+.category-detail-solutions .shell {
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(6, 34, 54, 0.72);
+}
+
+.category-detail-eyebrow {
+  margin: 0 0 32px;
+  color: #ff641f;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.category-detail-solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+
+.category-detail-solution-card {
+  min-height: 206px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 46px 24px 24px;
+  background: #fff;
+  color: #111;
+}
+
+.category-detail-solution-card h3 {
+  margin: 0;
+  color: #111;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.category-detail-solution-card p {
+  margin: 18px 0 0;
+  color: #4e4e4e;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.category-detail-empty {
+  margin: 0;
+  padding: 24px 0;
+  color: #53636b;
+  font-size: 16px;
+}
+
+.category-detail-relations {
+  padding: 82px 0 90px;
+  background: #f7f7f7;
+}
+
+.category-detail-relations__grid {
+  display: grid;
+  grid-template-columns: minmax(340px, 0.82fr) 1.18fr;
+  gap: 116px;
+  align-items: center;
+}
+
+.category-detail-relations h2 {
+  max-width: 470px;
+  margin: 0;
+  color: #062236;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.category-detail-relations p {
+  max-width: 450px;
+  margin: 30px 0 32px;
+  color: #334b59;
+  font-size: 14px;
+  line-height: 1.42;
+}
+
+.category-detail-relations img {
+  display: block;
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+}
+
+@media (max-width: 1050px) {
+  .category-detail-solutions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .category-detail-relations__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .category-detail-relations img {
+    height: auto;
+    aspect-ratio: 1.45 / 1;
+  }
+}
+
+@media (max-width: 620px) {
+  .category-detail .shell {
+    width: calc(100% - 36px);
+  }
+
+  .category-detail-hero,
+  .category-detail-hero__inner {
+    min-height: 380px;
+  }
+
+  .category-detail-hero__image {
+    background-position: 62% center;
+  }
+
+  .category-detail-hero h1 {
+    font-size: 36px;
+  }
+
+  .category-detail-hero p {
+    font-size: 14px;
+  }
+
+  .category-detail-solutions {
+    padding-top: 48px;
+  }
+
+  .category-detail-solutions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-detail-solution-card {
+    min-height: 190px;
+  }
+
+  .category-detail-relations {
+    padding: 0 0 64px;
+  }
+
+  .category-detail .category-detail-relations__grid {
+    width: 100%;
+    gap: 24px;
+  }
+
+  .category-detail-relations__grid > div {
+    padding-inline: 18px;
+  }
+
+  .category-detail-relations__grid > img {
+    order: -1;
+    aspect-ratio: 8 / 5;
+  }
+
+  .category-detail-relations h2 {
+    font-size: 36px;
+  }
+}

@@ -1,0 +1,237 @@
+(function () {
+  var heroSection = document.querySelector('.hero-section');
+  if (!heroSection) return;
+
+  var slides = heroSection.querySelectorAll('[data-hero-slide]');
+  var copies = heroSection.querySelectorAll('[data-hero-copy]');
+  var prevButton = heroSection.querySelector('.hero-prev');
+  var nextButton = heroSection.querySelector('.hero-next');
+  var activeIndex = 0;
+  var slideCount = Math.max(slides.length, copies.length);
+  var intervalMs = window.gyaTiming && Number(window.gyaTiming.heroAutoplayMs)
+    ? Number(window.gyaTiming.heroAutoplayMs)
+    : 10000;
+  var timerId;
+
+  function setActiveSlide(index) {
+    if (slideCount <= 0) return;
+
+    activeIndex = (index + slideCount) % slideCount;
+
+    slides.forEach(function (slide, i) {
+      slide.classList.toggle('is-active', i === activeIndex);
+    });
+
+    copies.forEach(function (copy, i) {
+      copy.classList.toggle('is-active', i === activeIndex);
+    });
+  }
+
+  function startAutoplay() {
+    if (timerId) clearInterval(timerId);
+    timerId = setInterval(function () {
+      setActiveSlide(activeIndex + 1);
+    }, intervalMs);
+  }
+
+  if (slideCount > 1) {
+    if (prevButton) {
+      prevButton.addEventListener('click', function () {
+        setActiveSlide(activeIndex - 1);
+        startAutoplay();
+      });
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener('click', function () {
+        setActiveSlide(activeIndex + 1);
+        startAutoplay();
+      });
+    }
+
+    startAutoplay();
+  } else {
+    if (prevButton) prevButton.hidden = true;
+    if (nextButton) nextButton.hidden = true;
+  }
+})();
+
+(function () {
+  var actions = document.querySelectorAll('.js-whatsapp-action[data-whatsapp-url]');
+
+  if (!actions.length) return;
+
+  function openWhatsapp(action, event) {
+    var url = action.dataset.whatsappUrl;
+
+    if (!url) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    window.open(url, '_blank', 'noopener');
+  }
+
+  actions.forEach(function (action) {
+    action.addEventListener('click', function (event) {
+      openWhatsapp(action, event);
+    });
+
+    action.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        openWhatsapp(action, event);
+      }
+    });
+  });
+})();
+
+(function () {
+  var actions = document.querySelectorAll('.js-mail-action[data-mail-url]');
+
+  if (!actions.length) return;
+
+  function openMail(action, event) {
+    var url = action.dataset.mailUrl;
+
+    if (!url) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    window.location.href = url;
+  }
+
+  actions.forEach(function (action) {
+    action.addEventListener('click', function (event) {
+      openMail(action, event);
+    });
+
+    action.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        openMail(action, event);
+      }
+    });
+  });
+})();
+
+(function () {
+  var toggle = document.querySelector('.mobile-menu-toggle');
+  var panel = document.querySelector('.mobile-menu-panel');
+  var closeButton = document.querySelector('.mobile-menu-close');
+  var backdrop = document.querySelector('.mobile-menu-backdrop');
+
+  if (!toggle || !panel || !closeButton) return;
+
+  function setMenuOpen(isOpen) {
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    panel.classList.toggle('is-open', isOpen);
+    if (backdrop) backdrop.classList.toggle('is-open', isOpen);
+    document.body.classList.toggle('mobile-menu-open', isOpen);
+  }
+
+  toggle.addEventListener('click', function () {
+    setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  closeButton.addEventListener('click', function () {
+    setMenuOpen(false);
+  });
+
+  if (backdrop) {
+    backdrop.addEventListener('click', function () {
+      setMenuOpen(false);
+    });
+  }
+
+  panel.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      setMenuOpen(false);
+    });
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      setMenuOpen(false);
+    }
+  });
+})();
+
+(function () {
+  var hero = document.querySelector('[data-gya-hero]');
+  if (!hero) return;
+
+  var slides = Array.prototype.slice.call(hero.querySelectorAll('[data-gya-hero-slide]'));
+  var media = Array.prototype.slice.call(hero.querySelectorAll('[data-gya-hero-media]'));
+  var intervalMs = window.gyaTiming && Number(window.gyaTiming.heroAutoplayMs)
+    ? Number(window.gyaTiming.heroAutoplayMs)
+    : 10000;
+  var activeIndex = 0;
+  var timerId;
+
+  if (slides.length < 2) return;
+
+  function showSlide(index) {
+    activeIndex = (index + slides.length) % slides.length;
+    var slideKey = slides[activeIndex].dataset.gyaHeroSlide;
+
+    slides.forEach(function (slide, slideIndex) {
+      slide.classList.toggle('is-active', slideIndex === activeIndex);
+    });
+
+    media.forEach(function (item) {
+      item.classList.toggle('is-active', item.dataset.gyaHeroMedia === slideKey);
+    });
+  }
+
+  function startAutoplay() {
+    window.clearInterval(timerId);
+    timerId = window.setInterval(function () {
+      showSlide(activeIndex + 1);
+    }, intervalMs);
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      window.clearInterval(timerId);
+    } else {
+      startAutoplay();
+    }
+  });
+
+  startAutoplay();
+})();
+
+(function () {
+  var directory = document.querySelector('[data-team-directory]');
+  if (!directory) return;
+
+  var filters = Array.prototype.slice.call(directory.querySelectorAll('[data-team-filter]'));
+  var members = Array.prototype.slice.call(directory.querySelectorAll('[data-team-member]'));
+  var emptyState = directory.querySelector('[data-team-empty]');
+
+  function setActiveGroup(group) {
+    var visibleMembers = 0;
+
+    filters.forEach(function (filter) {
+      var isActive = filter.dataset.teamFilter === group;
+      filter.classList.toggle('is-active', isActive);
+      filter.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    members.forEach(function (member) {
+      var isVisible = member.dataset.teamMember === group;
+      member.hidden = !isVisible;
+      if (isVisible) visibleMembers += 1;
+    });
+
+    if (emptyState) emptyState.hidden = visibleMembers > 0;
+    directory.dataset.activeGroup = group;
+  }
+
+  filters.forEach(function (filter) {
+    filter.addEventListener('click', function () {
+      setActiveGroup(filter.dataset.teamFilter || 'gerentes');
+    });
+  });
+
+  setActiveGroup(directory.dataset.activeGroup || 'gerentes');
+})();

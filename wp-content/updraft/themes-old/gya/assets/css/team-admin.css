@@ -1,0 +1,50 @@
+.column-gya_team_order {
+  width: 48px;
+  text-align: center;
+}
+
+.gya-order-handle {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  place-items: center;
+  background: transparent;
+  color: #646970;
+  cursor: grab;
+}
+
+.gya-order-handle:hover,
+.gya-order-handle:focus-visible {
+  border-color: #ff641f;
+  color: #ff641f;
+  outline: 0;
+}
+
+.gya-order-handle:active {
+  cursor: grabbing;
+}
+
+.gya-order-placeholder {
+  height: 54px;
+  outline: 2px dashed #ff641f;
+  outline-offset: -4px;
+  background: #fff6f1;
+}
+
+.gya-order-status {
+  min-height: 20px;
+  margin: 4px 0 8px;
+  color: #646970;
+  font-weight: 600;
+}
+
+.gya-order-status[data-state="success"] {
+  color: #008a20;
+}
+
+.gya-order-status[data-state="error"] {
+  color: #b32d2e;
+}

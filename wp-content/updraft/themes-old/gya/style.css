@@ -1,0 +1,16 @@
+/*
+Theme Name: GYA Theme
+Theme URI: https://example.com/gya-theme
+Author: Johan
+Description: Tema personalizado para la landing y blog de GYA.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.8
+Requires PHP: 7.4
+Text Domain: gya
+*/
+
+/*
+  WordPress requiere style.css en la raiz del tema.
+  Los estilos reales viven en assets/css/main.css.
+*/

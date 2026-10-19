@@ -1,0 +1,401 @@
+0000.040 (R) [notice] Looking for db archive: file name: backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-db.gz
+0000.041 (R) [notice] Archive is expected to be size: 400.4 KB: OK
+0000.045 (R) [notice] Looking for mu-plugins archive: file name: backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-mu-plugins.zip
+0000.047 (R) [notice] Archive is expected to be size: 1.5 KB: OK
+0000.049 (R) [notice] Looking for plugins archive: file name: backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-plugins.zip
+0000.051 (R) [notice] Archive is expected to be size: 21848.7 KB: OK
+0000.054 (R) [notice] Looking for themes archive: file name: backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-themes.zip
+0000.055 (R) [notice] Archive is expected to be size: 3228.6 KB: OK
+0000.058 (R) [notice] Looking for uploads archive: file name: backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-uploads2.zip
+0000.059 (R) [notice] Archive is expected to be size: 21681.9 KB: OK
+0000.059 (R) [notice] Looking for uploads archive: file name: backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-uploads.zip
+0000.059 (R) [notice] Archive is expected to be size: 38700.5 KB: OK
+0000.061 (R) [notice] Looking for others archive: file name: backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-others.zip
+0000.063 (R) [notice] Archive is expected to be size: 7135.6 KB: OK
+0000.065 (R) [notice] Will not delete any archives after unpacking them, because there was no cloud storage for this backup
+0000.070 (R) [notice] Unpacking backup... (backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-db.gz, 0.4 Mb)
+0000.076 (R) [notice] Restoring the database (on a large site this can take a long time - if it times out (which can happen if your web hosting company has configured your hosting to limit resources) then you should use a different method, such as phpMyAdmin)...
+0000.154 (R) [notice] Enabling Maintenance mode&#8230;
+0000.180 (R) [notice] Backup of: https://www.gyaonline.com
+0000.194 (R) [notice] Content URL: https://www.gyaonline.com/wp-content
+0000.194 (R) [notice] Uploads URL: https://www.gyaonline.com/wp-content/uploads
+0000.195 (R) [notice] Old table prefix: owjo_
+0000.195 (R) [notice] Old ABSPATH: /home/gyaonlin/public_html/
+0000.195 (R) [notice] UpdraftPlus plugin slug: updraftplus/updraftplus.php
+0000.195 (R) [notice] Site information: multisite = 0
+0000.195 (R) [notice] Site information: sql_mode = NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+0000.197 (R) [notice] New table prefix: yo_
+0000.203 (R) [notice] Processing table (InnoDB):  owjo_options - will restore as: yo_options
+0000.333 (R) [notice] Atomic restore: dropping original table (wp_options)
+0000.343 (R) [notice] Atomic restore: renaming new table (yo_options) to final table name (wp_options)
+0000.888 (R) [notice] Table prefix has changed: changing option table field(s) accordingly: OK
+0000.893 (R) [notice] Search and replacing table: wp_options: rows: 345
+0000.928 (R) [notice] Processing table (InnoDB):  owjo_users - will restore as: yo_users
+0000.969 (R) [notice] Atomic restore: dropping original table (wp_users)
+0000.980 (R) [notice] Atomic restore: renaming new table (yo_users) to final table name (wp_users)
+0000.997 (R) [notice] Search and replacing table: wp_users: rows: 1
+0000.997 (R) [notice] Processing table (InnoDB):  owjo_usermeta - will restore as: yo_usermeta
+0001.036 (R) [notice] Atomic restore: dropping original table (wp_usermeta)
+0001.047 (R) [notice] Atomic restore: renaming new table (yo_usermeta) to final table name (wp_usermeta)
+0001.063 (R) [notice] Table prefix has changed: changing usermeta table field(s) accordingly: OK
+0001.065 (R) [notice] Search and replacing table: wp_usermeta: rows: 56
+0001.067 (R) [notice] Processing table (InnoDB):  owjo_actionscheduler_actions - will restore as: yo_actionscheduler_actions
+0001.122 (R) [notice] Atomic restore: dropping original table (wp_actionscheduler_actions)
+0001.134 (R) [notice] Atomic restore: renaming new table (yo_actionscheduler_actions) to final table name (wp_actionscheduler_actions)
+0001.152 (R) [notice] Search and replacing table: wp_actionscheduler_actions: rows: 15
+0001.153 (R) [notice] Processing table (InnoDB):  owjo_actionscheduler_claims - will restore as: yo_actionscheduler_claims
+0001.185 (R) [notice] Atomic restore: dropping original table (wp_actionscheduler_claims)
+0001.197 (R) [notice] Atomic restore: renaming new table (yo_actionscheduler_claims) to final table name (wp_actionscheduler_claims)
+0001.211 (R) [notice] Search and replacing table: wp_actionscheduler_claims: rows: 0
+0001.211 (R) [notice] Processing table (InnoDB):  owjo_actionscheduler_groups - will restore as: yo_actionscheduler_groups
+0001.245 (R) [notice] Atomic restore: dropping original table (wp_actionscheduler_groups)
+0001.255 (R) [notice] Atomic restore: renaming new table (yo_actionscheduler_groups) to final table name (wp_actionscheduler_groups)
+0001.271 (R) [notice] Search and replacing table: wp_actionscheduler_groups: rows: 3
+0001.271 (R) [notice] Processing table (InnoDB):  owjo_actionscheduler_logs - will restore as: yo_actionscheduler_logs
+0001.311 (R) [notice] Atomic restore: dropping original table (wp_actionscheduler_logs)
+0001.322 (R) [notice] Atomic restore: renaming new table (yo_actionscheduler_logs) to final table name (wp_actionscheduler_logs)
+0001.337 (R) [notice] Search and replacing table: wp_actionscheduler_logs: rows: 43
+0001.338 (R) [notice] Processing table (InnoDB):  owjo_commentmeta - will restore as: yo_commentmeta
+0001.371 (R) [notice] Atomic restore: dropping original table (wp_commentmeta)
+0001.382 (R) [notice] Atomic restore: renaming new table (yo_commentmeta) to final table name (wp_commentmeta)
+0001.397 (R) [notice] Search and replacing table: wp_commentmeta: rows: 0
+0001.398 (R) [notice] Processing table (InnoDB):  owjo_comments - will restore as: yo_comments
+0001.439 (R) [notice] Atomic restore: dropping original table (wp_comments)
+0001.455 (R) [notice] Atomic restore: renaming new table (yo_comments) to final table name (wp_comments)
+0001.470 (R) [notice] Search and replacing table: wp_comments: rows: 1
+0001.471 (R) [notice] Processing table (InnoDB):  owjo_links - will restore as: yo_links
+0001.504 (R) [notice] Atomic restore: dropping original table (wp_links)
+0001.515 (R) [notice] Atomic restore: renaming new table (yo_links) to final table name (wp_links)
+0001.529 (R) [notice] Search and replacing table: wp_links: rows: 0
+0001.530 (R) [notice] Processing table (InnoDB):  owjo_postmeta - will restore as: yo_postmeta
+0001.644 (R) [notice] Atomic restore: dropping original table (wp_postmeta)
+0001.654 (R) [notice] Atomic restore: renaming new table (yo_postmeta) to final table name (wp_postmeta)
+0001.669 (R) [notice] Search and replacing table: wp_postmeta: rows: 13
+0001.691 (R) [notice] Processing table (InnoDB):  owjo_posts - will restore as: yo_posts
+0001.794 (R) [notice] Atomic restore: dropping original table (wp_posts)
+0001.836 (R) [notice] Atomic restore: renaming new table (yo_posts) to final table name (wp_posts)
+0001.856 (R) [notice] Search and replacing table: wp_posts: rows: 284
+0001.867 (R) [notice] Processing table (InnoDB):  owjo_snippets - will restore as: yo_snippets
+0001.910 (R) [notice] Atomic restore: dropping original table (wp_snippets)
+0001.920 (R) [notice] Atomic restore: renaming new table (yo_snippets) to final table name (wp_snippets)
+0001.937 (R) [notice] Search and replacing table: wp_snippets: rows: 5
+0001.938 (R) [notice] Processing table (InnoDB):  owjo_term_relationships - will restore as: yo_term_relationships
+0001.974 (R) [notice] Atomic restore: dropping original table (wp_term_relationships)
+0001.984 (R) [notice] Atomic restore: renaming new table (yo_term_relationships) to final table name (wp_term_relationships)
+0001.996 (R) [notice] Skipping this table: data in this table (wp_term_relationships) should not be search/replaced
+0001.996 (R) [notice] Processing table (InnoDB):  owjo_term_taxonomy - will restore as: yo_term_taxonomy
+0002.030 (R) [notice] Database queries processed: 50 in 1.94 seconds
+0002.035 (R) [notice] Atomic restore: dropping original table (wp_term_taxonomy)
+0002.046 (R) [notice] Atomic restore: renaming new table (yo_term_taxonomy) to final table name (wp_term_taxonomy)
+0002.064 (R) [notice] Search and replacing table: wp_term_taxonomy: rows: 6
+0002.065 (R) [notice] Processing table (InnoDB):  owjo_termmeta - will restore as: yo_termmeta
+0002.093 (R) [notice] Atomic restore: dropping original table (wp_termmeta)
+0002.104 (R) [notice] Atomic restore: renaming new table (yo_termmeta) to final table name (wp_termmeta)
+0002.117 (R) [notice] Search and replacing table: wp_termmeta: rows: 0
+0002.118 (R) [notice] Processing table (InnoDB):  owjo_terms - will restore as: yo_terms
+0002.151 (R) [notice] Atomic restore: dropping original table (wp_terms)
+0002.162 (R) [notice] Atomic restore: renaming new table (yo_terms) to final table name (wp_terms)
+0002.175 (R) [notice] Search and replacing table: wp_terms: rows: 6
+0002.176 (R) [notice] Processing table (MyISAM):  owjo_e_events - will restore as: yo_e_events
+0002.187 (R) [notice] Atomic restore: dropping original table (wp_e_events)
+0002.188 (R) [notice] Atomic restore: renaming new table (yo_e_events) to final table name (wp_e_events)
+0002.197 (R) [notice] Search and replacing table: wp_e_events: rows: 0
+0002.198 (R) [notice] Processing table (InnoDB):  owjo_imunify_bot_blocks - will restore as: yo_imunify_bot_blocks
+0002.232 (R) [notice] Atomic restore: dropping original table (wp_imunify_bot_blocks)
+0002.233 (R) [notice] Atomic restore: renaming new table (yo_imunify_bot_blocks) to final table name (wp_imunify_bot_blocks)
+0002.247 (R) [notice] Search and replacing table: wp_imunify_bot_blocks: rows: 1
+0002.248 (R) [notice] Processing table (MEMORY):  owjo_imunify_bot_blocks_active - will restore as: yo_imunify_bot_blocks_active
+0002.256 (R) [notice] Atomic restore: dropping original table (wp_imunify_bot_blocks_active)
+0002.258 (R) [notice] Atomic restore: renaming new table (yo_imunify_bot_blocks_active) to final table name (wp_imunify_bot_blocks_active)
+0002.264 (R) [notice] Search and replacing table: wp_imunify_bot_blocks_active: rows: 0
+0002.264 (R) [notice] Processing table (InnoDB):  owjo_imunify_bot_hourly - will restore as: yo_imunify_bot_hourly
+0002.288 (R) [notice] Atomic restore: dropping original table (wp_imunify_bot_hourly)
+0002.290 (R) [notice] Atomic restore: renaming new table (yo_imunify_bot_hourly) to final table name (wp_imunify_bot_hourly)
+0002.302 (R) [notice] Search and replacing table: wp_imunify_bot_hourly: rows: 129
+0002.305 (R) [notice] Processing table (InnoDB):  owjo_imunify_bot_hourly_ip - will restore as: yo_imunify_bot_hourly_ip
+0002.336 (R) [notice] Atomic restore: dropping original table (wp_imunify_bot_hourly_ip)
+0002.338 (R) [notice] Atomic restore: renaming new table (yo_imunify_bot_hourly_ip) to final table name (wp_imunify_bot_hourly_ip)
+0002.351 (R) [notice] Search and replacing table: wp_imunify_bot_hourly_ip: rows: 284
+0002.356 (R) [notice] Processing table (MEMORY):  owjo_imunify_bot_rl - will restore as: yo_imunify_bot_rl
+0002.366 (R) [notice] Atomic restore: dropping original table (wp_imunify_bot_rl)
+0002.367 (R) [notice] Atomic restore: renaming new table (yo_imunify_bot_rl) to final table name (wp_imunify_bot_rl)
+0002.373 (R) [notice] Search and replacing table: wp_imunify_bot_rl: rows: 0
+0002.373 (R) [notice] Processing table (InnoDB):  owjo_imunify_bot_violations - will restore as: yo_imunify_bot_violations
+0002.403 (R) [notice] Atomic restore: dropping original table (wp_imunify_bot_violations)
+0002.404 (R) [notice] Atomic restore: renaming new table (yo_imunify_bot_violations) to final table name (wp_imunify_bot_violations)
+0002.419 (R) [notice] Search and replacing table: wp_imunify_bot_violations: rows: 1
+0002.420 (R) [notice] Processing table (InnoDB):  owjo_rank_math_internal_links - will restore as: yo_rank_math_internal_links
+0002.452 (R) [notice] Atomic restore: dropping original table (wp_rank_math_internal_links)
+0002.453 (R) [notice] Atomic restore: renaming new table (yo_rank_math_internal_links) to final table name (wp_rank_math_internal_links)
+0002.467 (R) [notice] Search and replacing table: wp_rank_math_internal_links: rows: 0
+0002.468 (R) [notice] Processing table (InnoDB):  owjo_rank_math_internal_meta - will restore as: yo_rank_math_internal_meta
+0002.491 (R) [notice] Atomic restore: dropping original table (wp_rank_math_internal_meta)
+0002.493 (R) [notice] Atomic restore: renaming new table (yo_rank_math_internal_meta) to final table name (wp_rank_math_internal_meta)
+0002.504 (R) [notice] Search and replacing table: wp_rank_math_internal_meta: rows: 73
+0002.505 (R) [notice] Processing table (MyISAM):  owjo_wc_admin_note_actions - will restore as: yo_wc_admin_note_actions
+0002.524 (R) [notice] Atomic restore: dropping original table (wp_wc_admin_note_actions)
+0002.525 (R) [notice] Atomic restore: renaming new table (yo_wc_admin_note_actions) to final table name (wp_wc_admin_note_actions)
+0002.533 (R) [notice] Search and replacing table: wp_wc_admin_note_actions: rows: 186
+0002.583 (R) [notice] Processing table (MyISAM):  owjo_wc_admin_notes - will restore as: yo_wc_admin_notes
+0002.602 (R) [notice] Atomic restore: dropping original table (wp_wc_admin_notes)
+0002.603 (R) [notice] Atomic restore: renaming new table (yo_wc_admin_notes) to final table name (wp_wc_admin_notes)
+0002.613 (R) [notice] Search and replacing table: wp_wc_admin_notes: rows: 151
+0002.619 (R) [notice] Processing table (MyISAM):  owjo_wc_category_lookup - will restore as: yo_wc_category_lookup
+0002.633 (R) [notice] Atomic restore: dropping original table (wp_wc_category_lookup)
+0002.634 (R) [notice] Atomic restore: renaming new table (yo_wc_category_lookup) to final table name (wp_wc_category_lookup)
+0002.642 (R) [notice] Search and replacing table: wp_wc_category_lookup: rows: 10
+0002.644 (R) [notice] Processing table (MyISAM):  owjo_wc_customer_lookup - will restore as: yo_wc_customer_lookup
+0002.654 (R) [notice] Atomic restore: dropping original table (wp_wc_customer_lookup)
+0002.656 (R) [notice] Atomic restore: renaming new table (yo_wc_customer_lookup) to final table name (wp_wc_customer_lookup)
+0002.666 (R) [notice] Search and replacing table: wp_wc_customer_lookup: rows: 0
+0002.666 (R) [notice] Processing table (MyISAM):  owjo_wc_download_log - will restore as: yo_wc_download_log
+0002.681 (R) [notice] Atomic restore: dropping original table (wp_wc_download_log)
+0002.682 (R) [notice] Atomic restore: renaming new table (yo_wc_download_log) to final table name (wp_wc_download_log)
+0002.692 (R) [notice] Search and replacing table: wp_wc_download_log: rows: 0
+0002.693 (R) [notice] Processing table (MyISAM):  owjo_wc_email_unsubscribes - will restore as: yo_wc_email_unsubscribes
+0002.704 (R) [notice] Atomic restore: dropping original table (wp_wc_email_unsubscribes)
+0002.705 (R) [notice] Atomic restore: renaming new table (yo_wc_email_unsubscribes) to final table name (wp_wc_email_unsubscribes)
+0002.714 (R) [notice] Search and replacing table: wp_wc_email_unsubscribes: rows: 0
+0002.715 (R) [notice] Processing table (MyISAM):  owjo_wc_order_addresses - will restore as: yo_wc_order_addresses
+0002.727 (R) [notice] Atomic restore: dropping original table (wp_wc_order_addresses)
+0002.728 (R) [notice] Atomic restore: renaming new table (yo_wc_order_addresses) to final table name (wp_wc_order_addresses)
+0002.737 (R) [notice] Search and replacing table: wp_wc_order_addresses: rows: 0
+0002.738 (R) [notice] Processing table (MyISAM):  owjo_wc_order_coupon_lookup - will restore as: yo_wc_order_coupon_lookup
+0002.749 (R) [notice] Atomic restore: dropping original table (wp_wc_order_coupon_lookup)
+0002.750 (R) [notice] Atomic restore: renaming new table (yo_wc_order_coupon_lookup) to final table name (wp_wc_order_coupon_lookup)
+0002.772 (R) [notice] Search and replacing table: wp_wc_order_coupon_lookup: rows: 0
+0002.773 (R) [notice] Processing table (MyISAM):  owjo_wc_order_operational_data - will restore as: yo_wc_order_operational_data
+0002.817 (R) [notice] Database queries processed: 100 in 2.73 seconds
+0002.817 (R) [notice] Atomic restore: dropping original table (wp_wc_order_operational_data)
+0002.823 (R) [notice] Atomic restore: renaming new table (yo_wc_order_operational_data) to final table name (wp_wc_order_operational_data)
+0002.837 (R) [notice] Search and replacing table: wp_wc_order_operational_data: rows: 0
+0002.837 (R) [notice] Processing table (MyISAM):  owjo_wc_order_product_lookup - will restore as: yo_wc_order_product_lookup
+0002.849 (R) [notice] Atomic restore: dropping original table (wp_wc_order_product_lookup)
+0002.850 (R) [notice] Atomic restore: renaming new table (yo_wc_order_product_lookup) to final table name (wp_wc_order_product_lookup)
+0002.861 (R) [notice] Search and replacing table: wp_wc_order_product_lookup: rows: 0
+0002.862 (R) [notice] Processing table (MyISAM):  owjo_wc_order_stats - will restore as: yo_wc_order_stats
+0002.873 (R) [notice] Atomic restore: dropping original table (wp_wc_order_stats)
+0002.875 (R) [notice] Atomic restore: renaming new table (yo_wc_order_stats) to final table name (wp_wc_order_stats)
+0002.887 (R) [notice] Search and replacing table: wp_wc_order_stats: rows: 0
+0002.888 (R) [notice] Processing table (MyISAM):  owjo_wc_order_tax_lookup - will restore as: yo_wc_order_tax_lookup
+0002.900 (R) [notice] Atomic restore: dropping original table (wp_wc_order_tax_lookup)
+0002.901 (R) [notice] Atomic restore: renaming new table (yo_wc_order_tax_lookup) to final table name (wp_wc_order_tax_lookup)
+0002.911 (R) [notice] Search and replacing table: wp_wc_order_tax_lookup: rows: 0
+0002.911 (R) [notice] Processing table (MyISAM):  owjo_wc_orders - will restore as: yo_wc_orders
+0002.923 (R) [notice] Atomic restore: dropping original table (wp_wc_orders)
+0002.925 (R) [notice] Atomic restore: renaming new table (yo_wc_orders) to final table name (wp_wc_orders)
+0002.935 (R) [notice] Search and replacing table: wp_wc_orders: rows: 0
+0002.935 (R) [notice] Processing table (MyISAM):  owjo_wc_orders_meta - will restore as: yo_wc_orders_meta
+0002.947 (R) [notice] Atomic restore: dropping original table (wp_wc_orders_meta)
+0002.948 (R) [notice] Atomic restore: renaming new table (yo_wc_orders_meta) to final table name (wp_wc_orders_meta)
+0002.961 (R) [notice] Search and replacing table: wp_wc_orders_meta: rows: 0
+0002.961 (R) [notice] Processing table (MyISAM):  owjo_wc_product_attributes_lookup - will restore as: yo_wc_product_attributes_lookup
+0002.977 (R) [notice] Atomic restore: dropping original table (wp_wc_product_attributes_lookup)
+0002.979 (R) [notice] Atomic restore: renaming new table (yo_wc_product_attributes_lookup) to final table name (wp_wc_product_attributes_lookup)
+0002.989 (R) [notice] Search and replacing table: wp_wc_product_attributes_lookup: rows: 25
+0002.990 (R) [notice] Processing table (MyISAM):  owjo_wc_product_download_directories - will restore as: yo_wc_product_download_directories
+0003.003 (R) [notice] Atomic restore: dropping original table (wp_wc_product_download_directories)
+0003.005 (R) [notice] Atomic restore: renaming new table (yo_wc_product_download_directories) to final table name (wp_wc_product_download_directories)
+0003.013 (R) [notice] Search and replacing table: wp_wc_product_download_directories: rows: 2
+0003.017 (R) [notice] Processing table (MyISAM):  owjo_wc_product_meta_lookup - will restore as: yo_wc_product_meta_lookup
+0003.030 (R) [notice] Atomic restore: dropping original table (wp_wc_product_meta_lookup)
+0003.031 (R) [notice] Atomic restore: renaming new table (yo_wc_product_meta_lookup) to final table name (wp_wc_product_meta_lookup)
+0003.041 (R) [notice] Search and replacing table: wp_wc_product_meta_lookup: rows: 0
+0003.042 (R) [notice] Processing table (MyISAM):  owjo_wc_rate_limits - will restore as: yo_wc_rate_limits
+0003.054 (R) [notice] Atomic restore: dropping original table (wp_wc_rate_limits)
+0003.056 (R) [notice] Atomic restore: renaming new table (yo_wc_rate_limits) to final table name (wp_wc_rate_limits)
+0003.065 (R) [notice] Search and replacing table: wp_wc_rate_limits: rows: 0
+0003.065 (R) [notice] Processing table (MyISAM):  owjo_wc_reserved_stock - will restore as: yo_wc_reserved_stock
+0003.076 (R) [notice] Atomic restore: dropping original table (wp_wc_reserved_stock)
+0003.077 (R) [notice] Atomic restore: renaming new table (yo_wc_reserved_stock) to final table name (wp_wc_reserved_stock)
+0003.087 (R) [notice] Search and replacing table: wp_wc_reserved_stock: rows: 0
+0003.087 (R) [notice] Processing table (MyISAM):  owjo_wc_tax_rate_classes - will restore as: yo_wc_tax_rate_classes
+0003.100 (R) [notice] Atomic restore: dropping original table (wp_wc_tax_rate_classes)
+0003.101 (R) [notice] Atomic restore: renaming new table (yo_wc_tax_rate_classes) to final table name (wp_wc_tax_rate_classes)
+0003.113 (R) [notice] Search and replacing table: wp_wc_tax_rate_classes: rows: 2
+0003.114 (R) [notice] Processing table (MyISAM):  owjo_wc_webhooks - will restore as: yo_wc_webhooks
+0003.128 (R) [notice] Atomic restore: dropping original table (wp_wc_webhooks)
+0003.130 (R) [notice] Atomic restore: renaming new table (yo_wc_webhooks) to final table name (wp_wc_webhooks)
+0003.139 (R) [notice] Search and replacing table: wp_wc_webhooks: rows: 0
+0003.139 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_api_keys - will restore as: yo_woocommerce_api_keys
+0003.150 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_api_keys)
+0003.151 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_api_keys) to final table name (wp_woocommerce_api_keys)
+0003.161 (R) [notice] Search and replacing table: wp_woocommerce_api_keys: rows: 0
+0003.162 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_attribute_taxonomies - will restore as: yo_woocommerce_attribute_taxonomies
+0003.174 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_attribute_taxonomies)
+0003.176 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_attribute_taxonomies) to final table name (wp_woocommerce_attribute_taxonomies)
+0003.185 (R) [notice] Search and replacing table: wp_woocommerce_attribute_taxonomies: rows: 2
+0003.186 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_downloadable_product_permissions - will restore as: yo_woocommerce_downloadable_product_permissions
+0003.198 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_downloadable_product_permissions)
+0003.199 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_downloadable_product_permissions) to final table name (wp_woocommerce_downloadable_product_permissions)
+0003.209 (R) [notice] Search and replacing table: wp_woocommerce_downloadable_product_permissions: rows: 0
+0003.209 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_log - will restore as: yo_woocommerce_log
+0003.220 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_log)
+0003.222 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_log) to final table name (wp_woocommerce_log)
+0003.231 (R) [notice] Search and replacing table: wp_woocommerce_log: rows: 0
+0003.231 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_order_itemmeta - will restore as: yo_woocommerce_order_itemmeta
+0003.243 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_order_itemmeta)
+0003.244 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_order_itemmeta) to final table name (wp_woocommerce_order_itemmeta)
+0003.254 (R) [notice] Search and replacing table: wp_woocommerce_order_itemmeta: rows: 0
+0003.254 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_order_items - will restore as: yo_woocommerce_order_items
+0003.266 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_order_items)
+0003.267 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_order_items) to final table name (wp_woocommerce_order_items)
+0003.273 (R) [notice] Skipping this table: data in this table (wp_woocommerce_order_items) should not be search/replaced
+0003.274 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_payment_tokenmeta - will restore as: yo_woocommerce_payment_tokenmeta
+0003.285 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_payment_tokenmeta)
+0003.286 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_payment_tokenmeta) to final table name (wp_woocommerce_payment_tokenmeta)
+0003.296 (R) [notice] Search and replacing table: wp_woocommerce_payment_tokenmeta: rows: 0
+0003.296 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_payment_tokens - will restore as: yo_woocommerce_payment_tokens
+0003.310 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_payment_tokens)
+0003.312 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_payment_tokens) to final table name (wp_woocommerce_payment_tokens)
+0003.321 (R) [notice] Search and replacing table: wp_woocommerce_payment_tokens: rows: 0
+0003.321 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_sessions - will restore as: yo_woocommerce_sessions
+0003.335 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_sessions)
+0003.336 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_sessions) to final table name (wp_woocommerce_sessions)
+0003.342 (R) [notice] Skipping this table: data in this table (wp_woocommerce_sessions) should not be search/replaced
+0003.342 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_shipping_zone_locations - will restore as: yo_woocommerce_shipping_zone_locations
+0003.353 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_shipping_zone_locations)
+0003.354 (R) [notice] Database queries processed: 150 in 3.27 seconds
+0003.354 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_shipping_zone_locations) to final table name (wp_woocommerce_shipping_zone_locations)
+0003.363 (R) [notice] Search and replacing table: wp_woocommerce_shipping_zone_locations: rows: 0
+0003.364 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_shipping_zone_methods - will restore as: yo_woocommerce_shipping_zone_methods
+0003.374 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_shipping_zone_methods)
+0003.376 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_shipping_zone_methods) to final table name (wp_woocommerce_shipping_zone_methods)
+0003.386 (R) [notice] Search and replacing table: wp_woocommerce_shipping_zone_methods: rows: 0
+0003.387 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_shipping_zones - will restore as: yo_woocommerce_shipping_zones
+0003.400 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_shipping_zones)
+0003.401 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_shipping_zones) to final table name (wp_woocommerce_shipping_zones)
+0003.410 (R) [notice] Search and replacing table: wp_woocommerce_shipping_zones: rows: 0
+0003.411 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_tax_rate_locations - will restore as: yo_woocommerce_tax_rate_locations
+0003.421 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_tax_rate_locations)
+0003.423 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_tax_rate_locations) to final table name (wp_woocommerce_tax_rate_locations)
+0003.433 (R) [notice] Search and replacing table: wp_woocommerce_tax_rate_locations: rows: 0
+0003.433 (R) [notice] Processing table (MyISAM):  owjo_woocommerce_tax_rates - will restore as: yo_woocommerce_tax_rates
+0003.445 (R) [notice] Atomic restore: dropping original table (wp_woocommerce_tax_rates)
+0003.447 (R) [notice] Atomic restore: renaming new table (yo_woocommerce_tax_rates) to final table name (wp_woocommerce_tax_rates)
+0003.457 (R) [notice] Search and replacing table: wp_woocommerce_tax_rates: rows: 0
+0003.457 (R) [notice] Processing table (MyISAM):  owjo_wpfm_backup - will restore as: yo_wpfm_backup
+0003.468 (R) [notice] Atomic restore: dropping original table (wp_wpfm_backup)
+0003.470 (R) [notice] Atomic restore: renaming new table (yo_wpfm_backup) to final table name (wp_wpfm_backup)
+0003.479 (R) [notice] Search and replacing table: wp_wpfm_backup: rows: 0
+0003.479 (R) [notice] Processing table (InnoDB):  owjo_wpmailsmtp_debug_events - will restore as: yo_wpmailsmtp_debug_events
+0003.501 (R) [notice] Atomic restore: dropping original table (wp_wpmailsmtp_debug_events)
+0003.513 (R) [notice] Atomic restore: renaming new table (yo_wpmailsmtp_debug_events) to final table name (wp_wpmailsmtp_debug_events)
+0003.526 (R) [notice] Search and replacing table: wp_wpmailsmtp_debug_events: rows: 0
+0003.527 (R) [notice] Processing table (InnoDB):  owjo_wpmailsmtp_tasks_meta - will restore as: yo_wpmailsmtp_tasks_meta
+0003.548 (R) [notice] Disabling Maintenance mode&#8230;
+0003.549 (R) [notice] Atomic restore: dropping original table (wp_wpmailsmtp_tasks_meta)
+0003.566 (R) [notice] Atomic restore: renaming new table (yo_wpmailsmtp_tasks_meta) to final table name (wp_wpmailsmtp_tasks_meta)
+0003.578 (R) [notice] Search and replacing table: wp_wpmailsmtp_tasks_meta: rows: 0
+0003.579 (R) [notice] Finished: lines processed: 166 in 3.49 seconds
+0003.579 (R) [notice] Cleaning up rubbish...
+0003.581 (R) [notice] Database search and replace: replace https://www.gyaonline.com in backup dump with http://gya.local
+0003.581 (R) [notice] Database search and replace: replace http://www.gyaonline.com in backup dump with http://gya.local
+0003.581 (R) [notice] Database search and replace: replace http://gyaonline.com in backup dump with http://gya.local
+0003.581 (R) [notice] Database search and replace: replace https://gyaonline.com in backup dump with http://gya.local
+0003.581 (R) [notice] Database search and replace: replace /home/gyaonlin/public_html in backup dump with C:\Users\Usuario\Local Sites\gya\app\public
+0003.582 (R) [notice] Search and replacing table: wp_actionscheduler_actions: already done
+0003.582 (R) [notice] Search and replacing table: wp_actionscheduler_claims: already done
+0003.583 (R) [notice] Search and replacing table: wp_actionscheduler_groups: already done
+0003.583 (R) [notice] Search and replacing table: wp_actionscheduler_logs: already done
+0003.583 (R) [notice] Search and replacing table: wp_commentmeta: already done
+0003.583 (R) [notice] Search and replacing table: wp_comments: already done
+0003.583 (R) [notice] Search and replacing table: wp_e_events: already done
+0003.583 (R) [notice] Search and replacing table: wp_imunify_bot_blocks: already done
+0003.583 (R) [notice] Search and replacing table: wp_imunify_bot_blocks_active: already done
+0003.583 (R) [notice] Search and replacing table: wp_imunify_bot_hourly: already done
+0003.584 (R) [notice] Search and replacing table: wp_imunify_bot_hourly_ip: already done
+0003.584 (R) [notice] Search and replacing table: wp_imunify_bot_rl: already done
+0003.584 (R) [notice] Search and replacing table: wp_imunify_bot_violations: already done
+0003.584 (R) [notice] Search and replacing table: wp_links: already done
+0003.584 (R) [notice] Search and replacing table: wp_options: already done
+0003.584 (R) [notice] Search and replacing table: wp_postmeta: already done
+0003.584 (R) [notice] Search and replacing table: wp_posts: already done
+0003.585 (R) [notice] Search and replacing table: wp_rank_math_internal_links: already done
+0003.585 (R) [notice] Search and replacing table: wp_rank_math_internal_meta: already done
+0003.585 (R) [notice] Search and replacing table: wp_snippets: already done
+0003.585 (R) [notice] Search and replacing table: wp_term_relationships: already done
+0003.585 (R) [notice] Search and replacing table: wp_term_taxonomy: already done
+0003.585 (R) [notice] Search and replacing table: wp_termmeta: already done
+0003.585 (R) [notice] Search and replacing table: wp_terms: already done
+0003.586 (R) [notice] Search and replacing table: wp_usermeta: already done
+0003.586 (R) [notice] Search and replacing table: wp_users: already done
+0003.586 (R) [notice] Search and replacing table: wp_wc_admin_note_actions: already done
+0003.586 (R) [notice] Search and replacing table: wp_wc_admin_notes: already done
+0003.586 (R) [notice] Search and replacing table: wp_wc_category_lookup: already done
+0003.586 (R) [notice] Search and replacing table: wp_wc_customer_lookup: already done
+0003.586 (R) [notice] Search and replacing table: wp_wc_download_log: already done
+0003.587 (R) [notice] Search and replacing table: wp_wc_email_unsubscribes: already done
+0003.587 (R) [notice] Search and replacing table: wp_wc_order_addresses: already done
+0003.587 (R) [notice] Search and replacing table: wp_wc_order_coupon_lookup: already done
+0003.587 (R) [notice] Search and replacing table: wp_wc_order_operational_data: already done
+0003.587 (R) [notice] Search and replacing table: wp_wc_order_product_lookup: already done
+0003.587 (R) [notice] Search and replacing table: wp_wc_order_stats: already done
+0003.588 (R) [notice] Search and replacing table: wp_wc_order_tax_lookup: already done
+0003.588 (R) [notice] Search and replacing table: wp_wc_orders: already done
+0003.588 (R) [notice] Search and replacing table: wp_wc_orders_meta: already done
+0003.588 (R) [notice] Search and replacing table: wp_wc_product_attributes_lookup: already done
+0003.588 (R) [notice] Search and replacing table: wp_wc_product_download_directories: already done
+0003.588 (R) [notice] Search and replacing table: wp_wc_product_meta_lookup: already done
+0003.588 (R) [notice] Search and replacing table: wp_wc_rate_limits: already done
+0003.589 (R) [notice] Search and replacing table: wp_wc_reserved_stock: already done
+0003.589 (R) [notice] Search and replacing table: wp_wc_tax_rate_classes: already done
+0003.589 (R) [notice] Search and replacing table: wp_wc_webhooks: already done
+0003.589 (R) [notice] Search and replacing table: wp_woocommerce_api_keys: already done
+0003.589 (R) [notice] Search and replacing table: wp_woocommerce_attribute_taxonomies: already done
+0003.589 (R) [notice] Search and replacing table: wp_woocommerce_downloadable_product_permissions: already done
+0003.589 (R) [notice] Search and replacing table: wp_woocommerce_log: already done
+0003.590 (R) [notice] Search and replacing table: wp_woocommerce_order_itemmeta: already done
+0003.590 (R) [notice] Search and replacing table: wp_woocommerce_order_items: already done
+0003.590 (R) [notice] Search and replacing table: wp_woocommerce_payment_tokenmeta: already done
+0003.590 (R) [notice] Search and replacing table: wp_woocommerce_payment_tokens: already done
+0003.590 (R) [notice] Search and replacing table: wp_woocommerce_sessions: already done
+0003.591 (R) [notice] Search and replacing table: wp_woocommerce_shipping_zone_locations: already done
+0003.591 (R) [notice] Search and replacing table: wp_woocommerce_shipping_zone_methods: already done
+0003.591 (R) [notice] Search and replacing table: wp_woocommerce_shipping_zones: already done
+0003.591 (R) [notice] Search and replacing table: wp_woocommerce_tax_rate_locations: already done
+0003.591 (R) [notice] Search and replacing table: wp_woocommerce_tax_rates: already done
+0003.591 (R) [notice] Search and replacing table: wp_wpfm_backup: already done
+0003.591 (R) [notice] Search and replacing table: wp_wpmailsmtp_debug_events: already done
+0003.592 (R) [notice] Search and replacing table: wp_wpmailsmtp_tasks_meta: already done
+0003.592 (R) [notice] Tables examined: 61
+0003.592 (R) [notice] Rows examined: 1644
+0003.592 (R) [notice] Changes made: 69
+0003.592 (R) [notice] SQL update commands run: 69
+0003.592 (R) [notice] Errors: 0
+0003.592 (R) [notice] Time taken (seconds): 0.328
+0003.617 (R) [notice] Unpacking backup... (backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-mu-plugins.zip, 0 MB)
+0003.654 (R) [notice] Unzip progress: 3 out of 3 files (2.7 KB, mu-plugins/imunify-security-bots.php)
+0003.655 (R) [notice] Moving old data out of the way...
+0003.656 (R) [notice] Moving unpacked backup into place...
+0003.658 (R) [notice] Cleaning up rubbish...
+0003.666 (R) [notice] Unpacking backup... (backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-plugins.zip, 21.3 MB)
+0004.856 (R) [notice] Unzip progress: 1002 out of 4700 files (4.2 MB, plugins/seo-by-rank-math/includes/metaboxes/index.php)
+0007.287 (R) [notice] Unzip progress: 2003 out of 4700 files (11.6 MB, plugins/seo-by-rank-math/vendor/wordpress/php-mcp-schema/src/Server/Tools/DTO/ListToolsResult.php)
+0009.356 (R) [notice] Unzip progress: 3004 out of 4700 files (42.3 MB, plugins/code-snippets/js/entries/editor.ts)
+0011.672 (R) [notice] Unzip progress: 4005 out of 4700 files (61.3 MB, plugins/updraftplus/vendor/guzzle/guzzle/src/Guzzle/Service/Command/LocationVisitor/Request/JsonVisitor.php)
+0012.957 (R) [notice] Unzip progress: 4700 out of 4700 files (67.4 MB, plugins/updraftplus/updraftplus.php)
+0012.962 (R) [notice] Moving old data out of the way...
+0013.372 (R) [notice] Moving unpacked backup into place...
+0017.258 (R) [notice] Cleaning up rubbish...
+0017.269 (R) [notice] Unpacking backup... (backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-themes.zip, 3.2 MB)
+0017.517 (R) [notice] Unzip progress: 126 out of 126 files (3.9 MB, themes/index.php)
+0017.521 (R) [notice] Moving old data out of the way...
+0017.553 (R) [notice] Moving unpacked backup into place...
+0017.577 (R) [notice] Cleaning up rubbish...
+0017.588 (R) [notice] Unpacking backup... (backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-uploads.zip, 37.8 MB)
+0017.734 (R) [notice] Unzip progress: 83 out of 83 files (37.8 MB, uploads/2026/07/two-colleagues-formal-wear-working-together-optimize-trading-strategy-corporate-finance-fund-forex-chart-hologram-modern-office-background.jpg)
+0017.737 (R) [notice] Moving old data out of the way...
+0017.785 (R) [notice] Moving unpacked backup into place...
+0017.801 (R) [notice] Cleaning up rubbish...
+0017.807 (R) [notice] Unpacking backup... (backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-uploads2.zip, 21.2 MB)
+0017.963 (R) [notice] Unzip progress: 109 out of 109 files (21.2 MB, uploads/rank-math/rank_math_b41d2ea36362973d288ae5a8873ed32d.xml)
+0017.964 (R) [notice] Moving unpacked backup into place...
+0018.095 (R) [notice] Cleaning up rubbish...
+0018.104 (R) [notice] Unpacking backup... (backup_2026-10-18-1832_GampA_Consultora_Fiscal_L_22724af590bd-others.zip, 7 MB)
+0018.665 (R) [notice] Unzip progress: 341 out of 341 files (17.7 MB, imunify-security/ip_whitelist.php)
+0018.688 (R) [notice] Cleaning up rubbish...
+0018.689 (R) [notice] Error: Failed to delete working directory after restoring. (C:/Users/Usuario/Local Sites/gya/app/public/wp-content/upgrade/6b955a6e)
+0018.691 (R) [notice] Files found:
+0018.691 (R) [notice] * upgrade
+0019.271 (R) [notice] Restore successful!
