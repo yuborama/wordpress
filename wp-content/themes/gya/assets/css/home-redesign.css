@@ -227,6 +227,8 @@ body.front-page .header-social img {
   margin-bottom: 10px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center top;
+  aspect-ratio: 1;
 }
 
 .gya-posts__author small {

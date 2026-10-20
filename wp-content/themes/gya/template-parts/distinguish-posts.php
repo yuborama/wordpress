@@ -30,7 +30,7 @@ $title_id = $section_id . '-title';
                                     <?php if (!empty($service['author'])) : ?>
                                         <div class="gya-posts__author">
                                             <?php if (!empty($service['author_image'])) : ?>
-                                                <img src="<?php echo esc_url($service['author_image']); ?>" alt="" loading="lazy">
+                                                <img src="<?php echo esc_url($service['author_image']); ?>" alt="" width="36" height="36" loading="lazy">
                                             <?php endif; ?>
                                             <small><?php echo esc_html($service['author']); ?></small>
                                         </div>

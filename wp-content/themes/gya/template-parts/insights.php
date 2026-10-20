@@ -47,6 +47,12 @@ while ($insights_query->have_posts()) {
         $author_image = $author_image['url'];
     } elseif (is_numeric($author_image)) {
         $author_image = wp_get_attachment_image_url((int) $author_image, 'medium');
+    } elseif (!is_string($author_image)) {
+        $author_image = '';
+    }
+
+    if (!$author_image && $author_id && has_post_thumbnail($author_id)) {
+        $author_image = get_the_post_thumbnail_url($author_id, 'medium');
     }
 
     $insights[] = array(
